@@ -1728,8 +1728,8 @@ function $bo($aV) {
             this.$m[s] = this.$af[i][j]
         }
     }
-    this.$m[s + 10] = "You're getting good at this" + "!".repeat(Math.floor(Math.random() * 2));
-    this.$m[s + 13] = "Like... really good" + "!".repeat(Math.floor(Math.random() * 2));
+    this.$m[s + 50] = "You're getting good at this" + "!".repeat(Math.floor(Math.random() * 2)); // 10
+    this.$m[s + 54] = "Like... really good" + "!".repeat(Math.floor(Math.random() * 2)); // 13
     this.t = 0
 }
 $bo.prototype = {

@@ -1,47 +1,37 @@
 var _ = window,
-    raf = (function(){
-        return  _.requestAnimationFrame       ||
-                _.webkitRequestAnimationFrame ||
-                _.mozRequestAnimationFrame    ||
-                function(c){
-                    to(c, 1000 / 60);
-                };
-    })(),
+    raf = function() {
+        return _.requestAnimationFrame || _.webkitRequestAnimationFrame || _.mozRequestAnimationFrame || function(c) {
+            to(c, 1e3 / 60)
+        }
+    }(),
     M = Math,
     abs = M.abs,
     min = M.min,
     max = M.max,
     to = setTimeout;
 
-function rd(a, b){
-    if(!b){
+function rd(a, b) {
+    if (!b) {
         b = a;
-        a = 0;
+        a = 0
     }
-	return M.random() * (b - a) + a;
-};
-
-function rp(a){
-    return a[~~rd(a.length)];
+    return M.random() * (b - a) + a
 }
 
-function xt(o, x){
+function rp(a) {
+    return a[~~rd(a.length)]
+}
+
+function xt(o, x) {
     var r = {};
-
-    // Copying
-    for(var i in o){
-        r[i] = o[i];
+    for (var i in o) {
+        r[i] = o[i]
     }
-
-    // Overriding
-    for(var i in x){
-        r[i] = x[i];
+    for (var i in x) {
+        r[i] = x[i]
     }
-
-    return r;
+    return r
 }
-
-// Shortcuts
 var p = CanvasRenderingContext2D.prototype;
 p.fr = p.fillRect;
 p.sv = p.save;
@@ -54,2441 +44,2118 @@ p.bp = p.beginPath;
 p.clg = p.createLinearGradient;
 p.rt = p.rotate;
 p.ft = p.fillText;
-
-p.alpha = function(x){
-    this.globalAlpha = x;
+p.$i = function(x) {
+    this.globalAlpha = x
 };
-
-p.fs = function(p){
-    this.fillStyle = P.inverted ? invert(p) : p;
+p.fs = function(p) {
+    this.fillStyle = P.$h ? $aP(p) : p
 };
-
-p.di = function(i, x, y){
-    if(P.inverted) arguments[0] = invert(arguments[0]);
-    this.drawImage.apply(this, arguments);
+p.di = function(i, x, y) {
+    if (P.$h) arguments[0] = $aP(arguments[0]);
+    this.drawImage.apply(this, arguments)
 };
-
-// Adding all these functions to the global scope
-for(var i in p){
-    _[i] = (function(f){
-        return function(){
-            c[f].apply(c, arguments);
+for (var i in p) {
+    _[i] = function(f) {
+        return function() {
+            c[f].apply(c, arguments)
         }
-    })(i);
+    }(i)
 }
+var $aM = {};
 
-var colorCache = {};
-
-function invert(c){
-    if(c.inverted){
-        // It's a pattern or image
-        return c.inverted;
+function $aP(c) {
+    if (c.$h) {
+        return c.$h
     }
-
-    if(c.length){
-        // It's a color
-        if(!colorCache[c]){
-            if(c.charAt(0) === '#'){
+    if (c.length) {
+        if (!$aM[c]) {
+            if (c.charAt(0) === "#") {
                 var v = c.substring(1);
-                if(v.length == 3) v = v.charAt(0) + '0' + v.charAt(1) + '0' + v.charAt(2) + '0';
+                if (v.length == 3) v = v.charAt(0) + "0" + v.charAt(1) + "0" + v.charAt(2) + "0";
                 v = parseInt(v, 16);
-
-                colorCache[c] = '#' + ("000000" + (v ^ 0xffffff).toString(16)).slice(-6);
+                $aM[c] = "#" + ("000000" + (v ^ 16777215).toString(16)).slice(-6)
             }
         }
-        return colorCache[c] || c;
+        return $aM[c] || c
     }
+    return c
+}
 
-    // Can't invert that shit
-    return c;
-};
-
-function cache(w, h, rr, t, i){
-    var c = document.createElement('canvas'),
-        r = c.getContext('2d');
+function $n(w, h, rr, t, i) {
+    var c = document.createElement("canvas"),
+        r = c.getContext("2d");
     c.width = c.w = w;
     c.height = c.h = h;
-
     rr(c, r, w, h);
-
-    if(i){
-        P.inverted = true;
-        c.inverted = cache(w, h, rr, 0, false);
-        P.inverted  = false;
+    if (i) {
+        P.$h = 1;
+        c.$h = $n(w, h, rr, 0, 0);
+        P.$h = 0
     }
-
-    if(t === 'pattern'){
-        var p = r.createPattern(c, 'repeat');
+    if (t === "$4") {
+        var p = r.createPattern(c, "repeat");
         p.width = w;
         p.height = h;
-        if(i){
-            p.inverted = r.createPattern(c.inverted, 'repeat');
-            p.inverted.width = w;
-            p.inverted.height = h;
+        if (i) {
+            p.$h = r.createPattern(c.$h, "repeat");
+            p.$h.width = w;
+            p.$h.height = h
         }
-        return p;
+        return p
     }
+    return c
+}
 
-    return c;
-};
+function $0() {}
 
-function noop(){};
+function $5(x, a, b) {
+    return max(a, min(b, x))
+}
 
-function limit(x, a, b){
-    return max(a, min(b, x));
-};
-
-function shuffle(o){
-    for(var j, x, i = o.length; i; j = ~~(rd(1) * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-};
-
-// Vibration api
-navigator.vibrate = (function(){
-    return navigator.vibrate
-        || navigator.mozVibrate
-        || navigator.webkitVibrate
-        || noop;
-})();
-
+function $a4(o) {
+    for (var j, x, i = o.length; i; j = ~~(rd(1) * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o
+}
+navigator.vibrate = function() {
+    return navigator.vibrate || navigator.mozVibrate || navigator.webkitVibrate || $0
+}();
 var P = {
-	w: 640,
-	h: 920,
-	g: 800,
-	waterOffset: 100
+    w: 640,
+    h: 920,
+    g: 800,
+    $aj: 100
 };
 
-function Game(){
-	G = this;
-
-	G.highscore = parseInt(localStorage['hs']) || 0;
-
-	G.resolution = 1;
-	G.curPos = [];
-
-	G.can = document.querySelector('canvas');
-	with(G.can){
-		width = P.w;
-		height = P.h;
-	}
-
-	G.ctx = window.c = G.can.getContext('2d');
-
-	G.newWorld();
-	G.choice();
-	wld.scenario = new MenuScenario();
-
-	// Resizing
-	G.resize();
-	addEventListener('resize', G.resize, false);
-
-	with(document.body){
-		addEventListener('touc'+'hstart', G.touchStart.bind(G), false);
-		addEventListener('touc'+'hmove', G.touchMove.bind(G), false);
-		addEventListener('touc'+'hend', G.touchEnd.bind(G), false);
-		addEventListener('mous'+'edown', G.mouseDown.bind(G), false);
-		addEventListener('mous'+'emove', G.mouseMove.bind(G), false);
-		addEventListener('mous'+'eup', G.mouseUp.bind(G), false);
-	}
-	addEventListener('keydown', G.keyDown.bind(G), false);
-	addEventListener('keyup', G.keyUp.bind(G), false);
-
-	// Loop
-	G.frameCount = 0;
-	G.lastFrame = G.frameCountStart = Date.now();
-	raf(function(){
-		G.cycle();
-		raf(arguments.callee);
-	});
-
-	//G.elapsedList = [];
-
-	var displayablePixels = _.innerWidth * _.innerHeight * _.devicePixelRatio,
-		gamePixels = P.w * P.h,
-		ratio = displayablePixels / gamePixels;
-
-	if(ratio < .5){
-		G.setResolution(ratio * 2);
-	}
-
-	prepare('die', [
-		[3,,0.0246,,0.2645,0.29,,-0.568,,,,,,,,,,,1,,,0.0072,,0.5]
-	]);
-	prepare('jump', [
-		[0,,0.1336,,0.1006,0.3814,,0.2867,,,,,,0.1429,,,,,0.7082,,,,,0.5]
-	]);
-	prepare('boxland', [
-		[3,,0.0635,0.13,0.22,0.14,0.05,,0.02,,,,,,,0.28,,0.04,0.49,0.04,,,,0.25],
-		[3,,0.1733,0.96,0.06,0.2304,,-0.3608,,,,,,,,,,,1,,,,,0.25],
-		[3,,0.09,0.7003,0.23,0.0844,,0.227,,,,,,,,0.7108,,,1,,,,,0.25]
-	]);
-	prepare('heroland', [
-		[3,,0.0118,0.03,0.1681,0.565,,-0.2343,,,,0.26,0.6855,,,,,,1,,,,,0.2]
-	]);
-	prepare('button', [
-		[0,0.1696,0.5004,0.2598,0.3914,0.7047,,0.0141,-0.0005,,,0.6608,-0.8497,-0.1484,-0.0163,0.5521,0.2529,-0.5832,0.6323,-0.595,0.9155,0.2821,-0.0615,0.26]
-	]);
-	prepare('test', [
-		[,0.5,,0.2098,,0.1569,0.3,0.3677,,0.2937,,,,,,,,,,,0.2912,,,,,0.4261,,,0.1431,,,,1]
-	])
-	prepare('gameover', [
-		[2,0.18,0.24,,0.54,0.34,,,,1,0.31,,,,0.8522,,,,0.23,,,,,0.49]
-	]);
-};
-
-Game.prototype = {
-	choice: function(){
-		G.menu = new Choice();
-	},
-	home: function(){
-		G.menu = new Home(G);
-	},
-	prepareWorld: function(){
-		if(G.world.hero.dead){
-			G.newWorld();
-		}
-	},
-	play: function(t){
-		G.menu = null;
-		if(G.world.hero.dead){
-			G.newWorld();
-		}
-		G.world.scenario = new TutorialScenario();
-	},
-	lost: function(){
-		var s = G.world.score;
-
-		G.highscore = M.max(s, G.highscore);
-		localStorage['hs'] = G.highscore;
-
-		G.lastScore = s;
-
-		to(function(){
-			wld.scenario = null;
-			G.menu = new End(s);
-		}, 1500);
-	},
-	cycle: function(){
-		sv();
-		sc(G.resolution, G.resolution);
-
-		var n = Date.now(),
-			e = (n - G.lastFrame) / 1000;
-
-		e = M.min(e, 1 / 30);
-		G.lastFrame = n;
-
-		G.frameCount++;
-		if(G.frameCount === 100){
-			var totalTime = Date.now() - G.frameCountStart,
-				fps = G.frameCount / (totalTime / 1000);
-			if(fps < 30 && !navigator.userAgent.match(/Android/i)){
-				G.setResolution(G.resolution * .6);
-			}
-		}
-
-		G.world.cycle(e);
-		if(G.menu){
-			G.menu.cycle(e);
-		}
-
-		Easing.cycle(e);
-
-		/*fillStyle = '#fff';
-		font = '20pt Arial';
-		textBaseline = 'top';
-		textAlign = 'left';
-		ft(~~(1 / e) + 'fps', 10, 10);
-
-		G.elapsedList.push(e);
-		if(G.elapsedList.length > 100){
-			G.elapsedList.shift();
-		}
-
-		c.fillStyle = '#000';
-		c.strokeStyle = '#fff';
-		c.fr(0, 0, G.elapsedList.length * 2, 100);
-		c.strokeRect(0, 0, G.elapsedList.length * 2, 100);
-
-		var fps;
-		c.strokeStyle = '#fff'
-		c.beginPath();
-		for(var i = 0, x = 0 ; i < G.elapsedList.length ; i++, x+=2){
-			fps = ~~(1 / G.elapsedList[i]);
-			//c.fr(x, 100 - (fps / 60) * 100, 2, 2);
-			c.lineTo(x, 100 - (fps / 60) * 100);
-		}
-		c.stroke();*/
-
-		/*G.curPos.forEach(function(t){
-			alpha(.5);
-			fs('red');
-			beginPath();
-			arc(t.x, t.y, 100, 0, Math.PI * 2);
-			fill();
-		});*/
-
-		rs();
-	},
-	newWorld: function(){
-		G.world = new World();
-	},
-	resize : function(){
-		to(function(){
-			var maxWidth = innerWidth,
-				maxHeight = innerHeight,
-
-				availableRatio = maxWidth / maxHeight,
-				baseRatio = P.w / P.h,
-				ratioDifference = abs(availableRatio - baseRatio),
-				width,
-				height,
-				s = document.getElementById('canvascontainer').style;
-
-			if(availableRatio <= baseRatio){
-				width = maxWidth;
-				height = width / baseRatio;
-			}else{
-				height = maxHeight;
-				width = height * baseRatio;
-			}
-
-			s.width = width + 'px';
-			s.height = height + 'px';
-		},100);
-	},
-	pos : function(e){
-		var rect = G.can.getBoundingClientRect(),
-			pos = [];
-
-		e = e.touches || [e];
-
-		for(var i = 0 ; i < e.length ; i++){
-			pos.push({
-				x : (e[i].clientX - rect.left) / (rect.width / P.w),
-				y : (e[i].clientY - rect.top) / (rect.height / P.h)
-			})
-		}
-
-		return pos;
-	},
-	touchStart : function(e,m){
-		e.preventDefault();
-		G.touch = G.touch || !m;
-		var p = G.pos(e);
-		G.curPos = p;
-
-		scrollTo(0,1);
-
-		if(G.menu) return;
-
-		G.world.touchStart();
-	},
-	touchMove : function(e){
-		e.preventDefault();
-		if(G.curPos){
-			G.curPos = G.pos(e);
-
-			if(G.menu) return;
-			G.world.touchMove();
-		}
-	},
-	touchEnd : function(e){
-		e.preventDefault();
-
-		var p = G.curPos[0];
-		G.curPos = G.pos(e);
-
-		if(G.menu){
-			G.menu.click(p.x, p.y);
-		}else{
-			G.world.touchEnd();
-		}
-	},
-	keyDown: function(e){
-		if(e.keyCode == 32 || e.keyCode == 40 || e.keyCode == 38) e.preventDefault();
-		if(G.menu) return;
-		G.world.keyDown(e.keyCode);
-	},
-	keyUp: function(e){
-		if(G.menu) return;
-		G.world.keyUp(e.keyCode);
-	},
-	mouseDown: function(e){
-		if(!G.touch){
-			G.touchStart(e, true);
-		}
-	},
-	mouseMove: function(e){
-		if(!G.touch){
-			G.touchMove(e);
-		}
-	},
-	mouseUp: function(e){
-		if(!G.touch){
-			G.touchEnd(e);
-		}
-	},
-	setResolution: function(r){
-		G.can.width = P.w * r;
-		G.can.height = P.h * r;
-
-		G.resolution = r;
-	}
-};
-
-function World(){
-	wld = this;
-
-	this.score = 0;
-
-	this.waterY = P.h - P.waterOffset;
-	this.waterSpeed = 0;
-	this.flooding = false;
-	this.camY = -400;
-	this.nextThunder = 0;
-
-	this.boxes = [];
-	this.particles = [];
-
-	this.down = {};
-
-	this.angle = 0;
-
-	this.nextSort = 0;
-
-	// Main platform
-	with(this.pf = this.addBox(new Box(this, P.w - 200, 200))){
-		x = P.w / 2;
-		y = P.h - this.pf.h / 2;
-		fall = false;
-		pushable = false;
-	}
-
-	// Hero
-	with(this.hero = this.addBox(new Hero(this))){
-		x = P.w / 2;
-		y = 100;
-		land(this.pf);
-	}
-
-	this.drops = [];
-	for(var i = 0 ; i < 10 ; i++){
-		this.drops.push({
-			x: rd(P.w),
-			y: rd(P.h)
-		});
-	}
-
-	this.t = 0;
-};
-
-World.prototype = {
-	getHeightMap: function(divs){
-		var map = [],
-			me = this;
-		for(var i = 0 ; i < divs ; i++){
-			map.push(null);
-		}
-		this.boxes.forEach(function(b){
-			var ind,
-				leftX, leftInd,
-				rightX, rightInd;
-			if(b !== me.hero){
-				leftInd = ~~(b.leftX() * map.length / P.w);
-				rightInd = ~~(b.rightX() * map.length / P.w);
-
-				for(ind = leftInd ; ind <= rightInd ; ind++){
-					map[ind] = min(map[ind] || me.pf.topY(), b.topY());
-				}
-			}
-		});
-		return map;
-	},
-	highestBox: function(x, y){
-		var r = null;
-		this.boxes.forEach(function(b){
-			if(b !== wld.hero && b.topY() > y && (!r || b.topY() < r.topY())){
-				if(abs(x - b.x) < b.w / 2){
-					r = b;
-				}
-			}
-		});
-		return r;
-	},
-	idealSpawnX: function(w){
-		// Finding the lowest height
-		var divs = ~~(P.w / w),
-			map = this.getHeightMap(divs),
-			ind = 0;
-		for(var i = 1 ; i < divs ; i++){
-			if(map[i] !== null && map[i] > map[ind]){
-				ind = i;
-			}
-		}
-
-		// Creating an array of possible indexes (indexes at which the difference with the lowest height is small enough)
-		var maxY = map[ind],
-			diff,
-			inds = [];
-		for(var i = 0 ; i < divs ; i++){
-			diff = abs(map[i] - maxY);
-			if(diff < 150){
-				inds.push(i);
-			}
-		}
-
-		ind = rp(inds);
-
-		/*this.lastChosenInd = ind;
-		this.lastHeightMapDivs = divs;
-		this.lastHeightMap = map;*/
-
-		return limit(ind * P.w / divs + w / 2, this.pf.x - this.pf.w / 2, this.pf.x + this.pf.w / 2)
-			 + rd(-P.w / divs, P.w / divs) / 2;
-	},
-	resetDrop: function(d){
-		d.y = rd(-400, -100);
-	},
-	spawnBox: function(x, y, d){
-		d = d || rp([{
-			w: 60,
-			h: 60
-		}, {
-			w: 90,
-			h: 60
-		},{
-			w: 90,
-			h: 90
-		},{
-			w: 40,
-			h: 90
-		}]);
-
-		var b = new Box(this, d.w, d.h);
-		b.x = x || this.idealSpawnX(d.w);
-		b.y = y || this.camY - 100;
-		this.boxes.push(b);
-
-		return b;
-	},
-	addBox: function(b){
-		this.boxes.push(b);
-		return b;
-	},
-	removeBox: function(b){
-		var i = this.boxes.indexOf(b);
-		if(i >= 0) this.boxes.splice(i, 1);
-		b.exists = false;
-	},
-	balance: function(){
-		var l = 0,
-			r = 0;
-		this.boxes.forEach(function(b){
-			if(b !== wld.hero && b !== wld.pf && b.liesOn){
-				if(b.x < P.w / 2) l++;
-				else r++;
-			}
-		});
-		return r - l;
-	},
-	cycle: function(e){
-		this.t += e;
-
-		if(!this.hero.dead)
-			this.waterY -= e * this.waterSpeed * (this.flooding ? 5 : 1);
-
-		//this.nextSort -= e;
-		if((this.nextSort -= e) <= 0){
-			this.sortBoxes();
-			this.nextSort = 2;
-		}
-
-		//this.nextThunder -= e;
-		if((this.nextThunder -= e) <= 0){
-			this.thunder();
-			this.nextThunder = 15;
-		}
-
-		if(this.angle !== 0){
-			this.boxes.forEach(function(b){
-				if(b !== wld.hero && b !== wld.pf){
-					b.setVX(wld.angle / (Math.PI / 32) * 20);
-				}
-			});
-		}
-
-		if(this.scenario){
-			this.scenario.cycle(e);
-		}
-
-		// Handling camera
-		var rightY = this.hero.y - P.h * .6;
-		var diff = rightY - this.camY;
-		if(!this.hero.dead && !G.menu){
-			var s = diff > 0 ? 100 : 50;
-
-			var s = max(10, abs(diff) * .5);
-
-			diff = limit(diff, -s * e, s * e);
-
-			this.camY += diff;
-			this.camY = min(this.camY, this.waterY + P.waterOffset - P.h);
-		}
-
-		// Background
-		fs('#000');
-		fr(0, 0, P.w, P.h);
-		if(!P.inverted) di(stars, 0, 0);
-
-		// Score
-		if(!G.menu && this.score > 0){
-			var s = this.score.toString();
-			var w = textWidth(s);
-			alpha(.2);
-			drawText(c, s, P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
-			alpha(1);
-		}
-
-		sv();
-		tr(0, -~~this.camY);
-
-		if(this.shake){
-			tr(~~rd(-8, 8), ~~rd(-8, 8));
-		}
-
-		sv();
-		tr(0, ~~max(this.waterY + P.waterOffset, this.camY + P.h) - waterHalo.height);
-		fs(waterHalo);
-		fr(0, 0, P.w, waterHalo.height);
-		rs();
-
-		this.water(this.t * 50, this.waterY - 20);
-
-		// Let's apply some rotation to it
-		sv();
-		tr(P.w / 2, P.h / 2);
-		rt(this.angle);
-		tr(-P.w / 2, -P.h / 2);
-
-		var bs = this.boxes.slice(0);
-		for(var i in bs){
-			bs[i].cycle(e);
-		}
-
-		//for(var i = 0 ; i < this.particles.length ; i++){
-		for(var i in this.particles){
-			this.particles[i].render();
-		}
-		rs();
-
-		this.water(-this.t * 50, this.waterY);
-		this.water(this.t * 50, this.waterY + 20);
-
-		//var map = this.getHeightMap();
-		/*if(this.lastHeightMap){
-			var map = this.lastHeightMap;
-			for(var i = 0, x = 0 ; i < map.length ; i++, x += (P.w / map.length)){
-				fillStyle = i === this.lastChosenInd ? '#0f0' : 'red';
-				fr(x, map[i], (P.w / map.length), 4);
-			}
-		}*/
-
-		rs();
-
-		// Rain
-		sv();
-
-		// Let's apply some rotation to it
-		tr(P.w / 2, P.h / 2);
-		rt(-M.PI / 64);
-		tr(-P.w / 2, -P.h / 2);
-
-		fs('#fff');
-		alpha(this.flooding ? 1 : .5);
-		for(var i = 0 ; i < this.drops.length ; i++){
-			this.drops[i].y += e * (this.flooding ? 2000 : 1000);
-			if(this.drops[i].y > P.h){
-				this.drops[i].x = rd(P.w);
-				this.drops[i].y = rd(-600, -100);
-			}
-			fr(this.drops[i].x, this.drops[i].y, 2, 40);
-		}
-
-		rs();
-
-		// Controls
-		if(G.touch && !G.menu && !this.hero.dead && this.hero.controllable){
-			alpha(this.hero.walkDir == -1 ? 1 : .5);
-			di(larrow, 60, P.h - 100);
-
-			alpha(this.hero.walkDir == 1 ? 1 : .5);
-			di(rarrow, P.w - 60 - rarrow.width, P.h - 100);
-
-			alpha(this.hero.vY < 0 ? 1 : .5);
-			di(jump, (P.w - jump.width) / 2, P.h - 100);
-
-			alpha(1);
-		}
-	},
-	water: function(x, y){
-		y = ~~y;
-
-		//with(c){
-			sv();
-			tr(x, y);
-			alpha(.5);
-
-			// Waves pattern
-			fs(water);
-			fr(-x, 0, P.w, water.height);
-
-			// Calculating remaining space that needs to be filled
-			var sy = ~~(water.height + y - this.camY);
-
-			// Filling the bottom
-			fs('#d5d5d5');
-			fr(-x, water.height, P.w, P.h - sy);
-
-			rs();
-		//}
-	},
-	touchStart: function(x, y){
-		wld.evalTouchMovement();
-	},
-	touchMove: noop,
-	touchEnd: function(){
-		wld.evalTouchMovement();
-	},
-	keyUp: function(k){
-		wld.down[k] = 0;
-		wld.evalKeyboardMovement();
-	},
-	keyDown: function(k){
-		wld.down[k] = true;
-
-		if(k == 38 || k == 87){
-			wld.hero.jump();
-		}
-		wld.evalKeyboardMovement();
-	},
-	evalKeyboardMovement: function(){
-		var wd = 0;
-		if(wld.down[37] || wld.down[65]){
-			wd = -1;
-		}
-		if(wld.down[39] || wld.down[68]){
-			wd = 1;
-		}
-		wld.hero.setWalkDir(wd);
-	},
-	evalTouchMovement: function(x){
-		if(!G.touch) return;
-		var wd = 0;
-		G.curPos.forEach(function(t){
-			if(t.x < P.w / 3){
-				wd = -1;
-			}else if(t.x > P.w * 2 / 3){
-				wd = 1;
-			}else{
-				wld.hero.jump();
-			}
-		});
-		wld.hero.setWalkDir(wd);
-	},
-	quake: function(){
-		var shake = function(){
-			wld.boxes.forEach(function(b){
-				if(b !== wld.pf && b !== wld.hero){
-					b.vX = rd(-100, 100);
-				}
-			});
-		};
-
-		wld.hero.say('EARTHQUAKE!!!');
-
-		to(function(){
-			wld.shake = true;
-		}, 2000);
-		for(var t = 2 ; t < 5 ; t += .2){
-			to(shake, t * 1000);
-		}
-		to(function(){
-			wld.shake = false;
-			wld.hero.say('Phewww');
-		}, t * 1000);
-	},
-	flood: function(){
-		wld.hero.say('FLOOD!!!');
-		to(function(){
-			wld.flooding = true;
-		}, 2000);
-		to(function(){
-			wld.flooding = false;
-			wld.hero.say('Flood\'s over');
-		}, 8000);
-	},
-	boxStorm: function(){
-		wld.hero.say('BOX STOOORM!!!');
-
-		var xs = [];
-		for(var i = 0 ; i < 1 ; i++){
-			for(var x = 0 ; x < P.w ; x += rd(100, 200)){
-				xs.push(x);
-			}
-		}
-
-		shuffle(xs);
-
-		for(var i = 0, t = 3 ; i < xs.length ; i++, t += 1.2){
-			to((function(x){
-				return function(){
-					wld.spawnBox(x);
-				}
-			})(xs[i]), t * 1000);
-		}
-
-		to(function(){
-			wld.hero.say('Storm is over');
-		}, t * 1000 + 1000);
-	},
-	addParticle: function(p){
-		wld.particles.push(p);
-	},
-	removeParticle: function(p){
-		var ind = wld.particles.indexOf(p);
-		if(ind >= 0) wld.particles.splice(ind, 1);
-	},
-	sortBoxes: function(){
-		wld.cleanBoxes();
-		wld.boxes.sort(function(a, b){
-			var da = abs(a.x - P.w / 2),
-				db = abs(b.x - P.w / 2);
-			if(a === wld.hero) return 1;
-			if(b === wld.hero) return -1;
-			return db - da;
-		});
-	},
-	cleanBoxes: function(){
-		var maxVisibleY = max(wld.camY + P.h, wld.waterY + P.waterOffset),
-			i = wld.boxes.length;
-
-		while(wld.boxes[--i]){
-			if(wld.boxes[i].topY() >= maxVisibleY){
-
-				// Let's block boxes lying on this one
-				wld.boxes[i].over.forEach(function(b){
-					if(b !== wld.hero){
-						b.liesOn = null;
-						b.fall = false;
-					}
-				});
-
-				wld.boxes.splice(i, 1);
-			}
-		}
-	},
-	thunder: function(){
-		var i = P.inverted,
-			s = 200,
-			show = function(){ P.inverted = !i; },
-			hide = function(){ P.inverted = i; };
-
-		for(var t = 0 ; t < 400 ; t += s){
-			to(show, t);
-			to(hide, t + s / 2);
-		}
-	},
-	tilt: function(){
-		wld.hero.say('THE PLATFORM IS TILTING!!!');
-
-		var b = wld.balance(),
-			a = M.PI / 64;
-		if(b < 0) a *= -1;
-
-		Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
-			Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
-		});
-	}
-};
-
-function Menu(){
-	this.buttons = [];
-
-	this.alpha = 0;
-	Easing.tween(this, 'alpha', 0, 1, .5);
+function $bc() {
+    G = this;
+    G.$y = parseInt(localStorage["hs"]) || 0;
+    G.$ag = 1;
+    G.$O = [];
+    G.can = document.querySelector("canvas");
+    with(G.can) {
+        width = P.w;
+        height = P.h
+    }
+    G.ctx = window.c = G.can.getContext("2d");
+    G.$as();
+    G.$a_();
+    $_.$3 = new $a6;
+    G.resize();
+    onresize = G.resize;
+    with(document.body) {
+        ontouchstart = G.$8.bind(G);
+        ontouchmove = G.$6.bind(G);
+        ontouchend = G.$ae.bind(G);
+        onmo$ciown = G.$bX.bind(G);
+        onmousemove = G.$bZ.bind(G);
+        onmouseup = G.$c_.bind(G)
+    }
+    onkeydown = G.$aO.bind(G);
+    onkeyup = G.$aA.bind(G);
+    G.$aL = 0;
+    G.$bf = G.$bO = Date.now();
+    raf(function() {
+        G.$c();
+        raf(arguments.callee)
+    });
+    var $bv = _.innerWidth * _.innerHeight * _.devicePixelRatio,
+        $bx = P.w * P.h,
+        $a0 = $bv / $bx;
+    if ($a0 < .5) {
+        G.$aX($a0 * 2)
+    }
+    $N("die", [
+        [3, , .0246, , .2645, .29, , -.568, , , , , , , , , , , 1, , , .0072, , .5]
+    ]);
+    $N("$K", [
+        [0, , .1336, , .1006, .3814, , .2867, , , , , , .1429, , , , , .7082, , , , , .5]
+    ]);
+    $N("box$a1", [
+        [3, , .0635, .13, .22, .14, .05, , .02, , , , , , , .28, , .04, .49, .04, , , , .25],
+        [3, , .1733, .96, .06, .2304, , -.3608, , , , , , , , , , , 1, , , , , .25],
+        [3, , .09, .7003, .23, .0844, , .227, , , , , , , , .7108, , , 1, , , , , .25]
+    ]);
+    $N("$a$a1", [
+        [3, , .0118, .03, .1681, .565, , -.2343, , , , .26, .6855, , , , , , 1, , , , , .2]
+    ]);
+    $N("$M", [
+        [0, .1696, .5004, .2598, .3914, .7047, , .0141, -5e-4, , , .6608, -.8497, -.1484, -.0163, .5521, .2529, -.5832, .6323, -.595, .9155, .2821, -.0615, .26]
+    ]);
+    $N("test", [
+        [, .5, , .2098, , .1569, .3, .3677, , .2937, , , , , , , , , , , .2912, , , , , .4261, , , .1431, , , , 1]
+    ]);
+    $N("$ac", [
+        [2, .18, .24, , .54, .34, , , , 1, .31, , , , .8522, , , , .23, , , , , .49]
+    ])
 }
-
-Menu.prototype = {
-	cycle: function(e){
-		alpha(this.alpha);
-		fs('rgba(0,0,0,.7)');
-		fr(0, 0, P.w, P.h);
-
-		for(var i in this.buttons){
-			this.buttons[i].render();
-		}
-
-		alpha(1);
-	},
-	click: function(x, y){
-		for(var i in this.buttons){
-			if(this.buttons[i].contains(x, y)){
-				this.buttons[i].click();
-				return;
-			}
-		}
-	},
-	out: function(f){
-		Easing.tween(this, 'alpha', this.alpha, 0, .5, 0, linear, f);
-	}
+$bc.prototype = {
+    $a_: function() {
+        G.$p = new $bm
+    },
+    $aq: function() {
+        G.$p = new $br(G)
+    },
+    $ay: function() {
+        if (G.$q.$a.$V) {
+            G.$as()
+        }
+    },
+    play: function(t) {
+        G.$p = null;
+        if (G.$q.$a.$V) {
+            G.$as()
+        }
+        G.$q.$3 = new $a3
+    },
+    $bT: function() {
+        var s = G.$q.score;
+        G.$y = M.max(s, G.$y);
+        localStorage["hs"] = G.$y;
+        G.lastScore = s;
+        to(function() {
+            $_.$3 = null;
+            G.$p = new $bl(s)
+        }, 1500)
+    },
+    $c: function() {
+        sv();
+        sc(G.$ag, G.$ag);
+        var n = Date.now(),
+            e = (n - G.$bf) / 1e3;
+        e = M.min(e, 1 / 30);
+        G.$bf = n;
+        G.$aL++;
+        if (G.$aL === 100) {
+            var $bF = Date.now() - G.$bO,
+                fps = G.$aL / ($bF / 1e3);
+            if (fps < 30 && !navigator.userAgent.match(/Android/i)) {
+                G.$aX(G.$ag * .6)
+            }
+        }
+        G.$q.$c(e);
+        if (G.$p) {
+            G.$p.$c(e)
+        }
+        $d.$c(e);
+        rs()
+    },
+    $as: function() {
+        G.$q = new $bg
+    },
+    resize: function() {
+        to(function() {
+            var $bd = innerWidth,
+                $bn = innerHeight,
+                $be = $bd / $bn,
+                $ab = P.w / P.h,
+                $cf = abs($be - $ab),
+                width, height, s = document.getElementById("canvascontainer").style;
+            if ($be <= $ab) {
+                width = $bd;
+                height = width / $ab
+            } else {
+                height = $bn;
+                width = height * $ab
+            }
+            s.width = width + "px";
+            s.height = height + "px"
+        }, 100)
+    },
+    pos: function(e) {
+        var $aa = G.can.getBoundingClientRect(),
+            pos = [];
+        e = e.touches || [e];
+        for (var i = 0; i < e.length; i++) {
+            pos.push({
+                x: (e[i].clientX - $aa.left) / ($aa.width / P.w),
+                y: (e[i].clientY - $aa.top) / ($aa.height / P.h)
+            })
+        }
+        return pos
+    },
+    $8: function(e, m) {
+        e.preventDefault();
+        G.touch = G.touch || !m;
+        var p = G.pos(e);
+        G.$O = p;
+        scrollTo(0, 1);
+        if (G.$p) return;
+        G.$q.$8()
+    },
+    $6: function(e) {
+        e.preventDefault();
+        if (G.$O) {
+            G.$O = G.pos(e);
+            if (G.$p) return;
+            G.$q.$6()
+        }
+    },
+    $ae: function(e) {
+        e.preventDefault();
+        var p = G.$O[0];
+        G.$O = G.pos(e);
+        if (G.$p) {
+            G.$p.$aI(p.x, p.y)
+        } else {
+            G.$q.$ae()
+        }
+    },
+    $aO: function(e) {
+        if (e.keyCode == 32 || e.keyCode == 40 || e.keyCode == 38) e.preventDefault();
+        if (G.$p) return;
+        G.$q.$aO(e.keyCode)
+    },
+    $aA: function(e) {
+        if (G.$p) return;
+        G.$q.$aA(e.keyCode)
+    },
+    $bX: function(e) {
+        if (!G.touch) {
+            G.$8(e, 1)
+        }
+    },
+    $bZ: function(e) {
+        if (!G.touch) {
+            G.$6(e)
+        }
+    },
+    $c_: function(e) {
+        if (!G.touch) {
+            G.$ae(e)
+        }
+    },
+    $aX: function(r) {
+        G.can.width = P.w * r;
+        G.can.height = P.h * r;
+        G.$ag = r
+    }
 };
 
-function Home(g){
-	Menu.call(this);
-
-	var h = this,lb;
-	this.buttons.push(lb = new Button(playButton, (P.w - playButton.width) / 2, 0, function(){
-		G.prepareWorld();
-		h.out(G.play.bind(G));
-	}));
-	if(localStorage.getItem('tut') == 1){
-		this.buttons.push(lb = new Button(tutorialButton, (P.w - tutorialButton.width) / 2, 0, function(){
-			localStorage['tut'] = null;
-			G.prepareWorld();
-			h.out(G.play.bind(G));
-		}));
-	}
-	this.buttons.push(new Button(colorsButton, (P.w - colorsButton.width) / 2, 0, function(){
-		P.inverted = !P.inverted;
-		localStorage['c'] = P.inverted ? '1' : '0';
-	}));
-
-	this.titleY = 200;
-	Easing.tween(this, 'titleY', -100, this.titleY, .5, 0, easeOutBack);
-
-	var d = .5,
-		y = this.buttons.length == 3 ? 400 : 500;
-	this.buttons.forEach(function(b){
-		b.y = y;
-		Easing.tween(b, 'y', b.y + 600, b.y, 1, d, easeOutBack);
-		d += .5;
-		y += 150;
-	});
-
-	Easing.tween(this, 'bestY', P.h, 860, 1, d, easeOutBack);
+function $bg() {
+    $_ = this;
+    this.score = 0;
+    this.$t = P.h - P.$aj;
+    this.$ah = 0;
+    this.$U = 0;
+    this.$u = -400;
+    this.$aE = 0;
+    this.$b = [];
+    this.$cYs = [];
+    this.down = {};
+    this.$Q = 0;
+    this.$aH = 0;
+    with(this.pf = this.$bi(new $T(this, P.w - 200, 200))) {
+        x = P.w / 2;
+        y = P.h - this.pf.h / 2;
+        $ai = 0;
+        $X = 0
+    }
+    with(this.$a = this.$bi(new $aK(this))) {
+        x = P.w / 2;
+        y = 100;
+        $a1(this.pf)
+    }
+    this.$I = [];
+    for (var i = 0; i < 10; i++) {
+        this.$I.push({
+            x: rd(P.w),
+            y: rd(P.h)
+        })
+    }
+    this.t = 0
 }
+$bg.prototype = {
+    $a5: function(divs) {
+        var $k = [],
+            me = this;
+        for (var i = 0; i < divs; i++) {
+            $k.push(null)
+        }
+        this.$b.forEach(function(b) {
+            var ind, $s, $a9, $E, $a7;
+            if (b !== me.$a) {
+                $a9 = ~~(b.$s() * $k.length / P.w);
+                $a7 = ~~(b.$E() * $k.length / P.w);
+                for (ind = $a9; ind <= $a7; ind++) {
+                    $k[ind] = min($k[ind] || me.pf.$f(), b.$f())
+                }
+            }
+        });
+        return $k
+    },
+    $b3: function(x, y) {
+        var r = null;
+        this.$b.forEach(function(b) {
+            if (b !== $_.$a && b.$f() > y && (!r || b.$f() < r.$f())) {
+                if (abs(x - b.x) < b.w / 2) {
+                    r = b
+                }
+            }
+        });
+        return r
+    },
+    $b6: function(w) {
+        var divs = ~~(P.w / w),
+            $k = this.$a5(divs),
+            ind = 0;
+        for (var i = 1; i < divs; i++) {
+            if ($k[i] !== null && $k[i] > $k[ind]) {
+                ind = i
+            }
+        }
+        var $b5 = $k[ind],
+            $B, inds = [];
+        for (var i = 0; i < divs; i++) {
+            $B = abs($k[i] - $b5);
+            if ($B < 150) {
+                inds.push(i)
+            }
+        }
+        ind = rp(inds);
+        return $5(ind * P.w / divs + w / 2, this.pf.x - this.pf.w / 2, this.pf.x + this.pf.w / 2) + rd(-P.w / divs, P.w / divs) / 2
+    },
+    $cd: function(d) {
+        d.y = rd(-400, -100)
+    },
+    $Z: function(x, y, d) {
+        d = d || rp([{
+            w: 60,
+            h: 60
+        }, {
+            w: 90,
+            h: 60
+        }, {
+            w: 90,
+            h: 90
+        }, {
+            w: 40,
+            h: 90
+        }]);
+        var b = new $T(this, d.w, d.h);
+        b.x = x || this.$b6(d.w);
+        b.y = y || this.$u - 100;
+        this.$b.push(b);
+        return b
+    },
+    $bi: function(b) {
+        this.$b.push(b);
+        return b
+    },
+    $bq: function(b) {
+        var i = this.$b.indexOf(b);
+        if (i >= 0) this.$b.splice(i, 1);
+        b.$bk = 0
+    },
+    $cc: function() {
+        var l = 0,
+            r = 0;
+        this.$b.forEach(function(b) {
+            if (b !== $_.$a && b !== $_.pf && b.$l) {
+                if (b.x < P.w / 2) l++;
+                else r++
+            }
+        });
+        return r - l
+    },
+    $c: function(e) {
+        this.t += e;
+        if (!this.$a.$V) this.$t -= e * this.$ah * (this.$U ? 5 : 1);
+        if ((this.$aH -= e) <= 0) {
+            this.$bP();
+            this.$aH = 2
+        }
+        if ((this.$aE -= e) <= 0) {
+            this.thunder();
+            this.$aE = 15
+        }
+        if (this.$Q !== 0) {
+            this.$b.forEach(function(b) {
+                if (b !== $_.$a && b !== $_.pf) {
+                    b.$9($_.$Q / (Math.PI / 32) * 20)
+                }
+            })
+        }
+        if (this.$3) {
+            this.$3.$c(e)
+        }
+        var $bs = this.$a.y - P.h * .6;
+        var $B = $bs - this.$u;
+        if (!this.$a.$V && !G.$p) {
+            var s = $B > 0 ? 100 : 50;
+            var s = max(10, abs($B) * .5);
+            $B = $5($B, -s * e, s * e);
+            this.$u += $B;
+            this.$u = min(this.$u, this.$t + P.$aj - P.h)
+        }
+        fs("#000");
+        fr(0, 0, P.w, P.h);
+        if (!P.$h) di($ca, 0, 0);
+        if (!G.$p && this.score > 0) {
+            var s = this.score.toString();
+            var w = $P(s);
+            $i(.2);
+            $z(c, s, P.$h ? "black" : "white", (P.w - w) / 2, 300);
+            $i(1)
+        }
+        sv();
+        tr(0, -~~this.$u);
+        if (this.$S) {
+            tr(~~rd(-8, 8), ~~rd(-8, 8))
+        }
+        sv();
+        tr(0, ~~max(this.$t + P.$aj, this.$u + P.h) - $az.height);
+        fs($az);
+        fr(0, 0, P.w, $az.height);
+        rs();
+        this.$H(this.t * 50, this.$t - 20);
+        sv();
+        tr(P.w / 2, P.h / 2);
+        rt(this.$Q);
+        tr(-P.w / 2, -P.h / 2);
+        var bs = this.$b.slice(0);
+        for (var i in bs) {
+            bs[i].$c(e)
+        }
+        for (var i in this.$cYs) {
+            this.$cYs[i].$R()
+        }
+        rs();
+        this.$H(-this.t * 50, this.$t);
+        this.$H(this.t * 50, this.$t + 20);
+        rs();
+        sv();
+        tr(P.w / 2, P.h / 2);
+        rt(-M.PI / 64);
+        tr(-P.w / 2, -P.h / 2);
+        fs("#fff");
+        $i(this.$U ? 1 : .5);
+        for (var i = 0; i < this.$I.length; i++) {
+            this.$I[i].y += e * (this.$U ? 2e3 : 1e3);
+            if (this.$I[i].y > P.h) {
+                this.$I[i].x = rd(P.w);
+                this.$I[i].y = rd(-600, -100)
+            }
+            fr(this.$I[i].x, this.$I[i].y, 2, 40)
+        }
+        rs();
+        if (G.touch && !G.$p && !this.$a.$V && this.$a.$x) {
+            $i(this.$a.$D == -1 ? 1 : .5);
+            di($b7, 60, P.h - 100);
+            $i(this.$a.$D == 1 ? 1 : .5);
+            di($aD, P.w - 60 - $aD.width, P.h - 100);
+            $i(this.$a.vY < 0 ? 1 : .5);
+            di($K, (P.w - $K.width) / 2, P.h - 100);
+            $i(1)
+        }
+    },
+    $H: function(x, y) {
+        y = ~~y;
+        sv();
+        tr(x, y);
+        $i(.5);
+        fs($H);
+        fr(-x, 0, P.w, $H.height);
+        var sy = ~~($H.height + y - this.$u);
+        fs("#d5d5d5");
+        fr(-x, $H.height, P.w, P.h - sy);
+        rs()
+    },
+    $8: function(x, y) {
+        $_.$bp()
+    },
+    $6: $0,
+    $ae: function() {
+        $_.$bp()
+    },
+    $aA: function(k) {
+        $_.down[k] = 0;
+        $_.$aY()
+    },
+    $aO: function(k) {
+        $_.down[k] = 1;
+        if (k == 38 || k == 87) {
+            $_.$a.$K()
+        }
+        $_.$aY()
+    },
+    $aY: function() {
+        var wd = 0;
+        if ($_.down[37] || $_.down[65]) {
+            wd = -1
+        }
+        if ($_.down[39] || $_.down[68]) {
+            wd = 1
+        }
+        $_.$a.$aS(wd)
+    },
+    $bp: function(x) {
+        if (!G.touch) return;
+        var wd = 0;
+        G.$O.forEach(function(t) {
+            if (t.x < P.w / 3) {
+                wd = -1
+            } else if (t.x > P.w * 2 / 3) {
+                wd = 1
+            } else {
+                $_.$a.$K()
+            }
+        });
+        $_.$a.$aS(wd)
+    },
+    $cb: function() {
+        var $S = function() {
+            $_.$b.forEach(function(b) {
+                if (b !== $_.pf && b !== $_.$a) {
+                    b.vX = rd(-100, 100)
+                }
+            })
+        };
+        $_.$a.$g("EARTHQUAKE" + "!".repeat(Math.floor(Math.random() * 6)));
+        to(function() {
+            $_.$S = 1
+        }, 2e3);
+        for (var t = 2; t < 5; t += .2) {
+            to($S, t * 1e3)
+        }
+        to(function() {
+            $_.$S = 0;
+            $_.$a.$g("Phewww")
+        }, t * 1e3)
+    },
+    $b9: function() {
+        $_.$a.$g("FLOOD" + "!".repeat(Math.floor(Math.random() * 5)));
+        to(function() {
+            $_.$U = 1; // 1
+        }, 2e3);
+        to(function() {
+            $_.$U = 0;
+            $_.$a.$g("Flood's over")
+        }, 8e3)
+    },
+    $bK: function() {
+        $_.$a.$g("BOX ST" + "O".repeat(Math.floor(Math.random() * 6)) + "RM" + "!".repeat(Math.floor(Math.random() * 4)));
+        var xs = [];
+        for (var i = 0; i < 1; i++) {
+            for (var x = 0; x < P.w; x += rd(100, 200)) {
+                xs.push(x)
+            }
+        }
+        $a4(xs);
+        for (var i = 0, t = 3; i < xs.length; i++, t += 1.2) {
+            to(function(x) {
+                return function() {
+                    $_.$Z(x)
+                }
+            }(xs[i]), t * 1e3)
+        }
+        to(function() {
+            $_.$a.$g("Storm is over")
+        }, t * 1e3 + 1e3)
+    },
+    add$1: function(p) {
+        $_.$cYs.push(p)
+    },
+    $bV: function(p) {
+        var ind = $_.$cYs.indexOf(p);
+        if (ind >= 0) $_.$cYs.splice(ind, 1)
+    },
+    $bP: function() {
+        $_.$bQ();
+        $_.$b.sort(function(a, b) {
+            var da = abs(a.x - P.w / 2),
+                db = abs(b.x - P.w / 2);
+            if (a === $_.$a) return 1;
+            if (b === $_.$a) return -1;
+            return db - da
+        })
+    },
+    $bQ: function() {
+        var $bC = max($_.$u + P.h, $_.$t + P.$aj),
+            i = $_.$b.length;
+        while ($_.$b[--i]) {
+            if ($_.$b[i].$f() >= $bC) {
+                $_.$b[i].over.forEach(function(b) {
+                    if (b !== $_.$a) {
+                        b.$l = null;
+                        b.$ai = 0
+                    }
+                });
+                $_.$b.splice(i, 1)
+            }
+        }
+    },
+    thunder: function() {
+        var i = P.$h,
+            s = 200,
+            $by = function() {
+                P.$h = !i
+            },
+            $bz = function() {
+                P.$h = i
+            };
+        for (var t = 0; t < 400; t += s) {
+            to($by, t);
+            to($bz, t + s / 2)
+        }
+    },
+    tilt: function() {
+        $_.$a.$g("THE PLATFORM IS TILTING" + "!".repeat(Math.floor(Math.random() * 5)));
+        var b = $_.$cc(),
+            a = M.PI / (8 + Math.random() * 54); // 64
+        if (b < 0) a *= -1;
+        $d.$e($_, "$Q", 0, a, 1, 1, $G, function() {
+            $d.$e($_, "$Q", $_.$Q, 0, 1, 2)
+        })
+    }
+};
 
-Home.prototype = xt(Menu.prototype, {
-	cycle: function(e){
-		Menu.prototype.cycle.call(this, e);
+function $C() {
+    this.$Ms = [];
+    this.$i = 0;
+    $d.$e(this, "$i", 0, 1, .5)
+}
+$C.prototype = {
+    $c: function(e) {
+        $i(this.$i);
+        fs("rgba(0,0,0,.7)");
+        fr(0, 0, P.w, P.h);
+        for (var i in this.$Ms) {
+            this.$Ms[i].$R()
+        }
+        $i(1)
+    },
+    $aI: function(x, y) {
+        for (var i in this.$Ms) {
+            if (this.$Ms[i].$bI(x, y)) {
+                this.$Ms[i].$aI();
+                return
+            }
+        }
+    },
+    out: function(f) {
+        $d.$e(this, "$i", this.$i, 0, .5, 0, $G, f)
+    }
+};
 
-		alpha(this.alpha);
-		di(title, (P.w - title.width) / 2, this.titleY);
-
-		var hsString = G.highscore ? ('high'+'score: ' + G.highscore) : '';
-		drawText(c, hsString, 'white', (P.w - textWidth(hsString, .5)) / 2, this.bestY, .5, 1);
-
-		alpha(1);
-	}
+function $br(g) {
+    $C.call(this);
+    var h = this,
+        lb;
+    this.$Ms.push(lb = new $F($7, (P.w - $7.width) / 2, 0, function() {
+        G.$ay();
+        h.out(G.play.bind(G))
+    }));
+    if (localStorage.getItem("tut") == 1) {
+        this.$Ms.push(lb = new $F($a8, (P.w - $a8.width) / 2, 0, function() {
+            localStorage["tut"] = null;
+            G.$ay();
+            h.out(G.play.bind(G))
+        }))
+    }
+    this.$Ms.push(new $F($aps$F, (P.w - $aps$F.width) / 2, 0, function() {
+        P.$h = !P.$h;
+        localStorage["c"] = P.$h ? "1" : "0"
+    }));
+    this.$a2Y = 200;
+    $d.$e(this, "$a2Y", -100, this.$a2Y, .5, 0, $J);
+    var d = .5,
+        y = this.$Ms.length == 3 ? 400 : 500;
+    this.$Ms.forEach(function(b) {
+        b.y = y;
+        $d.$e(b, "y", b.y + 600, b.y, 1, d, $J);
+        d += .5;
+        y += 150
+    });
+    $d.$e(this, "$bw", P.h, 860, 1, d, $J)
+}
+$br.prototype = xt($C.prototype, {
+    $c: function(e) {
+        $C.prototype.$c.call(this, e);
+        $i(this.$i);
+        di($a2, (P.w - $a2.width) / 2, this.$a2Y);
+        var hsString = G.$y ? "high" + "score: " + G.$y : "";
+        $z(c, hsString, "white", (P.w - $P(hsString, .5)) / 2, this.$bw, .5, 1);
+        $i(1)
+    }
 });
 
-function End(s){
-	Menu.call(this);
+function $bl(s) {
+    $C.call(this);
+    this.score = s;
+    var h = this;
+    this.$Ms.push(new $F($bS, (P.w - $7.width) / 2, 500, function() {
+        G.$ay();
+        h.out(G.play.bind(G))
+    }));
+    this.$Ms.push(new $F($bR, (P.w - $7.width) / 2, 660, function() {
+        G.$aq()
+    }));
+    $d.$e(this.$Ms[0], "y", this.$Ms[0].y + 500, this.$Ms[0].y, 1, 1, $J);
+    $d.$e(this.$Ms[1], "y", this.$Ms[1].y + 500, this.$Ms[1].y, 1, 1.5, $J);
+    play("$ac")
+}
+$bl.prototype = xt($C.prototype, {
+    $c: function(e) {
+        $C.prototype.$c.call(this, e);
+        $i(this.$i);
+        di($ac, (P.w - $ac.width) / 2, 200);
+        var s = this.score + "";
+        $z(c, s, "white", (P.w - $P(s)) / 2, 300, 1, 1);
+        s = "best: " + G.$y;
+        $z(c, s, "white", (P.w - $P(s, .5)) / 2, 400, .5, 1);
+        $i(1)
+    }
+});
 
-	this.score = s;
+function $T($q, w, h) {
+    this.w = w;
+    this.h = h;
+    this.x = this.y = 0;
+    this.vX = this.vY = 0;
+    this.$ai = 1;
+    this.$aR = 1;
+    this.$X = 1;
+    this.over = [];
+    this.$bk = 1;
+    this.$ak = 0;
+    this.$Y = 0;
+    this.sx = this.sy = 1;
+    this.$aQ = 0;
+    $d.$e(this, "$aQ", 0, 1, .3, 0, $J)
+}
+$T.prototype = {
+    $f: function() {
+        return this.y - this.h / 2
+    },
+    $o: function() {
+        return this.y + this.h / 2
+    },
+    $s: function() {
+        return this.x - this.w / 2
+    },
+    $E: function() {
+        return this.x + this.w / 2
+    },
+    $c: function(e) {
+        var prevY = this.$o(),
+            b, me = this;
+        if (this.$ai) {
+            if (!this.$l) {
+                this.y += e * this.vY;
+                this.vY += e * P.g;
+                if (this.vY > 0 && !this.deco$a0n) {
+                    if (this.y > P.h) {
+                        $_.$bq(this)
+                    }
+                    var below = this.$bU(prevY);
+                    if (below && this.$aF(below) && this.$aZ(below)) {
+                        this.$a1(below)
+                    }
+                }
+            } else {
+                b = this.$l;
+                if (abs(b.x - this.x) > (this.w + b.w) / 2 || abs(b.y - this.y) > (this.h + b.h) / 2 + 2 || !b.$bk) {
+                    this.$aG()
+                }
+            }
+        }
+        if (this.vX != 0) {
+            var x = this.x;
+            this.x += this.vX * e;
+            if (this.vX > 0) {
+                this.vX = max(0, this.vX - e * 300)
+            } else if (this.vX < 0) {
+                this.vX = min(0, this.vX + e * 300)
+            }
+            $_.$b.forEach(function(b) {
+                if (b !== me && b.$aF(me)) {
+                    b.$9(me.vX * .6);
+                    me.x = x;
+                    me.vX = 0
+                }
+            })
+        }
+        var l = $5(this.vY / 1e3, 0, 1) * $bj.height,
+            $B = l - this.$Y;
+        this.$Y += $5($B, -500 * e, 500 * e);
+        if (prevY < $_.$t && this.$o() > $_.$t && !this.$l) {
+            for (var i = 0; i < 20; i++) {
+                var p = new $1(rd(10, 20), "#ddd");
+                p.x = rd(this.$s(), this.$E());
+                p.y = this.$o() + 50;
+                $_.add$1(p);
+                var $ce = p.x - this.x;
+                var dx = (p.x - this.x) * 2;
+                $d.$e(p, "x", p.x, p.x + dx, .3);
+                $d.$e(p, "y", p.y, p.y - rd(100, 200), .3);
+                $d.$e(p, "s", p.s, 0, .3, 0, $G, p.$al.bind(p))
+            }
+        }
+        this.$R()
+    },
+    $aZ: function(b) {
+        return 1
+    },
+    $R: function() {
+        sv();
+        $i(this.deco$a0n ? .5 : 1);
+        tr(this.x, this.y);
+        sc(this.sx, this.sy);
+        tr(-this.x, -this.y);
+        var $bD = (P.w / 2 - this.$s()) / (P.w / 2),
+            $bu = (P.w / 2 - this.$E()) / (P.w / 2),
+            $at = min(0, $bD) * 20,
+            $bh = max(0, $bu) * 20;
+        if (this.$ai && this.$Y > 20) {
+            sv();
+            tr(this.$s(), this.y - this.$Y);
+            fs($bj);
+            fr($at, 0, this.w - $at + $bh, abs(this.$Y));
+            rs()
+        }
+        fs("#ffffff");
+        fr(this.x - this.w / 2, this.y - this.h / 2 + this.$ak, this.w, this.h);
+        if (this.y < $_.$u - this.h / 2 && !this.deco$a0n) {
+            sv();
+            tr(this.x, $_.$u + 100);
+            sc(this.$aQ, this.$aQ);
+            di($aB, -$aB.width / 2, -$aB.height);
+            rs()
+        }
+        fs("#c0c0c0");
+        fr(this.$s(), this.$f() + this.$ak, $at, this.h);
+        fr(this.$E(), this.$f() + this.$ak, $bh, this.h);
+        rs()
+    },
+    $bJ: function(b) {
+        var ind = this.over.indexOf(b);
+        if (ind === -1) this.over.push(b)
+    },
+    $bY: function(b) {
+        var ind = this.over.indexOf(b);
+        if (ind >= 0) this.over.splice(ind, 1)
+    },
+    $aG: function() {
+        if (this.$l) {
+            this.$l.$bY(this);
+            this.$l = null;
+            this.vY = 0
+        }
+    },
+    $a1: function(b) {
+        var v = this.vY,
+            f = function(t, b, c, d) {
+                var prct = t / d;
+                var f = 1 - M.pow(abs(prct * 2 - 1), 3);
+                return f * c + b
+            };
+        this.y = b.$f() - this.h / 2;
+        if (this.vY > 100 && this.$aR) {
+            $d.$e(this, "$ak", 0, -this.vY / 45, .4, 0, f)
+        }
+        this.vY = 0;
+        this.$aG();
+        this.$l = b;
+        b.$bJ(this);
+        b.$aU(this, v);
+        for (var x = this.$s() + rd(5, 15); x < this.$E(); x += rd(10, 25)) {
+            var p = new $1(rd(10, 20), "gray");
+            p.x = x;
+            p.y = this.$o();
+            $_.add$1(p);
+            $d.$e(p, "y", p.y, p.y - rd(30, 80), .3, 0, $G, p.$al.bind(p));
+            $d.$e(p, "s", p.s, 0, .3)
+        }
+        play(this === $_.$a ? "$a$a1" : "box$a1");
+        $d.$e(this, "sx", 1, 1.1, .2, 0, f);
+        $d.$e(this, "sy", 1, .9, .2, 0, f)
+    },
+    $aU: $0,
+    $b0: function(b) {
+        return this.$o() > b.$o() && abs(b.x - this.x) < (this.w + b.w) / 2
+    },
+    $bL: function(b, p) {
+        var x = this.x,
+            vX;
+        if (b.x > this.x) {
+            b.x = this.$E() + b.w / 2;
+            if (p && this.$X) vX = -150
+        } else {
+            b.x = this.$s() - b.w / 2;
+            if (p && this.$X) vX = 150
+        }
+        vX && this.$9(vX)
+    },
+    $9: function(vX) {
+        this.vX = vX;
+        for (var i in this.over) {
+            this.over[i].$9(vX * .7)
+        }
+    },
+    $bU: function($oBefore) {
+        var r, me = this,
+            by = this.$o();
+        $_.$b.forEach(function(h) {
+            if (h.$b0(me) && (!r || h.$f() < r.$f())) {
+                r = h
+            }
+        });
+        return r
+    },
+    $aF: function(b) {
+        return abs(b.x - this.x) < (this.w + b.w) / 2 && abs(b.y - this.y) < (this.h + b.h) / 2
+    }
+};
 
-	var h = this;
-	this.buttons.push(new Button(retryButton, (P.w - playButton.width) / 2, 500, function(){
-		G.prepareWorld();
-		h.out(G.play.bind(G));
-	}));
-	this.buttons.push(new Button(menuButton, (P.w - playButton.width) / 2, 660, function(){
-		G.home();
-	}));
+function $aK($q) {
+    $T.call(this, $q, 40, 80);
+    this.$2 = this.wd = 1;
+    this.$D = this.$aw = this.vXFactor = this.$ax = 0;
+    this.$aT = this.$aR = 0;
+    this.$x = 1
+}
+$aK.prototype = xt($T.prototype, {
+    $c: function(e) {
+        this.$b4 = this.$o();
+        this.$bE = this.$f();
+        $T.prototype.$c.call(this, e);
+        if (!this.$x) {
+            this.$D = 0
+        }
+        if (this.$D) {
+            if (this.$D !== this.$2) {
+                this.vXFactor = 0
+            } else {
+                this.vXFactor = min(this.vXFactor + e * 4, 1)
+            }
+        } else {
+            this.vXFactor = max(0, this.vXFactor - e * 4)
+        }
+        this.$2 = this.$D || this.$2;
+        this.x += this.$2 * 300 * this.vXFactor * e; // player movement speed, 300 default
+        this.$aw += abs(this.vXFactor) * e;
+        if (!this.$l) this.$aw += e;
+        this.$aT = this.$D !== 0;
+        this.$ax -= e;
+        this.$w -= e;
+        var me = this;
+        $_.$b.forEach(function(b) {
+            if (me !== b && me.$aF(b) && !b.deco$a0n) {
+                if (me.$bE > b.$o()) {
+                    me.vY = 0;
+                    me.y = b.$o() + me.h / 2
+                } else {
+                    b.$bL(me, me.$l);
+                    if (me.$l) me.$ax = .3
+                }
+            }
+        });
+        if (this.y > $_.$t) {
+            if (this.y < $_.$t + 45) {
+				this.$g("Cold cold cooooold!!!");
+			} else {
+				this.$g("TOO COOOOOOOOLD!!!!! I'M DEAD!!!!");
+			}
+            if (this.y > $_.$t + 50) {
+                this.die()
+            }
+        }
+    },
+    $aZ: function(b) {
+        return b.$f() >= this.$b4 && b.$f() <= this.$o()
+    },
+    $R: function() {
+        var h = $bW;
+        di(h, this.x - h.width / 2, this.y - h.height / 2);
+        sv();
+        tr(this.$s(), this.$f());
+        if (this.$w > 0) {
+            fs("#fff");
+            fr(this.w / 2, -10, 4, this.$gY + 30);
+            c.textAlign = "center";
+            c.textBaseline = "middle";
+            c.font = "16pt Roboto";
+            fs("#000");
+            ft(this.$aN, this.w / 2 + 1, this.$gY + 1);
+            fs("#fff");
+            ft(this.$aN, this.w / 2, this.$gY)
+        }
+        tr(this.w / 2, 0);
+        sc(this.wd * this.sx, 1);
+        tr(-this.w / 2, 0);
+        fs("#fff");
+        fr(0, 0, this.w, 60);
+        var la = 5,
+            lp = .5,
+            sl = M.sin(this.$aw * M.PI * 2 / lp) * la + la,
+            lll = 20,
+            rll = 20;
+        if (this.$aT || !this.$l) {
+            lll = 20 - sl;
+            rll = 20 - la * 2 + sl
+        }
+        fr(5, 60, 5, lll);
+        fr(30, 60, 5, rll);
+        fs("#000");
+        var p = 4,
+            bt = .3,
+            mt = $_.t % p,
+            mi = p - bt / 2,
+            s = min(1, max(-mt + mi, mt - mi) / (bt / 2)),
+            h = s * 5;
+        fr(20, 15, 5, 5 * s);
+        fr(31, 15, 5, 5 * s);
+        fs("#ccc");
+        if (!this.$l) {
+            fr(3, -5, 5, 30);
+            fr(17, -5, 5, 5)
+        } else if (this.$ax <= 0) {
+            fr(3, 25, 5, 23)
+        } else {
+            fr(16, 33, 34, 5);
+            fr(40, 25, 15, 5)
+        }
+        rs()
+    },
+    $K: function() {
+        if (this.$l && this.$x) {
+            this.$aG();
+            this.$l = 0;
+            this.vY = -400;
+            play("$K")
+        }
+    },
+    $aU: function() {
+        this.die()
+    },
+    die: function() {
+        $_.$bq(this);
+        this.$V = 1;
+        play("die");
+        G.$bT();
+        for (var i = 0; i < 20; i++) {
+            var p = new $1(rd(2, 8), "red");
+            p.x = rd(this.$s() - 10, this.$E() + 10);
+            p.y = rd(this.$f(), this.$o());
+            $_.add$1(p);
+            var b = $_.$b3(p.x, p.y),
+                y = b ? b.$f() : P.h + 200;
+            $d.$e(p, "y", p.y, y, rd(.9, 1.2), 0, easeOutBounce);
+            $d.$e(p, "s", p.s, 0, 1, 3, $G, p.$al.bind(p))
+        }
+        for (var i = 0; i < 20; i++) {
+            var p = new $1(rd(10, 20), "red");
+            p.x = rd(this.$s() - 10, this.$E() + 10);
+            p.y = rd(this.$f(), this.$o());
+            $_.add$1(p);
+            $d.$e(p, "y", p.y, p.y - rd(30, 80), .3, 0, $G, p.$al.bind(p));
+            $d.$e(p, "s", p.s, 0, .3)
+        }
+        $_.$S = 1;
+        to(function() {
+            $_.$S = 0
+        }, 500);
+        navigator.vibrate(500)
+    },
+    $g: function(s, d) {
+        if (s != this.$aN) $d.$e(this, "$gY", 0, -80, .5, 0, $J);
+        this.$aN = s;
+        this.$w = d || 3
+    },
+    $aS: function(d) {
+        if (d !== this.$D && d) {
+            $d.$e(this, "wd", this.wd, d, .1)
+        }
+        this.$D = d
+    }
+});
+var $bb = {
+    a: [
+        [1, 1, 1],
+        [1, , 1],
+        [1, 1, 1],
+        [1, , 1],
+        [1, , 1]
+    ],
+    b: [
+        [1, 1, 1],
+        [1, , 1],
+        [1, 1],
+        [1, , 1],
+        [1, 1, 1]
+    ],
+    c: [
+        [1, 1, 1],
+        [1, , ],
+        [1, , ],
+        [1, , ],
+        [1, 1, 1]
+    ],
+    e: [
+        [1, 1, 1],
+        [1, , ],
+        [1, 1],
+        [1, , ],
+        [1, 1, 1]
+    ],
+    g: [
+        [1, 1, 1],
+        [1, , ],
+        [1, , ],
+        [1, , 1],
+        [1, 1, 1]
+    ],
+    h: [
+        [1, , 1],
+        [1, , 1],
+        [1, 1, 1],
+        [1, , 1],
+        [1, , 1]
+    ],
+    i: [
+        [1, 1, 1],
+        [, 1],
+        [, 1],
+        [, 1],
+        [1, 1, 1]
+    ],
+    k: [
+        [1, , 1],
+        [1, , 1],
+        [1, 1],
+        [1, , 1],
+        [1, , 1]
+    ],
+    l: [
+        [1, , 0],
+        [1, , ],
+        [1, , ],
+        [1, , ],
+        [1, 1, 1]
+    ],
+    m: [
+        [1, , 1],
+        [1, 1, 1],
+        [1, , 1],
+        [1, , 1],
+        [1, , 1]
+    ],
+    n: [
+        [1, 1, 1],
+        [1, , 1],
+        [1, , 1],
+        [1, , 1],
+        [1, , 1]
+    ],
+    o: [
+        [1, 1, 1],
+        [1, , 1],
+        [1, , 1],
+        [1, , 1],
+        [1, 1, 1]
+    ],
+    p: [
+        [1, 1, 1],
+        [1, , 1],
+        [1, 1, 1],
+        [1, , ],
+        [1, , ]
+    ],
+    r: [
+        [1, 1, 1],
+        [1, , 1],
+        [1, 1],
+        [1, , 1],
+        [1, , 1]
+    ],
+    s: [
+        [1, 1, 1],
+        [1, , ],
+        [1, 1, 1],
+        [, , 1],
+        [1, 1, 1]
+    ],
+    t: [
+        [1, 1, 1],
+        [, 1],
+        [, 1],
+        [, 1],
+        [, 1]
+    ],
+    u: [
+        [1, , 1],
+        [1, , 1],
+        [1, , 1],
+        [1, , 1],
+        [1, 1, 1]
+    ],
+    v: [
+        [1, , 1],
+        [1, , 1],
+        [1, , 1],
+        [1, , 1],
+        [, 1]
+    ],
+    w: [
+        [1, , 1, , 1],
+        [1, , 1, , 1],
+        [1, , 1, , 1],
+        [1, , 1, , 1],
+        [, 1, , 1]
+    ],
+    x: [
+        [1, , 1],
+        [1, , 1],
+        [, 1],
+        [1, , 1],
+        [1, , 1]
+    ],
+    y: [
+        [1, , 1],
+        [1, , 1],
+        [1, 1, 1],
+        [, 1],
+        [, 1]
+    ],
+    "'": [
+        [1]
+    ],
+    ".": [
+        [0],
+        [0],
+        [0],
+        [0],
+        [1]
+    ],
+    " ": [
+        [, 0],
+        [, ],
+        [, ],
+        [, ],
+        [, ]
+    ],
+    ":": [
+        [0],
+        [1],
+        [],
+        [1],
+        []
+    ],
+    "?": [
+        [1, 1, 1],
+        [, , 1],
+        [, 1, 1],
+        [, , ],
+        [, 1]
+    ],
+    "!": [
+        [, 1],
+        [, 1],
+        [, 1],
+        [, , ],
+        [, 1]
+    ],
+    1: [
+        [1, 1, 0],
+        [, 1],
+        [, 1],
+        [, 1],
+        [1, 1, 1]
+    ],
+    2: [
+        [1, 1, 1],
+        [, , 1],
+        [1, 1, 1],
+        [1, , ],
+        [1, 1, 1]
+    ],
+    3: [
+        [1, 1, 1],
+        [, , 1],
+        [, 1, 1],
+        [, , 1],
+        [1, 1, 1]
+    ],
+    4: [
+        [1, , 0],
+        [1, , ],
+        [1, , 1],
+        [1, 1, 1],
+        [, , 1]
+    ],
+    5: [
+        [1, 1, 1],
+        [1, , ],
+        [1, 1],
+        [, , 1],
+        [1, 1]
+    ],
+    6: [
+        [1, 1, 1],
+        [1, , ],
+        [1, 1, 1],
+        [1, , 1],
+        [1, 1, 1]
+    ],
+    7: [
+        [1, 1, 1],
+        [, , 1],
+        [, 1],
+        [, 1],
+        [, 1]
+    ],
+    8: [
+        [1, 1, 1],
+        [1, , 1],
+        [1, 1, 1],
+        [1, , 1],
+        [1, 1, 1]
+    ],
+    9: [
+        [1, 1, 1],
+        [1, , 1],
+        [1, 1, 1],
+        [, , 1],
+        [1, 1, 1]
+    ],
+    0: [
+        [1, 1, 1],
+        [1, , 1],
+        [1, , 1],
+        [1, , 1],
+        [1, 1, 1]
+    ]
+};
+var $am = {};
+var $b_ = function($ap) {
+    $am[$ap] = {};
+    for (var i in $bb) {
+        var d = $bb[i];
+        $am[$ap][i] = $n(d[0].length * 10 + 10, d.length * 10, function(c, r) {
+            r.fs($ap);
+            for (var i in d) {
+                for (var j in d[i]) {
+                    if (d[i][j]) {
+                        r.fr(j * 10, i * 10, 10, 10)
+                    }
+                }
+            }
+        })
+    }
+};
+$b_("white");
+$b_("black");
+var $z = function(r, t, c, x, y, s, b) {
+    s = s || 1;
+    if (b) $z(r, t, "black", x + 5, y + 5, s, 0);
+    r.sv();
+    r.tr(x, y);
+    r.sc(s, s);
+    x = 0;
+    for (var i = 0; i < t.length; i++) {
+        var ch = t.charAt(i),
+            $r = $am[c][ch];
+        if ($r) {
+            r.di($r, x, 0);
+            x += $r.width
+        }
+    }
+    r.rs()
+};
+var $P = function(t, s) {
+    var w = 0,
+        i = t.length;
+    while (i--) {
+        var $r = $am["white"][t.charAt(i)];
+        w += $r ? $r.width : 0
+    }
+    return w * (s || 1)
+};
+var $ca = $n(P.w, P.h, function(c, r) {
+        r.fs("#000");
+        r.fr(0, 0, c.w, c.h);
+        r.fs("white");
+        for (var i = 0; i < 300; i++) {
+            r.globalAlpha = rd(.5, 1);
+            r.fr(rd(P.w), rd(P.h), 2, 2)
+        }
+        var g = r.clg(0, P.h - 300, 0, P.h - 800);
+        g.addColorStop(0, "rgba(0, 0, 0, 1)");
+        g.addColorStop(1, "rgba(0, 0, 0, 0)");
+        r.fs(g);
+        r.fr(0, 0, P.w, P.h)
+    }),
+    $H = $n(100, 20, function(c, r) {
+        var s = 100,
+            ss = c.w / s,
+            a = c.h / 2,
+            p = c.w;
+        r.fs("#d5d5d5");
+        r.beginPath();
+        r.mt(0, a);
+        for (var i = 0, x = 0; i <= s; i++, x += ss) {
+            r.lt(x, M.sin(x * M.PI * 2 / p) * a + a)
+        }
+        r.lt(x, c.h);
+        r.lt(0, c.h);
+        r.fill()
+    }, "$4", 1),
+    $az = $n(100, 400, function(c, r) {
+        var g = r.clg(0, 0, 0, c.h),
+            v = !P.$h ? "255,255,255" : "0,0,0";
+        g.addColorStop(0, "rgba(" + v + ", 0)");
+        g.addColorStop(1, "rgba(" + v + ", 1)");
+        r.globalAlpha = .3;
+        r.fs(g);
+        r.fr(0, 0, c.w, c.h)
+    }, "$4", 1),
+    $a2 = $n(475, 115, function(c, r) {
+        $z(r, "it's raining", "white", 0, 0, 1, 1);
+        $z(r, "...b" + "oxes?!", "white", 0, 60, 1, 1)
+    }),
+    $M = function(t, st) {
+        return $n(400, 120, function(c, r) {
+            r.fs("#fff");
+            r.fr(0, 0, 400, 100);
+            r.fs("#757575");
+            r.fr(0, 100, c.w, 20);
+            $z(r, t, "black", (c.w - $P(t)) / 2, 25)
+        })
+    },
+    $7 = $M("play"),
+    $a8 = $M("tutorial"),
+    $bS = $M("try again"),
+    $aps$F = $M("reverse"),
+    $bR = $M("back"),
+    $a_ = function(fg, bg, t) {
+        return $n(P.w, P.h / 2, function(c, r) {
+            r.fs(bg);
+            r.fr(0, 0, c.w, c.h);
+            $z(r, t, fg, (c.w - $P(t)) / 2, c.h / 2 - 25)
+        })
+    },
+    $bN = $a_("black", "#fff", "black on white"),
+    $bM = $a_("white", "#000", "white on black"),
+    $ac = $n(345, 55, function(c, r) {
+        $z(r, "game over", "white", 0, 0, 1, 1)
+    }),
+    $aD = $n(80, 80, function(c, r) {
+        r.fs("#000");
+        r.beginPath();
+        r.mt(0, 0);
+        r.lt(c.w, c.h / 2);
+        r.lt(0, c.h);
+        r.fill()
+    }, 0, 1),
+    $b7 = $n(80, 80, function(c, r) {
+        r.tr(c.w, 0);
+        r.sc(-1, 1);
+        r.di($aD, 0, 0)
+    }, 0, 1),
+    $K = $n(80, 80, function(c, r) {
+        r.fs("#000");
+        r.bp();
+        r.arc(c.w / 2, c.h / 2, c.w / 2, 0, M.PI * 2, 1);
+        r.fill()
+    }, 0, 1),
+    $aB = $n(80, 80, function(c, r) {
+        with(r) {
+            tr(0, c.h);
+            sc(2, -2);
+            fs("#fff");
+            bp();
+            mt(20, 40);
+            lt(40, 20);
+            lt(30, 20);
+            lt(30, 0);
+            lt(10, 0);
+            lt(10, 20);
+            lt(0, 20);
+            fill()
+        }
+    }, 0, 1),
+    $bW = $n(150, 150, function(c, r) {
+        var g = r.createRadialGradient(c.w / 2, c.h / 2, 1, c.w / 2, c.h / 2, c.h / 2),
+            v = !P.$h ? "255,255,255" : "0,0,0";
+        g.addColorStop(0, "rgba(" + v + ",1)");
+        g.addColorStop(1, "rgba(" + v + ",0)");
+        r.globalAlpha = .3;
+        r.fs(g);
+        r.fr(0, 0, c.w, c.h)
+    }, 0, 1),
+    $bj = $n(20, 200, function(c, r) {
+        var g = r.clg(0, 0, 0, c.h),
+            v = !P.$h ? "255,255,255" : "0,0,0";
+        g.addColorStop(0, "rgba(" + v + ", 0)");
+        g.addColorStop(1, "rgba(" + v + ", 1)");
+        r.globalAlpha = .5;
+        r.fs(g);
+        r.fr(0, 0, c.w, c.h)
+    }, "$4", 1);
+addEventListener("load", function() {
+    new $bc
+});
+var $es = [];
 
-	Easing.tween(this.buttons[0], 'y', this.buttons[0].y + 500, this.buttons[0].y, 1, 1, easeOutBack);
-	Easing.tween(this.buttons[1], 'y', this.buttons[1].y + 500, this.buttons[1].y, 1, 1.5, easeOutBack);
-
-	play('gameover');
+function $G(t, b, c, d) {
+    return t / d * c + b
 }
 
-End.prototype = xt(Menu.prototype, {
-	cycle: function(e){
-		Menu.prototype.cycle.call(this, e);
-
-		alpha(this.alpha);
-		di(gameover, (P.w - gameover.width) / 2, 200);
-
-		var s = this.score + '';
-		drawText(c, s, 'white', (P.w - textWidth(s)) / 2, 300, 1, true);
-
-		s = 'best: ' + G.highscore;
-		drawText(c, s, 'white', (P.w - textWidth(s, .5)) / 2, 400, .5, true);
-
-		alpha(1);
-	}
-});
-
-function Box(world, w, h){
-	this.w = w;
-	this.h = h;
-	this.x = this.y = 0;
-	this.vX = this.vY = 0;
-	this.fall = true;
-	this.bounces = true;
-	this.pushable = true;
-	this.over = [];
-	this.exists = true;
-	this.yOffset = 0;
-	this.haloLength = 0;
-
-	this.sx = this.sy = 1;
-
-	this.warningScale = 0;
-	Easing.tween(this, 'warningScale', 0, 1, .3, 0, easeOutBack);
+function $J(t, b, c, d, s) {
+    if (s == undefined) s = 1.70158;
+    return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b
 }
-
-Box.prototype = {
-	topY: function(){
-		return this.y - this.h / 2;
-	},
-	bottomY: function(){
-		return this.y + this.h / 2;
-	},
-	leftX: function(){
-		return this.x - this.w / 2;
-	},
-	rightX: function(){
-		return this.x + this.w / 2;
-	},
-	cycle: function(e){
-		var prevY = this.bottomY(),
-			b,
-			me = this;
-
-		// Falling
-		if(this.fall){
-
-			if(!this.liesOn){
-				this.y += e * this.vY;
-				this.vY += e * P.g;
-
-				if(this.vY > 0 && !this.decoration){
-					if(this.y > P.h){
-						wld.removeBox(this);
-					}
-
-					var below = this.findHighestBoxBelow(prevY);
-					if(below && this.inter(below) && this.landingCondition(below)){
-						this.land(below);
-					}
-				}
-			}else{
-				b = this.liesOn;
-				if(abs(b.x - this.x) > (this.w + b.w) / 2
-					|| abs(b.y - this.y) > (this.h + b.h) / 2 + 2
-					|| !b.exists){
-					this.free();
-				}
-			}
-		}
-
-		// Side movement
-		if(this.vX != 0){
-			var x = this.x;
-
-			this.x += this.vX * e;
-
-			if(this.vX > 0){
-				this.vX = max(0, this.vX - e * 300);
-			}else if(this.vX < 0){
-				this.vX = min(0, this.vX + e * 300);
-			}
-
-			// Resetting current box speed
-			// This is to avoid pushing a box through another
-			wld.boxes.forEach(function(b){
-				if(b !== me && b.inter(me)){
-					// Tranferring energy
-					b.setVX(me.vX * .6);
-
-					// Resetting self
-					me.x = x;
-					me.vX = 0;
-				}
-			});
-		}
-
-		// Halo length
-		var l = limit(this.vY / 1000, 0, 1) * boxHalo.height,
-			diff = l - this.haloLength;
-		this.haloLength += limit(diff, -500 * e, 500 * e);
-
-		// Water splashes
-		if(prevY < wld.waterY && this.bottomY() > wld.waterY && !this.liesOn){
-			for(var i = 0 ; i < 20 ; i++){
-				var p = new Particle(rd(10, 20), '#ddd');
-				p.x = rd(this.leftX(), this.rightX());
-				p.y = this.bottomY() + 50;
-				wld.addParticle(p);
-
-				var fromCenter = p.x - this.x;
-				var dx = (p.x - this.x) * 2;
-
-				Easing.tween(p, 'x', p.x, p.x + dx, .3);
-				Easing.tween(p, 'y', p.y, p.y - rd(100, 200), .3);
-				Easing.tween(p, 's', p.s, 0, .3, 0, linear, p.remove.bind(p));
-			}
-		}
-
-		this.render();
-	},
-	landingCondition: function(b){
-		return true;
-	},
-	render: function(){
-		sv();
-
-		alpha(this.decoration ? .5 : 1);
-		tr(this.x, this.y);
-		sc(this.sx, this.sy);
-		tr(-this.x, -this.y);
-
-		// 3D
-		var leftFromCenterX = (P.w / 2 - (this.leftX())) / (P.w / 2),
-			rightFromCenterX = (P.w / 2 - (this.rightX())) / (P.w / 2),
-			leftExtension = min(0, leftFromCenterX) * 20,
-			rightExtension = max(0, rightFromCenterX) * 20;
-
-		if(this.fall && this.haloLength > 20){
-			sv();
-			tr(this.leftX(), this.y - this.haloLength);
-			fs(boxHalo);
-			fr(leftExtension, 0, this.w - leftExtension + rightExtension, abs(this.haloLength));
-			rs();
-		}
-
-		fs('#ffffff');
-		fr(this.x - this.w / 2, this.y - this.h / 2 + this.yOffset, this.w, this.h);
-
-		// Announcement
-		if(this.y < wld.camY - this.h / 2 && !this.decoration){
-			sv();
-			tr(this.x, wld.camY + 100)
-			sc(this.warningScale, this.warningScale);
-			di(boxArrow, -boxArrow.width / 2, -boxArrow.height);
-			rs();
-		}
-
-		// Rendering sides
-		fs('#c0c0c0');
-		fr(this.leftX(), this.topY() + this.yOffset, leftExtension, this.h);
-		fr(this.rightX(), this.topY() + this.yOffset, rightExtension, this.h);
-
-		/*strokeStyle = 'red';
-		c.beginPath();
-		for(var i = 0 ; i < this.over.length ; i++){
-			mt(this.x, this.y);
-			lt(this.over[i].x, this.over[i].y);
-		}
-		st();*/
-
-		rs();
-	},
-	addOver: function(b){
-		var ind = this.over.indexOf(b);
-		if(ind === -1) this.over.push(b);
-	},
-	removeOver: function(b){
-		var ind = this.over.indexOf(b);
-		if(ind >= 0) this.over.splice(ind, 1);
-	},
-	free: function(){
-		if(this.liesOn){
-			this.liesOn.removeOver(this);
-			this.liesOn = null;
-			this.vY = 0;
-		}
-	},
-	land: function(b){
-		var v = this.vY,
-			f = function(t, b, c, d){
-				var prct = (t / d);
-				var f = 1 - M.pow(abs(prct * 2 - 1), 3);
-				return f * c + b;
-			};
-
-		this.y = b.topY() - this.h / 2;
-
-		if(this.vY > 100 && this.bounces){
-			Easing.tween(this, 'yOffset', 0, -this.vY / 45, .4, 0, f);
-		}
-
-		this.vY = 0;
-
-		this.free();
-		this.liesOn = b;
-		b.addOver(this);
-
-		b.squeeze(this, v);
-
-		for(var x = this.leftX() + rd(5, 15) ; x < this.rightX() ; x += rd(10, 25)){
-			var p = new Particle(rd(10, 20), 'gray');
-			p.x = x;
-			p.y = this.bottomY();
-			wld.addParticle(p);
-
-			Easing.tween(p, 'y', p.y, p.y - rd(30, 80), .3, 0, linear, p.remove.bind(p));
-			Easing.tween(p, 's', p.s, 0, .3)
-		}
-
-		play(this === wld.hero ? 'heroland' : 'boxland');
-
-		// Wiggle
-		Easing.tween(this, 'sx', 1, 1.1, .2, 0, f);
-		Easing.tween(this, 'sy', 1, .9, .2, 0, f);
-	},
-	squeeze: noop,
-	isBelow: function(b){
-		// Returns true if the current box is below b
-		return this.bottomY() > b.bottomY()
-			&& abs(b.x - this.x) < (this.w + b.w) / 2;
-	},
-	pushToSide: function(b, p){
-		var x = this.x,
-			vX;
-
-		// Putting b to the position closest to its theoretical one
-		if(b.x > this.x){
-			b.x = this.rightX() + b.w / 2;
-			if(p && this.pushable) vX = -150;
-		}else{
-			b.x = this.leftX() - b.w / 2;
-			if(p && this.pushable) vX = 150;
-		}
-
-		vX && this.setVX(vX);
-	},
-	setVX: function(vX){
-		this.vX = vX;
-
-		// Pushing boxes that are lying on the current one
-		//for(var i = 0 ; i < this.over.length ; i++){
-		for(var i in this.over){
-			this.over[i].setVX(vX * .7);
-		}
-	},
-	findHighestBoxBelow: function(bottomYBefore){
-		var r,
-			me = this,
-			by = this.bottomY();
-		wld.boxes.forEach(function(h){
-			if(h.isBelow(me) && (!r || h.topY() < r.topY())){
-			/*if(abs(h.x - me.x) < (me.w + h.w) / 2
-				&& bottomYBefore <= h.topY()
-				&& by >= h.topY()
-				&& h !== me
-				&& (!r || h.topY() < r.topY())){*/
-			/*if(abs(h.x - me.x) < (me.w + h.w) / 2
-				&& h.prevY - h.h / 2 >= bottomYBefore
-				&& h.topY() <= me.bottomY()
-				&& (!r || h.topY() < r.topY())){*/
-
-				r = h;
-			}
-		});
-		return r;
-	},
-	inter: function(b){
-		return abs(b.x - this.x) < (this.w + b.w) / 2
-			&& abs(b.y - this.y) < (this.h + b.h) / 2;
-	}
-};
-
-function Hero(world){
-	Box.call(this, world, 40, 80);
-	this.dir = this.wd = 1;
-	this.walkDir = this.walkT = this.vXFactor = this.pushingTimer = 0;
-	this.walking = this.bounces = false;
-	this.controllable = true;
-};
-
-Hero.prototype = xt(Box.prototype, {
-	cycle: function(e){
-		this.prevBottomY = this.bottomY();
-		this.prevTopY = this.topY();
-
-		Box.prototype.cycle.call(this, e);
-
-		if(!this.controllable){
-			this.walkDir = 0;
-		}
-
-		if(this.walkDir){
-			if(this.walkDir !== this.dir){
-				this.vXFactor = 0;
-			}else{
-				this.vXFactor = min(this.vXFactor + e * 4, 1);
-			}
-		}else{
-			this.vXFactor = max(0, this.vXFactor - e * 4);
-		}
-
-		this.dir = this.walkDir || this.dir;
-		this.x += this.dir * 300 * this.vXFactor * e;
-		this.walkT += abs(this.vXFactor) * e;
-		if(!this.liesOn) this.walkT += e;
-		this.walking = this.walkDir !== 0;
-
-		this.pushingTimer -= e;
-		this.sayT -= e;
-
-		var me = this;
-		wld.boxes.forEach(function(b){
-			if(me !== b && me.inter(b) && !b.decoration){
-				if(me.prevTopY > b.bottomY()){
-					me.vY = 0;
-					me.y = b.bottomY() + me.h / 2;
-				}else{
-					b.pushToSide(me, me.liesOn);
-					if(me.liesOn) me.pushingTimer = .3;
-				}
-			}
-		});
-
-		if(this.y > wld.waterY){
-			this.say('Cold cold cooooold!!!');
-			if(this.y > wld.waterY + 50){
-				this.die();
-			}
-		}
-	},
-	landingCondition: function(b){
-		return b.topY() >= this.prevBottomY
-			&& b.topY() <= this.bottomY();
-	},
-	render: function(){
-		// Halo
-		var h = heroHalo;
-		di(h, this.x - h.width / 2, this.y - h.height / 2);
-
-		sv();
-		tr(this.leftX(), this.topY());
-
-		if(this.sayT > 0){
-			fs('#fff');
-			fr(this.w / 2, -10, 4, this.sayY + 30);
-
-			c.textAlign = 'center';
-			c.textBaseline = 'middle';
-			c.font = '16pt Arial';
-
-			fs('#000');
-			ft(this.sayS, this.w / 2 + 1, this.sayY + 1);
-
-			fs('#fff');
-			ft(this.sayS, this.w / 2, this.sayY);
-		}
-
-		//if(this.dir === -1){
-			tr(this.w / 2, 0);
-			sc(this.wd * this.sx, 1);
-			tr(-this.w / 2, 0);
-		//}
-
-		// Body
-		fs('#fff');
-		fr(0, 0, this.w, 60);
-
-		// Legs
-		var la = 5, // amplitude
-			lp = .5, // period
-			sl = M.sin(this.walkT * M.PI * 2 / lp) * la + la, // sinusoidal length
-			lll = 20, // left leg length
-			rll = 20; // right leg length
-		if(this.walking || !this.liesOn){;
-			lll = 20 - sl;
-			rll = 20 - la * 2 + sl;
-		}
-
-		fr(5, 60, 5, lll);
-		fr(30, 60, 5, rll);
-
-		// Eyes
-		fs('#000');
-
-		// Let's blink
-		// Original formula: min(max(-x + 4.5, x - 4.5) / .5, 1)
-		var p = 4, // blink interval
-			bt = .3, // blink time
-			mt = wld.t % p, // modulo-ed time
-			mi = p - bt / 2, // middle of the blink
-			s = min(1, max(-mt + mi, mt - mi) / (bt / 2)), // scale of the eyes
-			h = s * 5;
-
-		fr(20, 15, 5, 5 * s);
-		fr(31, 15, 5, 5 * s);
-
-		// Arms
-		fs('#ccc');
-		if(!this.liesOn){
-			fr(3, -5, 5, 30);
-			fr(17, -5, 5, 5);
-		}else if(this.pushingTimer <= 0){
-			fr(3, 25, 5, 23);
-		}else{
-			fr(16, 33, 34, 5);
-			fr(40, 25, 15, 5);
-		}
-
-		rs();
-	},
-	jump: function(){
-		if(this.liesOn && this.controllable){
-			this.free();
-			this.liesOn = false;
-			this.vY = -400;
-			play('jump');
-		}
-	},
-	squeeze: function(){
-		this.die();
-	},
-	die: function(){
-		wld.removeBox(this);
-		this.dead = true;
-
-		play('die');
-
-		G.lost();
-
-		for(var i = 0 ; i < 20 ; i++){
-			var p = new Particle(rd(2, 8), 'red');
-			p.x = rd(this.leftX() - 10, this.rightX() + 10);
-			p.y = rd(this.topY(), this.bottomY());
-			wld.addParticle(p);
-
-			var b = wld.highestBox(p.x, p.y),
-				y = b ? b.topY() : P.h + 200;
-
-			Easing.tween(p, 'y', p.y, y, rd(.9, 1.2), 0, easeOutBounce);
-			Easing.tween(p, 's', p.s, 0, 1, 3, linear, p.remove.bind(p));
-		}
-		for(var i = 0 ; i < 20 ; i++){
-			var p = new Particle(rd(10, 20), 'red');
-			p.x = rd(this.leftX() - 10, this.rightX() + 10);
-			p.y = rd(this.topY(), this.bottomY());
-			wld.addParticle(p);
-
-			Easing.tween(p, 'y', p.y, p.y - rd(30, 80), .3, 0, linear, p.remove.bind(p));
-			Easing.tween(p, 's', p.s, 0, .3);
-		}
-
-		wld.shake = true;
-		to(function(){
-			wld.shake = false;
-		}, 500);
-		navigator.vibrate(500);
-	},
-	say: function(s, d){
-		if(s != this.sayS)
-			Easing.tween(this, 'sayY', 0, -80, .5, 0, easeOutBack);
-		this.sayS = s;
-		this.sayT = d || 3;
-	},
-	setWalkDir: function(d){
-		if(d !== this.walkDir && d){
-			Easing.tween(this, 'wd', this.wd, d, .1);
-		}
-		this.walkDir = d;
-	}
-});
-
-var defs = {
-	a: [
-		[1,1,1],
-		[1, ,1],
-		[1,1,1],
-		[1, ,1],
-		[1, ,1]
-	],
-	b: [
-		[1,1,1],
-		[1, ,1],
-		[1,1, ],
-		[1, ,1],
-		[1,1,1]
-	],
-	c: [
-		[1,1,1],
-		[1, , ],
-		[1, , ],
-		[1, , ],
-		[1,1,1]
-	],
-	/*d: [
-		[1,1,0],
-		[1, ,1],
-		[1, ,1],
-		[1, ,1],
-		[1,1,1]
-	],*/
-	e: [
-		[1,1,1],
-		[1, , ],
-		[1,1, ],
-		[1, , ],
-		[1,1,1]
-	],
-	/*f: [
-		[1,1,1],
-		[1, , ],
-		[1,1, ],
-		[1, , ],
-		[1, , ]
-	],*/
-	g: [
-		[1,1,1],
-		[1, , ],
-		[1, , ],
-		[1, ,1],
-		[1,1,1]
-	],
-	h: [
-		[1, ,1],
-		[1, ,1],
-		[1,1,1],
-		[1, ,1],
-		[1, ,1]
-	],
-	i: [
-		[1,1,1],
-		[ ,1, ],
-		[ ,1, ],
-		[ ,1, ],
-		[1,1,1]
-	],
-	/*j: [
-		[ , ,1],
-		[ , ,1],
-		[ , ,1],
-		[1, ,1],
-		[1,1,1]
-	],*/
-	k: [
-		[1, ,1],
-		[1, ,1],
-		[1,1, ],
-		[1, ,1],
-		[1, ,1]
-	],
-	l: [
-		[1, ,0],
-		[1, , ],
-		[1, , ],
-		[1, , ],
-		[1,1,1]
-	],
-	m: [
-		[1, ,1],
-		[1,1,1],
-		[1, ,1],
-		[1, ,1],
-		[1, ,1]
-	],
-	n: [
-		[1,1,1],
-		[1, ,1],
-		[1, ,1],
-		[1, ,1],
-		[1, ,1]
-	],
-	o: [
-		[1,1,1],
-		[1, ,1],
-		[1, ,1],
-		[1, ,1],
-		[1,1,1]
-	],
-	p: [
-		[1,1,1],
-		[1, ,1],
-		[1,1,1],
-		[1, , ],
-		[1, , ]
-	],
-	r: [
-		[1,1,1],
-		[1, ,1],
-		[1,1, ],
-		[1, ,1],
-		[1, ,1]
-	],
-	s: [
-		[1,1,1],
-		[1, , ],
-		[1,1,1],
-		[ , ,1],
-		[1,1,1]
-	],
-	t: [
-		[1,1,1],
-		[ ,1, ],
-		[ ,1, ],
-		[ ,1, ],
-		[ ,1, ]
-	],
-	u: [
-		[1, ,1],
-		[1, ,1],
-		[1, ,1],
-		[1, ,1],
-		[1,1,1]
-	],
-	v: [
-		[1, ,1],
-		[1, ,1],
-		[1, ,1],
-		[1, ,1],
-		[ ,1, ]
-	],
-	w: [
-		[1, ,1, ,1],
-		[1, ,1, ,1],
-		[1, ,1, ,1],
-		[1, ,1, ,1],
-		[ ,1, ,1, ]
-	],
-	x: [
-		[1, ,1],
-		[1, ,1],
-		[ ,1, ],
-		[1, ,1],
-		[1, ,1]
-	],
-	y: [
-		[1, ,1],
-		[1, ,1],
-		[1,1,1],
-		[ ,1, ],
-		[ ,1, ]
-	],
-	'\'': [
-		[1]
-	],
-	'.': [
-		[0],
-		[0],
-		[0],
-		[0],
-		[1]
-	],
-	' ': [
-		[ ,0],
-		[ , ],
-		[ , ],
-		[ , ],
-		[ , ]
-	],
-	/*'-': [
-		[ ,0],
-		[ , ],
-		[1,1],
-		[ , ],
-		[ , ]
-	],*/
-	':': [
-		[0],
-		[1],
-		[ ],
-		[1],
-		[ ]
-	],
-	'?': [
-		[1,1,1],
-		[ , ,1],
-		[ ,1,1],
-		[ , , ],
-		[ ,1, ]
-	],
-	'!': [
-		[ ,1, ],
-		[ ,1, ],
-		[ ,1, ],
-		[ , , ],
-		[ ,1, ]
-	],
-	'1': [
-		[1,1,0],
-		[ ,1, ],
-		[ ,1, ],
-		[ ,1, ],
-		[1,1,1]
-	],
-	'2': [
-		[1,1,1],
-		[ , ,1],
-		[1,1,1],
-		[1, , ],
-		[1,1,1]
-	],
-	'3': [
-		[1,1,1],
-		[ , ,1],
-		[ ,1,1],
-		[ , ,1],
-		[1,1,1]
-	],
-	'4': [
-		[1, ,0],
-		[1, , ],
-		[1, ,1],
-		[1,1,1],
-		[ , ,1]
-	],
-	'5': [
-		[1,1,1],
-		[1, , ],
-		[1,1, ],
-		[ , ,1],
-		[1,1, ]
-	],
-	'6': [
-		[1,1,1],
-		[1, , ],
-		[1,1,1],
-		[1, ,1],
-		[1,1,1]
-	],
-	'7': [
-		[1,1,1],
-		[ , ,1],
-		[ ,1, ],
-		[ ,1, ],
-		[ ,1, ]
-	],
-	'8': [
-		[1,1,1],
-		[1, ,1],
-		[1,1,1],
-		[1, ,1],
-		[1,1,1]
-	],
-	'9': [
-		[1,1,1],
-		[1, ,1],
-		[1,1,1],
-		[ , ,1],
-		[1,1,1]
-	],
-	'0': [
-		[1,1,1],
-		[1, ,1],
-		[1, ,1],
-		[1, ,1],
-		[1,1,1]
-	]
-};
-
-var Font = {};
-
-var createFont = function(color){
-	Font[color] = {};
-
-	for(var i in defs){
-		var d = defs[i];
-		Font[color][i] = cache(d[0].length * 10 + 10, d.length * 10, function(c, r){
-			r.fs(color);
-
-			for(var i in d){
-				for(var j in d[i]){
-					if(d[i][j]){
-						r.fr(j * 10, i * 10, 10, 10);
-					}
-				}
-			}
-		});
-	}
-};
-
-createFont('white');
-createFont('black');
-
-var drawText = function(r, t, c, x, y, s, b){
-	s = s || 1;
-
-	// Shadow
-	if(b) drawText(r, t, 'black', x + 5, y + 5, s, false);
-
-	r.sv();
-	r.tr(x, y);
-	r.sc(s, s);
-
-	x = 0;
-	for(var i = 0 ; i < t.length ; i++){
-		var ch = t.charAt(i),
-			img = Font[c][ch];
-		if(img){
-			r.di(img, x, 0);
-			x += img.width;
-		}
-	}
-	r.rs();
-};
-
-var textWidth = function(t, s){
-	var w = 0, i = t.length;
-	while(i--){
-		var img = Font['white'][t.charAt(i)];
-		w += img ? img.width : 0;
-	}
-	return w * (s || 1);
-};
-
-var stars = cache(P.w, P.h, function(c, r){
-	r.fs('#000');
-	r.fr(0, 0, c.w, c.h);
-
-	r.fs('white');
-	for(var i = 0 ; i < 300 ; i++){
-		r.globalAlpha = rd(.5, 1);
-		r.fr(rd(P.w), rd(P.h), 2, 2);
-	}
-
-	var g = r.clg(0, P.h - 300, 0, P.h - 800);
-	g.addColorStop(0, 'rgba(0, 0, 0, 1)');
-	g.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-	r.fs(g);
-	r.fr(0, 0, P.w, P.h);
-}),
-
-water = cache(100, 20, function(c, r){
-	var s = 100,
-		ss = c.w / s,
-		a = c.h / 2,
-		p = c.w;
-
-	r.fs('#d5d5d5');
-	r.beginPath();
-	r.mt(0, a);
-	for(var i = 0, x = 0 ; i <= s ; i++, x+=ss){
-		r.lt(x, M.sin(x * M.PI * 2 / p) * a + a);
-	}
-	r.lt(x, c.h);
-	r.lt(0, c.h);
-	r.fill();
-}, 'pattern', true),
-
-waterHalo = cache(100, 400, function(c, r){
-	var g = r.clg(0, 0, 0, c.h),
-		v = !P.inverted ? '255,255,255' : '0,0,0';
-	g.addColorStop(0, 'rgba(' + v + ', 0)');
-	g.addColorStop(1, 'rgba(' + v + ', 1)');
-
-	r.globalAlpha = .3;
-	r.fs(g);
-	r.fr(0, 0, c.w, c.h);
-}, 'pattern', true),
-
-title = cache(475, 115, function(c, r){
-	drawText(r, 'it\'s raining', 'white', 0, 0, 1, 1);
-	drawText(r, '...b'+'oxes?!', 'white', 0, 60, 1, 1);
-}),
-
-button = function(t, st){
-	return cache(400, 120, function(c, r){
-		r.fs('#fff');
-		r.fr(0, 0, 400, 100);
-
-		r.fs('#757575');
-		r.fr(0, 100, c.w, 20);
-
-		drawText(r, t, 'black', (c.w - textWidth(t)) / 2, 25);
-	});
-},
-
-playButton = button('play'),
-tutorialButton = button('tutorial'),
-retryButton = button('try again'),
-colorsButton = button('reverse'),
-menuButton = button('back'),
-
-choice = function(fg, bg, t){
-	return cache(P.w, P.h / 2, function(c, r){
-		r.fs(bg);
-		r.fr(0, 0, c.w, c.h);
-
-		drawText(r, t, fg, (c.w - textWidth(t)) / 2, c.h / 2 - 25);
-	});
-},
-bwButton = choice('black', '#fff', 'black on white'),
-wbButton = choice('white', '#000', 'white on black'),
-
-gameover = cache(345, 55, function(c, r){
-	drawText(r, 'game over', 'white', 0, 0, 1, 1);
-}),
-
-rarrow = cache(80, 80, function(c, r){
-	r.fs('#000');
-	r.beginPath();
-	r.mt(0, 0);
-	r.lt(c.w, c.h / 2);
-	r.lt(0, c.h);
-	r.fill();
-}, 0, true),
-
-larrow = cache(80, 80, function(c, r){
-	r.tr(c.w, 0);
-	r.sc(-1, 1);
-
-	r.di(rarrow, 0, 0);
-}, 0, true),
-
-jump = cache(80, 80, function(c, r){
-	r.fs('#000');
-	r.bp();
-	r.arc(c.w / 2, c.h / 2, c.w / 2, 0, M.PI * 2, true);
-	r.fill();
-}, 0, true),
-
-boxArrow = cache(80, 80, function(c, r){
-	with(r){
-		tr(0, c.h);
-		sc(2, -2);
-		fs('#fff');
-		bp();
-		mt(20, 40);
-		lt(40, 20);
-		lt(30, 20);
-		lt(30, 0);
-		lt(10, 0);
-		lt(10, 20);
-		lt(0, 20);
-		fill();
-	}
-}, 0, true),
-
-heroHalo = cache(150, 150, function(c, r){
-	var g = r.createRadialGradient(
-		c.w / 2,
-		c.h / 2,
-		1,
-		c.w / 2,
-		c.h / 2,
-		c.h / 2),
-		v = !P.inverted ? '255,255,255' : '0,0,0';
-
-	g.addColorStop(0, 'rgba(' + v + ',1)');
-	g.addColorStop(1, 'rgba(' + v + ',0)');
-
-	r.globalAlpha = .3;
-
-	r.fs(g);
-	r.fr(0, 0, c.w, c.h);
-}, 0, true),
-
-boxHalo = cache(20, 200, function(c, r){
-	var g = r.clg(0, 0, 0, c.h),
-		v = !P.inverted ? '255,255,255' : '0,0,0';
-
-	g.addColorStop(0, 'rgba(' + v + ', 0)');
-	g.addColorStop(1, 'rgba(' + v + ', 1)');
-
-	r.globalAlpha = .5;
-	r.fs(g);
-	r.fr(0, 0, c.w, c.h);
-}, 'pattern', true)
-
-;
-
-addEventListener('load',function(){
-	new Game();
-});
-
-var tweens = [];
-
-function linear(t, b, c, d){
-	return (t / d) * c + b;
-};
-
-function easeOutBack(t, b, c, d, s) {
-	if (s == undefined) s = 1.70158;
-	return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
-};
 
 function easeOutBounce(t, b, c, d) {
-	if ((t/=d) < (1/2.75)) {
-		return c*(7.5625*t*t) + b;
-	} else if (t < (2/2.75)) {
-		return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
-	} else if (t < (2.5/2.75)) {
-		return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
-	} else {
-		return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
-	}
-};
-
-var Easing = {
-	tween: function(o, p, a, b, d, l, f, e){
-		tweens.push({
-			o: o, // object
-			p: p, // property
-			a: a, // from
-			b: b, // to
-			d: d, // duration
-			l: l || 0,
-			f: f || linear, // easing function
-			e: e || noop, // end callback
-			t: 0
-		});
-	},
-	cycle: function(e){
-		var tw;
-		for(var i = tweens.length - 1 ; i >= 0 ; i--){
-			tw = tweens[i];
-			if(tw.l > 0){
-				tw.l -= e;
-				tw.o[tw.p] = tw.a;
-			}else{
-				tw.t = min(tw.d, tw.t + e);
-				tw.o[tw.p] = tw.f(tw.t, tw.a, tw.b - tw.a, tw.d);
-				if(tw.t == tw.d){
-					tw.e();
-					tweens.splice(i, 1);
-				}
-			}
-		}
-	}
-};
-
-function Button(img, x, y, f){
-	this.img = img;
-	this.x = x;
-	this.y = y;
-	this.clickf = f;
-	this.enabled = true;
-};
-
-Button.prototype = {
-	render: function(){
-		di(this.img, this.x, this.y);
-	},
-	contains: function(x, y){
-		return this.enabled
-			&& x > this.x
-			&& y > this.y
-			&& x < this.x + this.img.width
-			&& y < this.y + this.img.height;
-	},
-	click: function(){
-		this.clickf();
-		play('button');
-	}
+    if ((t /= d) < 1 / 2.75) {
+        return c * (7.5625 * t * t) + b
+    } else if (t < 2 / 2.75) {
+        return c * (7.5625 * (t -= 1.5 / 2.75) * t + .75) + b
+    } else if (t < 2.5 / 2.75) {
+        return c * (7.5625 * (t -= 2.25 / 2.75) * t + .9375) + b
+    } else {
+        return c * (7.5625 * (t -= 2.625 / 2.75) * t + .984375) + b
+    }
 }
-
-function PlayScenario(skip){
-	this.nextSpawn = 6;
-	this.nextScoreIncrease = this.waterDelay = 10;
-	this.nextEvent = 40;
-
-	this.flooding = false;
-
-	this.topWorldTimer = 40;
-
-	wld.hero.controllable = true;
-
-	this.gimmicks = [
-		['I should have brought my swimsuit', 'Or my umbrella'],
-		['How do I shoot?'],
-		['It\'s raining men!', 'Alleluia it\'s raining men!'],
-		['What does the b'+'ox s'+'ay?'],
-		['Did the weather man predict this?'],
-		['Follow me @remvst'],
-		['This does not feel like Tetris at all'],
-		['I\'m siiinging in the raiiin'],
-		['I should have taken swimming lessons'],
-		['I have no mouth :( '],
-		['Dem graphics'],
-		//['Hon hon hon'],
-		//['Let\'s build a fort'],
-		['I need a helmet', 'Safety first'],
-		['Did you notice I blink?'],
-		//['Those co'+'lors'],
-		//['Didi was alone'],
-		//['Such col'+'ors', 'Much graphics', 'Very pretty', 'Wow'],
-		//['Winter is coming'],
-		['Like the game?', 'Tweet about it!']
-	];
-
-	shuffle(this.gimmicks);
-
-	this.schedule = {};
-
-	var t = 0;
-	if(!skip){
-		this.schedule[0] = 'Hello' + (G.lastScore !== undefined ? ' again' : '') + '!';
-		if(G.highscore > 0 && G.lastScore === undefined){
-			this.schedule[0] = 'Hey, you came back!';
-		}
-		t += 3;
-	}
-
-	var s = 0;
-	if(!skip){
-		if('lastScore' in G && G.highscore < 40){
-			this.schedule[3] = 'I see you didn\'t do too well last time';
-			this.schedule[6] = 'Here is my advice';
-			this.schedule[9] = 'Try to avoid fal'+'ling b'+'oxes';
-			this.schedule[12] = 'Then, build a wall with the b'+'oxes';
-			this.schedule[15] = 'And climb it to avoid the w'+'ater';
-			this.schedule[18] = 'Let\'s try it!';
-			this.schedule[21] = 'It\'s raining b'+'oxes!!!';
-
-			s = 30;
-
-			this.nextSpawn = 24;
-		}else{
-			this.schedule[t] = 'It\'s raining b'+'oxes today!';
-			this.schedule[t + 7] = 'Water is rising!';
-
-			this.nextSpawn = 6;
-
-			s = 15;
-		}
-	}
-	this.nextScoreIncrease = this.waterDelay = this.nextSpawn + 7;
-
-	for(var i = 0 ; i < this.gimmicks[i] ; i++, s += 15){
-		for(var j = 0 ; j < this.gimmicks[i][j] ; j++, s += 3){
-			this.schedule[s] = this.gimmicks[i][j];
-		}
-	}
-
-	this.schedule[s + 10] = 'You\'re getting good at this!';
-	this.schedule[s + 13] = 'Like... really good!';
-
-	this.t = 0;
+var $d = {
+    $e: function(o, p, a, b, d, l, f, e) {
+        $es.push({
+            o: o,
+            p: p,
+            a: a,
+            b: b,
+            d: d,
+            l: l || 0,
+            f: f || $G,
+            e: e || $0,
+            t: 0
+        })
+    },
+    $c: function(e) {
+        var tw;
+        for (var i = $es.length - 1; i >= 0; i--) {
+            tw = $es[i];
+            if (tw.l > 0) {
+                tw.l -= e;
+                tw.o[tw.p] = tw.a
+            } else {
+                tw.t = min(tw.d, tw.t + e);
+                tw.o[tw.p] = tw.f(tw.t, tw.a, tw.b - tw.a, tw.d);
+                if (tw.t == tw.d) {
+                    tw.e();
+                    $es.splice(i, 1)
+                }
+            }
+        }
+    }
 };
 
-PlayScenario.prototype = {
-	cycle: function(e){
-		if(!wld.hero.dead && !G.menu){
-			this.t += e;
-
-			// Gimmicks
-			var rt = ~~this.t;
-			if(this.schedule[rt]){
-				wld.hero.say(this.schedule[rt]);
-				this.schedule[rt] = null;
-			}
-
-			//this.nextSpawn -= e;
-			if((this.nextSpawn -= e) <= 0){
-				var b = wld.spawnBox();
-				this.nextSpawn = 3;
-
-				if(abs(b.x - wld.hero.x) < (wld.hero.w + b.w) / 2){
-					wld.hero.say('WATCH OUT!', 2);
-				}
-			}
-
-			//this.topWorldTimer -= e;
-			if((this.topWorldTimer -= e) <= 0 && wld.hero.liesOn){
-				var higher, b;
-				for(var i = 0 ; i < wld.boxes.length ; i++){
-					b = wld.boxes[i];
-					if(b != wld.hero && b.topY() < wld.hero.bottomY() && b.liesOn){
-						higher = true;
-						break;
-					}
-				}
-				if(!higher){
-					wld.hero.say('I\'m on top of the wooooooorld!');
-					this.topWorldTimer = 20;
-				}
-			}
-
-			//this.nextScoreIncrease -= e;
-			if((this.nextScoreIncrease -= e) <= 0){
-				wld.score += 1;
-				this.nextScoreIncrease = 1;
-
-				if(wld.score === G.highscore + 1 && G.highscore){
-					wld.hero.say('New record!');
-				}
-			}
-
-			if(this.waterDelay > 0){
-				this.waterDelay -= e;
-				if(this.waterDelay <= 0){
-					wld.hero.say('Water is rising!');
-				}
-				wld.waterSpeed = 0;
-			}else{
-				wld.waterSpeed = 2.5;
-				if(this.t > 60){
-					wld.waterSpeed = 3.5;
-				}
-			}
-
-			this.nextEvent -= e;
-			if(this.nextEvent <= 0){
-				var t = rp(['quake', 'flood', 'boxStorm', 'tilt']);
-				wld[t].call(wld);
-				this.nextEvent = 40;
-			}
-		}
-	}
+function $F($r, x, y, f) {
+    this.$r = $r;
+    this.x = x;
+    this.y = y;
+    this.$aIf = f;
+    this.$bt = 1
+}
+$F.prototype = {
+    $R: function() {
+        di(this.$r, this.x, this.y)
+    },
+    $bI: function(x, y) {
+        return this.$bt && x > this.x && y > this.y && x < this.x + this.$r.width && y < this.y + this.$r.height
+    },
+    $aI: function() {
+        this.$aIf();
+        play("$M")
+    }
 };
 
-function TutorialScenario(){
-	var s = this,
-		dims = { w: 60, h: 60 };
-
-	this.states = {
-		hello: {
-			init: function(){
-				wld.hero.say('Hello!');
-				wld.hero.controllable = false;
-			},
-			cycle: function(){
-				if(wld.hero.sayT < 0){
-					s.startState('name');
-				}
-			}
-		},
-		name: {
-			init: function(){
-				wld.hero.say('My name is Didi');
-			},
-			cycle: function(){
-				if(wld.hero.sayT < 0){
-					s.startState('spawn');
-				}
-			}
-		},
-		spawn: {
-			init: function(){
-				wld.hero.say('It\'s raining b'+'oxes today!');
-				s.bx = wld.spawnBox(wld.pf.x - wld.pf.w / 2 + dims.w / 2, -100, dims);
-			},
-			cycle: function(){
-				if(s.bx.liesOn){
-					s.startState('push');
-				}
-			}
-		},
-		push: {
-			init: function(){
-				wld.hero.say('Try to push this one away!');
-				wld.hero.controllable = true;
-			},
-			cycle: function(){
-				if(wld.boxes.length === 2){
-					s.startState('pushed');
-				}else if(wld.hero.sayT < 0){
-					wld.hero.say('Use the arrow ' + (G.touch ? 'b'+'uttons' : 'keys') + ' to move');
-				}
-			}
-		},
-		pushed: {
-			init: function(){
-				wld.hero.say('Nice!');
-				wld.hero.controllable = false;
-			},
-			cycle: function(){
-				if(wld.hero.sayT < 0){
-					s.startState('stacking');
-				}
-			}
-		},
-		stacking: {
-			init: function(){
-				wld.hero.say('B'+'oxes can s'+'tack up');
-
-				var b = wld.pf.x + wld.pf.w / 2 - 70;
-				if(wld.hero.x > P.w / 2){
-					b = P.w - b;
-				}
-
-				s.boxes = [];
-
-				var xs = [b, b - 70, b + 70, b - 35, b + 35, b];
-				xs.forEach(function(x, i){
-					to(function(){
-						s.boxes.push(wld.spawnBox(x, null, dims));
-					}, i * 400);
-				});
-				to(function(){
-					s.startState('stack');
-				}, xs.length * 200 + 2000);
-			},
-			cycle: noop
-		},
-		stack: {
-			init: function(){
-				wld.hero.say('Try to j'+'ump on them');
-				wld.hero.controllable = true;
-
-				for(var i = 0 ; i < s.boxes.length ; i++){
-					s.boxes[i].pushable = false;
-				}
-			},
-			cycle: function(){
-				if(wld.hero.liesOn === s.boxes[s.boxes.length - 1]){
-					s.startState('jumped');
-				}else if(wld.hero.sayT < 0){
-					wld.hero.say(G.touch ? 'Use the round b'+'utton to j'+'ump' : 'Use the up arrow to j'+'ump');
-				}
-			}
-		},
-		jumped: {
-			init: function(){
-				wld.hero.say('Nice!');
-				wld.hero.controllable = false;
-			},
-			cycle: function(){
-				if(wld.hero.sayT < 0){
-					s.startState('explain');
-				}
-			}
-		},
-		explain: {
-			init: function(){
-				wld.hero.say('Try not to f'+'all in the w'+'ater!');
-
-				for(var i = 0 ; i < s.boxes.length ; i++){
-					s.boxes[i].pushable = true;
-				}
-			},
-			cycle: function(){
-				if(wld.hero.sayT < 0){
-					s.startState('start');
-				}
-			}
-		},
-		start: {
-			init: function(){
-				wld.hero.say('Let\'s play now!');
-				wld.hero.controllable = true;
-			},
-			cycle: function(){
-				if(wld.hero.sayT < 0){
-					s.end(true);
-				}
-			}
-		}
-	};
-
-	if(localStorage['tut'] == 1){
-		to(this.end, 1);
-	}else{
-		this.startState('hello');
-	}
+function $bo($aV) {
+    this.$W = 6;
+    this.$ar = this.$an = 10;
+    this.$aJ = 10; // 40
+    this.$U = 0;
+    this.$av = 40;
+    $_.$a.$x = 1;
+    this.$af = [
+        ["I should have brought my swimsuit", "Or my umbrella"],
+        ["How do I shoot?"],
+        ["It's raining men!", "Alleluia it's raining men!"],
+        ["What does the b" + "ox s" + "ay?"],
+        ["Did the weather man predict this?"],
+        ["Follow me @remvst"],
+        ["This does not feel like Tetris at all"],
+        ["I'm siiinging in the raiiin"],
+        ["I should have taken swimming lessons"],
+        ["I have no mouth :( "],
+        ["Dem graphics"],
+        ["I need a helmet", "Safety first"],
+        ["Did you notice I blink?"],
+        ["Like the game?", "Tweet about it!"]
+    ];
+    $a4(this.$af);
+    this.$m = {};
+    var t = 0;
+    if (!$aV) {
+        this.$m[0] = "Hello" + (G.lastScore !== undefined ? " again" : "") + "!";
+        if (G.$y > 0 && G.lastScore === undefined) {
+            this.$m[0] = "Hey, you came back!"
+        }
+        t += 3
+    }
+    var s = 0;
+    if (!$aV) {
+        if ("lastScore" in G && G.$y < 40) {
+            this.$m[3] = "I see you didn't do too well last time";
+            this.$m[6] = "Here is my advice";
+            this.$m[9] = "Try to avoid fal" + "ling b" + "oxes";
+            this.$m[12] = "Then, build a wall with the b" + "oxes";
+            this.$m[15] = "And climb it to avoid the w" + "ater";
+            this.$m[18] = "Let's try it!";
+            this.$m[21] = "It's raining b" + "oxes!!!";
+            s = 30;
+            this.$W = 24
+        } else {
+            this.$m[t] = "It's raining b" + "oxes today!";
+            this.$m[t + 7] = "Water is rising" + "!".repeat(Math.floor(Math.random() * 2));
+            this.$W = 6;
+            s = 15
+        }
+    }
+    this.$ar = this.$an = this.$W + 7;
+    for (var i = 0; i < this.$af[i]; i++, s += 15) {
+        for (var j = 0; j < this.$af[i][j]; j++, s += 3) {
+            this.$m[s] = this.$af[i][j]
+        }
+    }
+    this.$m[s + 10] = "You're getting good at this" + "!".repeat(Math.floor(Math.random() * 2));
+    this.$m[s + 13] = "Like... really good" + "!".repeat(Math.floor(Math.random() * 2));
+    this.t = 0
+}
+$bo.prototype = {
+    $c: function(e) {
+        if (!$_.$a.$V && !G.$p) {
+            this.t += e;
+            var rt = ~~this.t;
+            if (this.$m[rt]) {
+                $_.$a.$g(this.$m[rt]);
+                this.$m[rt] = null
+            }
+            if ((this.$W -= e) <= 0) {
+                var b = $_.$Z();
+                this.$W = 3;
+                if (abs(b.x - $_.$a.x) < ($_.$a.w + b.w) / 2) {
+                    $_.$a.$g("WATCH OUT" + "!".repeat(Math.floor(Math.random() * 3)), 2)
+                }
+            }
+            if ((this.$av -= e) <= 0 && $_.$a.$l) {
+                var $aW, b;
+                for (var i = 0; i < $_.$b.length; i++) {
+                    b = $_.$b[i];
+                    if (b != $_.$a && b.$f() < $_.$a.$o() && b.$l) {
+                        $aW = 1;
+                        break
+                    }
+                }
+                if (!$aW) {
+                    $_.$a.$g("I'm on top of the w" + "o".repeat(Math.floor(Math.random() * 10)) + "rld" + "!".repeat(Math.floor(Math.random() * 4)));
+                    this.$av = 20
+                }
+            }
+            if ((this.$ar -= e) <= 0) {
+                $_.score += 1;
+                this.$ar = 1;
+                if ($_.score === G.$y + 1 && G.$y) {
+                    $_.$a.$g("New record!")
+                }
+            }
+            if (this.$an > 0) {
+                this.$an -= e;
+                if (this.$an <= 0) {
+                    $_.$a.$g("Water is rising!")
+                }
+                $_.$ah = 0
+            } else {
+                $_.$ah = 2.5; // 2.5
+                if (this.t > 60) {
+                    $_.$ah = 3.5 // 3.5
+                }
+            }
+            this.$aJ -= e;
+            if (this.$aJ <= 0) {
+                var t = rp(["$cb", "$b9", "$bK", "tilt"]); // cb = earthquake, b9 = flood, bk = box storm, tilt = platform tilting
+                $_[t].call($_);
+                this.$aJ = 40 // 40
+            }
+        }
+    }
 };
 
-TutorialScenario.prototype = {
-	cycle: function(e){
-		if(this.state){
-			this.state.cycle(e);
-		}
-
-		wld.hero.x = limit(wld.hero.x, wld.pf.x - wld.pf.w / 2, wld.pf.x + wld.pf.w / 2);
-	},
-	startState: function(s){
-		(this.state = this.states[s]).init();
-		//this.state.init();
-	},
-	end: function(s){
-		localStorage['tut'] = 1;
-		wld.scenario = new PlayScenario(s);
-	}
+function $a3() {
+    var s = this,
+        $aC = {
+            w: 60,
+            h: 60
+        };
+    this.$aus = {
+        hello: {
+            $v: function() {
+                $_.$a.$g("Hello!");
+                $_.$a.$x = 0
+            },
+            $c: function() {
+                if ($_.$a.$w < 0) {
+                    s.$A("name")
+                }
+            }
+        },
+        name: {
+            $v: function() {
+                $_.$a.$g("My name is Sabrina") // Didi
+            },
+            $c: function() {
+                if ($_.$a.$w < 0) {
+                    s.$A("$bH")
+                }
+            }
+        },
+        $bH: {
+            $v: function() {
+                $_.$a.$g("It's raining b" + "oxes today!");
+                s.bx = $_.$Z($_.pf.x - $_.pf.w / 2 + $aC.w / 2, -100, $aC)
+            },
+            $c: function() {
+                if (s.bx.$l) {
+                    s.$A("push")
+                }
+            }
+        },
+        push: {
+            $v: function() {
+                $_.$a.$g("Try to push this one away!");
+                $_.$a.$x = 1
+            },
+            $c: function() {
+                if ($_.$b.length === 2) {
+                    s.$A("pushed")
+                } else if ($_.$a.$w < 0) {
+                    $_.$a.$g("Use the arrow " + (G.touch ? "b" + "uttons" : "keys") + " to move")
+                }
+            }
+        },
+        pushed: {
+            $v: function() {
+                $_.$a.$g("Nice!");
+                $_.$a.$x = 0
+            },
+            $c: function() {
+                if ($_.$a.$w < 0) {
+                    s.$A("$b2")
+                }
+            }
+        },
+        $b2: {
+            $v: function() {
+                $_.$a.$g("B" + "oxes can s" + "tack up");
+                var b = $_.pf.x + $_.pf.w / 2 - 70;
+                if ($_.$a.x > P.w / 2) {
+                    b = P.w - b
+                }
+                s.$b = [];
+                var xs = [b, b - 70, b + 70, b - 35, b + 35, b];
+                xs.forEach(function(x, i) {
+                    to(function() {
+                        s.$b.push($_.$Z(x, i * -100 - 100, $aC))
+                    }, i * 400)
+                });
+                to(function() {
+                    s.$A("$bG")
+                }, xs.length * 200 + 2e3)
+            },
+            $c: $0
+        },
+        $bG: {
+            $v: function() {
+                $_.$a.$g("Try to j" + "ump on them");
+                $_.$a.$x = 1;
+                for (var i = 0; i < s.$b.length; i++) {
+                    s.$b[i].$X = 0
+                }
+            },
+            $c: function() {
+                if ($_.$a.$l === s.$b[s.$b.length - 1]) {
+                    s.$A("$b1")
+                } else if ($_.$a.$w < 0) {
+                    $_.$a.$g(G.touch ? "Use the round b" + "utton to j" + "ump" : "Use the up arrow to j" + "ump")
+                }
+            }
+        },
+        $b1: {
+            $v: function() {
+                $_.$a.$g("Nice!");
+                $_.$a.$x = 0
+            },
+            $c: function() {
+                if ($_.$a.$w < 0) {
+                    s.$A("$b8")
+                }
+            }
+        },
+        $b8: {
+            $v: function() {
+                $_.$a.$g("Try not to f" + "all in the w" + "ater!");
+                for (var i = 0; i < s.$b.length; i++) {
+                    s.$b[i].$X = 1
+                }
+            },
+            $c: function() {
+                if ($_.$a.$w < 0) {
+                    s.$A("start")
+                }
+            }
+        },
+        start: {
+            $v: function() {
+                $_.$a.$g("Let's play now!");
+                $_.$a.$x = 1
+            },
+            $c: function() {
+                if ($_.$a.$w < 0) {
+                    s.end(1)
+                }
+            }
+        }
+    };
+    if (localStorage["tut"] == 1) {
+        to(this.end, 1)
+    } else {
+        this.$A("hello")
+    }
+}
+$a3.prototype = {
+    $c: function(e) {
+        if (this.$au) {
+            this.$au.$c(e)
+        }
+        $_.$a.x = $5($_.$a.x, $_.pf.x - $_.pf.w / 2, $_.pf.x + $_.pf.w / 2)
+    },
+    $A: function(s) {
+        (this.$au = this.$aus[s]).$v()
+    },
+    end: function(s) {
+        localStorage["tut"] = 1;
+        $_.$3 = new $bo(s)
+    }
 };
 
-function MenuScenario(){
-	this.nb = 0;
+function $a6() {
+    this.nb = 0
+}
+$a6.prototype = {
+    $c: function(e) {
+        this.nb -= e;
+        if (this.nb <= 0) {
+            var b = $_.$Z();
+            b.deco$a0n = 1;
+            this.nb = .5
+        }
+    }
 };
 
-MenuScenario.prototype = {
-	cycle: function(e){
-		this.nb -= e;
-		if(this.nb <= 0){
-			var b = wld.spawnBox();
-			b.decoration = true;
-			this.nb = .5;
-		}
-	}
+function $1(s, c) {
+    this.s = s;
+    this.c = c
+}
+$1.prototype = {
+    $R: function(e) {
+        fs(this.c);
+        fr(this.x - this.s / 2, this.y - this.s / 2, this.s, this.s)
+    },
+    $al: function() {
+        $_.$bV(this)
+    }
 };
 
-function Particle(s, c){
-	this.s = s;
-	this.c = c;
-};
-
-Particle.prototype = {
-	render: function(e){
-		fs(this.c);
-		fr(this.x - this.s / 2, this.y - this.s / 2, this.s, this.s);
-	},
-	remove: function(){
-		wld.removeParticle(this);
-	}
-};
-
-function Choice(){
-	Menu.call(this);
-
-	var h = this;
-	this.buttons.push(new Button(bwButton, 0, 0, function(){
-		P.inverted = true;
-		localStorage['c'] = '1';
-		h.out(G.home.bind(G));
-	}));
-	this.buttons.push(new Button(wbButton, 0, P.h / 2, function(){
-		P.inverted = false;
-		localStorage['c'] = '0';
-		h.out(G.home.bind(G));
-	}));
-
-	var c = localStorage['c'];
-	if(c){
-		P.inverted = c === '1';
-		setTimeout(function(){
-			G.home();
-		}, 0);
-	}
-};
-
-Choice.prototype = xt(Menu.prototype, {
-	out: function(f){
-		Easing.tween(this.buttons[0], 'y', 0, -P.h / 2, .2);
-		Easing.tween(this.buttons[1], 'y', P.h / 2, P.h, .2, 0, linear, f);
-	}
+function $bm() {
+    $C.call(this);
+    var h = this;
+    this.$Ms.push(new $F($bN, 0, 0, function() {
+        P.$h = 1;
+        localStorage["c"] = "1";
+        h.out(G.$aq.bind(G))
+    }));
+    this.$Ms.push(new $F($bM, 0, P.h / 2, function() {
+        P.$h = 0;
+        localStorage["c"] = "0";
+        h.out(G.$aq.bind(G))
+    }));
+    var c = localStorage["c"];
+    if (c) {
+        P.$h = c === "1";
+        setTimeout(function() {
+            G.$aq()
+        }, 0)
+    }
+}
+$bm.prototype = xt($C.prototype, {
+    out: function(f) {
+        $d.$e(this.$Ms[0], "y", 0, -P.h / 2, .2);
+        $d.$e(this.$Ms[1], "y", P.h / 2, P.h, .2, 0, $G, f)
+    }
 });
 
-function J(){this.B=function(e){for(var f=0;24>f;f++)this[String.fromCharCode(97+f)]=e[f]||0;0.01>this.c&&(this.c=0.01);e=this.b+this.c+this.e;0.18>e&&(e=0.18/e,this.b*=e,this.c*=e,this.e*=e)}}
-var W=new function(){this.A=new J;var e,f,d,g,l,z,K,L,M,A,m,N;this.reset=function(){var c=this.A;g=100/(c.f*c.f+0.001);l=100/(c.g*c.g+0.001);z=1-0.01*c.h*c.h*c.h;K=1E-6*-c.i*c.i*c.i;c.a||(m=0.5-c.n/2,N=5E-5*-c.o);L=0<c.l?1-0.9*c.l*c.l:1+10*c.l*c.l;M=0;A=1==c.m?0:2E4*(1-c.m)*(1-c.m)+32};this.D=function(){this.reset();var c=this.A;e=1E5*c.b*c.b;f=1E5*c.c*c.c;d=1E5*c.e*c.e+10;return e+f+d|0};this.C=function(c,O){var a=this.A,P=1!=a.s||a.v,r=0.1*a.v*a.v,Q=1+3E-4*a.w,n=0.1*a.s*a.s*a.s,X=1+1E-4*a.t,Y=1!=
-a.s,Z=a.x*a.x,$=a.g,R=a.q||a.r,aa=0.2*a.r*a.r*a.r,D=a.q*a.q*(0>a.q?-1020:1020),S=a.p?(2E4*(1-a.p)*(1-a.p)|0)+32:0,ba=a.d,T=a.j/2,ca=0.01*a.k*a.k,E=a.a,F=e,da=1/e,ea=1/f,fa=1/d,a=5/(1+20*a.u*a.u)*(0.01+n);0.8<a&&(a=0.8);for(var a=1-a,G=!1,U=0,v=0,w=0,B=0,t=0,x,u=0,h,p=0,s,H=0,b,V=0,q,I=0,C=Array(1024),y=Array(32),k=C.length;k--;)C[k]=0;for(k=y.length;k--;)y[k]=2*Math.random()-1;for(k=0;k<O;k++){if(G)return k;S&&++V>=S&&(V=0,this.reset());A&&++M>=A&&(A=0,g*=L);z+=K;g*=z;g>l&&(g=l,0<$&&(G=!0));h=g;0<
-T&&(I+=ca,h*=1+Math.sin(I)*T);h|=0;8>h&&(h=8);E||(m+=N,0>m?m=0:0.5<m&&(m=0.5));if(++v>F)switch(v=0,++U){case 1:F=f;break;case 2:F=d}switch(U){case 0:w=v*da;break;case 1:w=1+2*(1-v*ea)*ba;break;case 2:w=1-v*fa;break;case 3:w=0,G=!0}R&&(D+=aa,s=D|0,0>s?s=-s:1023<s&&(s=1023));P&&Q&&(r*=Q,1E-5>r?r=1E-5:0.1<r&&(r=0.1));q=0;for(var ga=8;ga--;){p++;if(p>=h&&(p%=h,3==E))for(x=y.length;x--;)y[x]=2*Math.random()-1;switch(E){case 0:b=p/h<m?0.5:-0.5;break;case 1:b=1-2*(p/h);break;case 2:b=p/h;b=0.5<b?6.28318531*
-(b-1):6.28318531*b;b=0>b?1.27323954*b+0.405284735*b*b:1.27323954*b-0.405284735*b*b;b=0>b?0.225*(b*-b-b)+b:0.225*(b*b-b)+b;break;case 3:b=y[Math.abs(32*p/h|0)]}P&&(x=u,n*=X,0>n?n=0:0.1<n&&(n=0.1),Y?(t+=(b-u)*n,t*=a):(u=b,t=0),u+=t,B+=u-x,b=B*=1-r);R&&(C[H%1024]=b,b+=C[(H-s+1024)%1024],H++);q+=b}q=0.125*q*w*Z;c[k]=1<=q?32767:-1>=q?-32768:32767*q|0}return O}};
-window.jsfxr=function(e){W.A.B(e);var f=W.D();e=new Uint8Array(4*((f+1)/2|0)+44);var f=2*W.C(new Uint16Array(e.buffer,44),f),d=new Uint32Array(e.buffer,0,44);d[0]=1179011410;d[1]=f+36;d[2]=1163280727;d[3]=544501094;d[4]=16;d[5]=65537;d[6]=44100;d[7]=88200;d[8]=1048578;d[9]=1635017060;d[10]=f;for(var f=f+44,d=0,g="data:audio/wav;base64,";d<f;d+=3)var l=e[d]<<16|e[d+1]<<8|e[d+2],g=g+("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[l>>18]+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[l>>
-12&63]+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[l>>6&63]+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[l&63]);d-=f;return g.slice(0,g.length-d)+"==".slice(0,d)};
-
-var sounds = {},
-	prepare = function(sid, settings){
-		sounds[sid] = [];
-
-		settings.forEach(function(s){
-			var a = new Audio();
-			a.src = jsfxr(s);
-
-			sounds[sid].push(a);
-		});
-	},
-	play = function(sid){
-		sounds[sid] && rp(sounds[sid]).play();
-	};
-
-
+function J() {
+    this.B = function(e) {
+        for (var f = 0; 24 > f; f++) this[String.fromCharCode(97 + f)] = e[f] || 0;
+        .01 > this.c && (this.c = .01);
+        e = this.b + this.c + this.e;
+        .18 > e && (e = .18 / e, this.b *= e, this.c *= e, this.e *= e)
+    }
+}
+var W = new function() {
+    this.A = new J;
+    var e, f, d, g, l, z, K, L, M, A, m, N;
+    this.$ba = function() {
+        var c = this.A;
+        g = 100 / (c.f * c.f + .001);
+        l = 100 / (c.g * c.g + .001);
+        z = 1 - .01 * c.h * c.h * c.h;
+        K = 1e-6 * -c.i * c.i * c.i;
+        c.a || (m = .5 - c.n / 2, N = 5e-5 * -c.o);
+        L = 0 < c.l ? 1 - .9 * c.l * c.l : 1 + 10 * c.l * c.l;
+        M = 0;
+        A = 1 == c.m ? 0 : 2e4 * (1 - c.m) * (1 - c.m) + 32
+    };
+    this.D = function() {
+        this.$ba();
+        var c = this.A;
+        e = 1e5 * c.b * c.b;
+        f = 1e5 * c.c * c.c;
+        d = 1e5 * c.e * c.e + 10;
+        return e + f + d | 0
+    };
+    this.C = function(c, O) {
+        var a = this.A,
+            P = 1 != a.s || a.v,
+            r = .1 * a.v * a.v,
+            Q = 1 + 3e-4 * a.w,
+            n = .1 * a.s * a.s * a.s,
+            X = 1 + 1e-4 * a.t,
+            Y = 1 != a.s,
+            Z = a.x * a.x,
+            $ = a.g,
+            R = a.q || a.r,
+            aa = .2 * a.r * a.r * a.r,
+            D = a.q * a.q * (0 > a.q ? -1020 : 1020),
+            S = a.p ? (2e4 * (1 - a.p) * (1 - a.p) | 0) + 32 : 0,
+            ba = a.d,
+            T = a.j / 2,
+            ca = .01 * a.k * a.k,
+            E = a.a,
+            F = e,
+            da = 1 / e,
+            ea = 1 / f,
+            fa = 1 / d,
+            a = 5 / (1 + 20 * a.u * a.u) * (.01 + n);
+        .8 < a && (a = .8);
+        for (var a = 1 - a, G = !1, U = 0, v = 0, w = 0, B = 0, t = 0, x, u = 0, h, p = 0, s, H = 0, b, V = 0, q, I = 0, C = Array(1024), y = Array(32), k = C.length; k--;) C[k] = 0;
+        for (k = y.length; k--;) y[k] = 2 * Math.random() - 1;
+        for (k = 0; k < O; k++) {
+            if (G) return k;
+            S && ++V >= S && (V = 0, this.$ba());
+            A && ++M >= A && (A = 0, g *= L);
+            z += K;
+            g *= z;
+            g > l && (g = l, 0 < $ && (G = !0));
+            h = g;
+            0 < T && (I += ca, h *= 1 + Math.sin(I) * T);
+            h |= 0;
+            8 > h && (h = 8);
+            E || (m += N, 0 > m ? m = 0 : .5 < m && (m = .5));
+            if (++v > F) switch (v = 0, ++U) {
+                case 1:
+                    F = f;
+                    break;
+                case 2:
+                    F = d
+            }
+            switch (U) {
+                case 0:
+                    w = v * da;
+                    break;
+                case 1:
+                    w = 1 + 2 * (1 - v * ea) * ba;
+                    break;
+                case 2:
+                    w = 1 - v * fa;
+                    break;
+                case 3:
+                    w = 0, G = !0
+            }
+            R && (D += aa, s = D | 0, 0 > s ? s = -s : 1023 < s && (s = 1023));
+            P && Q && (r *= Q, 1e-5 > r ? r = 1e-5 : .1 < r && (r = .1));
+            q = 0;
+            for (var ga = 8; ga--;) {
+                p++;
+                if (p >= h && (p %= h, 3 == E))
+                    for (x = y.length; x--;) y[x] = 2 * Math.random() - 1;
+                switch (E) {
+                    case 0:
+                        b = p / h < m ? .5 : -.5;
+                        break;
+                    case 1:
+                        b = 1 - 2 * (p / h);
+                        break;
+                    case 2:
+                        b = p / h;
+                        b = .5 < b ? 6.28318531 * (b - 1) : 6.28318531 * b;
+                        b = 0 > b ? 1.27323954 * b + .405284735 * b * b : 1.27323954 * b - .405284735 * b * b;
+                        b = 0 > b ? .225 * (b * -b - b) + b : .225 * (b * b - b) + b;
+                        break;
+                    case 3:
+                        b = y[Math.abs(32 * p / h | 0)]
+                }
+                P && (x = u, n *= X, 0 > n ? n = 0 : .1 < n && (n = .1), Y ? (t += (b - u) * n, t *= a) : (u = b, t = 0), u += t, B += u - x, b = B *= 1 - r);
+                R && (C[H % 1024] = b, b += C[(H - s + 1024) % 1024], H++);
+                q += b
+            }
+            q = .125 * q * w * Z;
+            c[k] = 1 <= q ? 32767 : -1 >= q ? -32768 : 32767 * q | 0
+        }
+        return O
+    }
+};
+window.$bA = function(e) {
+    W.A.B(e);
+    var f = W.D();
+    e = new Uint8Array(4 * ((f + 1) / 2 | 0) + 44);
+    var f = 2 * W.C(new Uint16Array(e.buffer, 44), f),
+        d = new Uint32Array(e.buffer, 0, 44);
+    d[0] = 1179011410;
+    d[1] = f + 36;
+    d[2] = 1163280727;
+    d[3] = 544501094;
+    d[4] = 16;
+    d[5] = 65537;
+    d[6] = 44100;
+    d[7] = 88200;
+    d[8] = 1048578;
+    d[9] = 1635017060;
+    d[10] = f;
+    for (var f = f + 44, d = 0, g = "data:audio/wav;base64,"; d < f; d += 3) var l = e[d] << 16 | e[d + 1] << 8 | e[d + 2],
+        g = g + ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" [l >> 18] + "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" [l >> 12 & 63] + "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" [l >> 6 & 63] + "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" [l & 63]);
+    d -= f;
+    return g.slice(0, g.length - d) + "==".slice(0, d)
+};
+var $ao = {},
+    $N = function(sid, $bB) {
+        $ao[sid] = [];
+        $bB.forEach(function(s) {
+            var a = new Audio;
+            a.src = $bA(s);
+            $ao[sid].push(a)
+        })
+    },
+    play = function(sid) {
+        $ao[sid] && rp($ao[sid]).play()
+    };

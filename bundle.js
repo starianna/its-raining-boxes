@@ -619,7 +619,7 @@ $bg.prototype = {
         }
         to(function() {
             $_.$S = 0;
-            $_.$a.$g("Phewww")
+            $_.$a.$g("Phe" + "w".repeat(1 + Math.floor(Math.random() * 5)));
         }, t * 1e3)
     },
     $b9: function() {
@@ -629,11 +629,11 @@ $bg.prototype = {
         }, 2e3);
         to(function() {
             $_.$U = 0;
-            $_.$a.$g("Flood's over")
+            $_.$a.$g("Flood is over")
         }, 8e3)
     },
     $bK: function() {
-        $_.$a.$g("BOX ST" + "O".repeat(Math.floor(Math.random() * 6)) + "RM" + "!".repeat(Math.floor(Math.random() * 4)));
+        $_.$a.$g("BOX ST" + "O".repeat(1 + Math.floor(Math.random() * 5)) + "RM" + "!".repeat(Math.floor(Math.random() * 4)));
         var xs = [];
         for (var i = 0; i < 1; i++) {
             for (var x = 0; x < P.w; x += rd(100, 200)) {
@@ -1758,7 +1758,7 @@ $bo.prototype = {
                     }
                 }
                 if (!$aW) {
-                    $_.$a.$g("I'm on top of the w" + "o".repeat(Math.floor(Math.random() * 10)) + "rld" + "!".repeat(Math.floor(Math.random() * 4)));
+                    $_.$a.$g("I'm on top of the w" + "o".repeat(1 + Math.floor(Math.random() * 9)) + "rld" + "!".repeat(Math.floor(Math.random() * 4)));
                     this.$av = 20
                 }
             }

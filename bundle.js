@@ -1121,7 +1121,7 @@ $aK.prototype = xt($T.prototype, {
         if (this.$l && this.$x) {
             this.$aG();
             this.$l = 0;
-            this.vY = -800; // -400
+            this.vY = -500; // player's jump height. default is -400
             play("$K")
         }
     },

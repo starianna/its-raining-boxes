@@ -592,9 +592,9 @@ $bg.prototype = {
         if (!G.touch) return;
         var wd = 0;
         G.$O.forEach(function(t) {
-            if (t.x < P.w / 3) {
+            if (t.x < P.w / 2) { // P.w / 3
                 wd = -1
-            } else if (t.x > P.w * 2 / 3) {
+            } else if (t.x > P.w * 1.5 / 2) { // P.w * 2 / 3
                 wd = 1
             } else {
                 $_.$a.$K()
@@ -821,7 +821,7 @@ function $T($q, w, h) {
     this.$Y = 0;
     this.sx = this.sy = 1;
     this.$aQ = 0;
-    $d.$e(this, "$aQ", 0, 1, .6, 0, $J) // .3
+    $d.$e(this, "$aQ", 0, 1, .3, 0, $J) // .3
 }
 $T.prototype = {
     $f: function() {

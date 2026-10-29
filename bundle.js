@@ -825,10 +825,10 @@ function $T($q, w, h) {
 }
 $T.prototype = {
     $f: function() {
-        return this.y - this.h / 2
+        return this.y - this.h / 0.5 // 2
     },
     $o: function() {
-        return this.y + this.h / 2
+        return this.y + this.h / 0.5 // 2
     },
     $s: function() {
         return this.x - this.w / 2
@@ -1054,7 +1054,7 @@ $aK.prototype = xt($T.prototype, {
             if (this.y < $_.$t + 45) {
 				this.$g("Cold cold cooooold!!!");
 			} else {
-				this.$g("TOO COOOOOOOOLD!!!!! I'M DEAD!!!!");
+				this.$g("TOO COOOOOOOOLD!!!!!! I'M GONNA DIEEEE!!!!!");
 			}
             if (this.y > $_.$t + 50) {
                 this.die()

@@ -629,7 +629,11 @@ $bg.prototype = {
         }, 2e3);
         to(function() {
             $_.$U = 0;
-            $_.$a.$g("Flood is over")
+			if(Math.random() < 0.5) {
+           		$_.$a.$g("Flood is over");
+			} else {
+				$_.$a.$g("Flood's over");
+			}
         }, 8e3)
     },
     $bK: function() {
@@ -649,7 +653,11 @@ $bg.prototype = {
             }(xs[i]), t * 1e3)
         }
         to(function() {
-            $_.$a.$g("Storm is over")
+			if(Math.random() < 0.5) {
+           		$_.$a.$g("Storm is over");
+			} else {
+				$_.$a.$g("Storm's over");
+			}
         }, t * 1e3 + 1e3)
     },
     add$1: function(p) {
@@ -1121,7 +1129,7 @@ $aK.prototype = xt($T.prototype, {
         if (this.$l && this.$x) {
             this.$aG();
             this.$l = 0;
-            this.vY = -500; // player's jump height. default is -400
+            this.vY = -550; // player's jump height. default is -400
             play("$K")
         }
     },
@@ -1776,9 +1784,9 @@ $bo.prototype = {
                 }
                 $_.$ah = 0
             } else {
-                $_.$ah = 2.5; // 2.5
+                $_.$ah = 3.5; // 2.5
                 if (this.t > 60) {
-                    $_.$ah = 3.5 // 3.5
+                    $_.$ah = 4.5 // 3.5
                 }
             }
             this.$aJ -= e;

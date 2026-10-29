@@ -821,14 +821,14 @@ function $T($q, w, h) {
     this.$Y = 0;
     this.sx = this.sy = 1;
     this.$aQ = 0;
-    $d.$e(this, "$aQ", 0, 1, .3, 0, $J)
+    $d.$e(this, "$aQ", 0, 1, .6, 0, $J) // .3
 }
 $T.prototype = {
     $f: function() {
-        return this.y - this.h / 0.5 // 2
+        return this.y - this.h / 2 // 2
     },
     $o: function() {
-        return this.y + this.h / 0.5 // 2
+        return this.y + this.h / 2 // 2
     },
     $s: function() {
         return this.x - this.w / 2

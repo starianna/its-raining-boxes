@@ -592,9 +592,9 @@ $bg.prototype = {
         if (!G.touch) return;
         var wd = 0;
         G.$O.forEach(function(t) {
-            if (t.x < P.w / 2) { // P.w / 3
+            if (t.x < P.w / 3) { // P.w / 3
                 wd = -1
-            } else if (t.x > P.w * 1.5 / 2) { // P.w * 2 / 3
+            } else if (t.x > P.w * 2 / 3) { // P.w * 2 / 3
                 wd = 1
             } else {
                 $_.$a.$K()
@@ -1121,7 +1121,7 @@ $aK.prototype = xt($T.prototype, {
         if (this.$l && this.$x) {
             this.$aG();
             this.$l = 0;
-            this.vY = -400;
+            this.vY = -800; // -400
             play("$K")
         }
     },

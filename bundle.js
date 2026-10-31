@@ -1751,7 +1751,7 @@ $bo.prototype = {
             }
             if ((this.$W -= e) <= 0) {
                 var b = $_.$Z();
-                this.$W = Math.floor(Math.random() * 11); // 3, second cooldown for new boxes to spawn
+                this.$W = Math.floor(Math.random() * 7); // 3, second cooldown for new boxes to spawn
                 if (abs(b.x - $_.$a.x) < ($_.$a.w + b.w) / 2) {
                     $_.$a.$g("WATCH OUT" + "!".repeat(Math.floor(Math.random() * 3)), 2)
                 }

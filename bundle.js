@@ -709,7 +709,7 @@ $bg.prototype = {
     tilt: function() {
         $_.$a.$g("THE PLATFORM IS TILTING" + "!".repeat(Math.floor(Math.random() * 5)));
         var b = $_.$cc(),
-            a = M.PI / (8 + Math.random() * 54); // 64
+            a = M.PI / (12 + Math.random() * 50); // 64
         if (b < 0) a *= -1;
         $d.$e($_, "$Q", 0, a, 1, 1, $G, function() {
             $d.$e($_, "$Q", $_.$Q, 0, 1, 2)
@@ -1751,7 +1751,7 @@ $bo.prototype = {
             }
             if ((this.$W -= e) <= 0) {
                 var b = $_.$Z();
-                this.$W = 3;
+                this.$W = 1; // 3, second cooldown for new boxes to spawn?
                 if (abs(b.x - $_.$a.x) < ($_.$a.w + b.w) / 2) {
                     $_.$a.$g("WATCH OUT" + "!".repeat(Math.floor(Math.random() * 3)), 2)
                 }

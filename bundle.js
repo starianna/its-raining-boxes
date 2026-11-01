@@ -1717,7 +1717,7 @@ function $bo($aV) {
     if (!$aV) {
         this.$m[0] = "Hello" + (G.lastScore !== undefined ? " again" : "") + "!".repeat(Math.floor(Math.random() * 3));
         if (G.$y > 0 && G.lastScore === undefined) {
-            this.$m[0] = "Hey, you came back" + "!".repeat(Math.floor(Math.random() * 4);
+            this.$m[0] = "Hey, you came back" + "!".repeat(Math.floor(Math.random() * 4));
         }
         t += 3
     }

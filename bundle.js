@@ -63,6 +63,9 @@ for (var i in p) {
 }
 var $aM = {};
 
+var eq = -Math.floor(Math.random() * 350);
+var er = Math.floor(Math.random() * 350);
+
 function $aP(c) {
     if (c.$h) {
         return c.$h
@@ -603,10 +606,12 @@ $bg.prototype = {
         $_.$a.$aS(wd)
     },
     $cb: function() {
+		eq = -Math.floor(Math.random() * 350);
+		er = Math.floor(Math.random() * 350);
         var $S = function() {
             $_.$b.forEach(function(b) {
                 if (b !== $_.pf && b !== $_.$a) {
-                    b.vX = rd(-500, 500) // -100, 100
+                    b.vX = rd(eq, er) // -speed at which the boxes move around during earthquake, default -100, 100
                 }
             })
         };

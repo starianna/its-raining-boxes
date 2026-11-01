@@ -748,6 +748,7 @@ $C.prototype = {
     },
     out: function(f) {
         $d.$e(this, "$i", this.$i, 0, .5, 0, $G, f)
+		console.log("out")
     }
 };
 

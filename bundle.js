@@ -614,7 +614,7 @@ $bg.prototype = {
         to(function() {
             $_.$S = 1
         }, 2e3);
-        for (var t = 2; t < 5; t += .2) {
+        for (var t = 2; t < 25 /* 5 */; t += .2) {
             to($S, t * 1e3)
         }
         to(function() {

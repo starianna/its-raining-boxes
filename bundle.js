@@ -673,7 +673,7 @@ $bg.prototype = {
         if (ind >= 0) $_.$cYs.splice(ind, 1)
     },
     $bP: function() {
-        //$_.$bQ();
+        $_.$bQ();
         $_.$b.sort(function(a, b) {
             var da = abs(a.x - P.w / 2),
                 db = abs(b.x - P.w / 2);
@@ -807,6 +807,7 @@ function $bl(s) {
     $d.$e(this.$Ms[0], "y", this.$Ms[0].y + 500, this.$Ms[0].y, 1, 1, $J);
     $d.$e(this.$Ms[1], "y", this.$Ms[1].y + 500, this.$Ms[1].y, 1, 1.5, $J);
     play("$ac")
+	console.log("0");
 }
 $bl.prototype = xt($C.prototype, {
     $c: function(e) {
@@ -981,6 +982,7 @@ $T.prototype = {
             $d.$e(p, "s", p.s, 0, .3)
         }
         play(this === $_.$a ? "$a$a1" : "box$a1");
+		console.log("1");
         $d.$e(this, "sx", 1, 1.1, .2, 0, f);
         $d.$e(this, "sy", 1, .9, .2, 0, f)
     },
@@ -1681,6 +1683,7 @@ $F.prototype = {
     $aI: function() {
         this.$aIf();
         play("$M")
+		console.log("2");
     }
 };
 

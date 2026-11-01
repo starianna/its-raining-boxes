@@ -500,7 +500,7 @@ $bg.prototype = {
         sv();
         tr(0, -~~this.$u);
         if (this.$S) {
-            tr(~~rd(-32, 32), ~~rd(-32, 32)) // tr(~~rd(-8, 8), ~~rd(-8, 8))
+            tr(~~rd(-8, 8), ~~rd(-8, 8)) // shaking intensity, default is -8 and 8
         }
         sv();
         tr(0, ~~max(this.$t + P.$aj, this.$u + P.h) - $az.height);
@@ -606,7 +606,7 @@ $bg.prototype = {
         var $S = function() {
             $_.$b.forEach(function(b) {
                 if (b !== $_.pf && b !== $_.$a) {
-                    b.vX = rd(-100, 100)
+                    b.vX = rd(-500, 500) // -100, 100
                 }
             })
         };

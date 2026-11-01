@@ -965,7 +965,7 @@ $T.prototype = {
                 return f * c + b
             };
         this.y = b.$f() - this.h / 2;
-        if (this.vY > 1000 /* 100 */ && this.$aR) {
+        if (this.vY > 100 /* 100 */ && this.$aR) {
             $d.$e(this, "$ak", 0, -this.vY / 45, .4, 0, f)
         }
         this.vY = 0;
@@ -978,7 +978,7 @@ $T.prototype = {
             p.x = x;
             p.y = this.$o();
             $_.add$1(p);
-            $d.$e(p, "y", p.y, p.y - rd(30, 80), .3, 0, $G, p.$al.bind(p));
+            $d.$e(p, "y", p.y, p.y - rd(300, 800 /* 30, 80*/), .3, 0, $G, p.$al.bind(p));
             $d.$e(p, "s", p.s, 0, .3)
         }
         play(this === $_.$a ? "$a$a1" : "box$a1");

@@ -673,7 +673,7 @@ $bg.prototype = {
         if (ind >= 0) $_.$cYs.splice(ind, 1)
     },
     $bP: function() {
-        $_.$bQ();
+        //$_.$bQ();
         $_.$b.sort(function(a, b) {
             var da = abs(a.x - P.w / 2),
                 db = abs(b.x - P.w / 2);
@@ -682,6 +682,7 @@ $bg.prototype = {
             return db - da
         })
     },
+	// cleanBoxes
     $bQ: function() {
         var $bC = max($_.$u + P.h, $_.$t + P.$aj),
             i = $_.$b.length;

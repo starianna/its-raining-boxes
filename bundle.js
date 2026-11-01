@@ -503,7 +503,7 @@ $bg.prototype = {
         sv();
         tr(0, -~~this.$u);
         if (this.$S) {
-            tr(~~rd(-8, 8), ~~rd(-8, 8)) // shaking intensity, default is -8 and 8
+            tr(~~rd(-8*(er/100), 8*(er/100)), ~~rd(-8*(er/100), 8*(er/100))) // shaking intensity, default is -8 and 8
         }
         sv();
         tr(0, ~~max(this.$t + P.$aj, this.$u + P.h) - $az.height);
@@ -1798,7 +1798,7 @@ $bo.prototype = {
             if (this.$aJ <= 0) {
                 var t = rp(["$cb", "$b9", "$bK", "tilt"]); // cb = earthquake, b9 = flood, bk = box storm, tilt = platform tilting
                 $_[t].call($_);
-                this.$aJ = 40 // 40
+                this.$aJ = (10 + Math.floor(Math.random() * 30)) // 40
             }
         }
     }

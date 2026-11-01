@@ -695,7 +695,7 @@ $bg.prototype = {
                         b.$ai = 0
                     }
                 });
-                //$_.$b.splice(i, 1)
+                //$_.$b.splice(i, 1) // normally boxes would be deleted if they fall deep enough into the water
             }
         }
     },

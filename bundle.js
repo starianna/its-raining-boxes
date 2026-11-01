@@ -500,7 +500,7 @@ $bg.prototype = {
         sv();
         tr(0, -~~this.$u);
         if (this.$S) {
-            tr(~~rd(-8, 8), ~~rd(-8, 8))
+            tr(~~rd(-32, 32), ~~rd(-32, 32)) // tr(~~rd(-8, 8), ~~rd(-8, 8))
         }
         sv();
         tr(0, ~~max(this.$t + P.$aj, this.$u + P.h) - $az.height);
@@ -614,7 +614,7 @@ $bg.prototype = {
         to(function() {
             $_.$S = 1
         }, 2e3);
-        for (var t = 2; t < 5 /* 5, duration of earthquake default */; t += 2 /* .2 */) {
+        for (var t = 2; t < 5 /* 5, duration of earthquake default */; t += .2) {
             to($S, t * 1e3)
         }
         to(function() {

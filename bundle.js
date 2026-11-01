@@ -1758,7 +1758,7 @@ $bo.prototype = {
                 var b = $_.$Z();
                 this.$W = (Math.random() * 7); // 3, second cooldown for new boxes to spawn
                 if (abs(b.x - $_.$a.x) < ($_.$a.w + b.w) / 2) {
-                    $_.$a.$g("WATCH OUT" + "!".repeat(Math.floor(Math.random() * 3)), 2)
+                    $_.$a.$g("WATCH OUT" + "!".repeat(Math.floor(Math.random() * 4)), 2)
                 }
             }
             if ((this.$av -= e) <= 0 && $_.$a.$l) {
@@ -1789,9 +1789,9 @@ $bo.prototype = {
                 }
                 $_.$ah = 0
             } else {
-                $_.$ah = 3.5; // 2.5
+                $_.$ah = 2.5; // 2.5
                 if (this.t > 60) {
-                    $_.$ah = 4.5 // 3.5
+                    $_.$ah = 3.5 // 3.5
                 }
             }
             this.$aJ -= e;

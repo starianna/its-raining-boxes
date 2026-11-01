@@ -1734,7 +1734,7 @@ function $bo($aV) {
             s = 30;
             this.$W = 24
         } else {
-            this.$m[t] = "It's raining b" + "oxes today!";
+            this.$m[t] = "It's raining boxes today" + "!".repeat(Math.floor(Math.random() * 3));
             this.$m[t + 7] = "Water is rising" + "!".repeat(Math.floor(Math.random() * 2));
             this.$W = 6;
             s = 15
@@ -1790,7 +1790,7 @@ $bo.prototype = {
             if (this.$an > 0) {
                 this.$an -= e;
                 if (this.$an <= 0) {
-                    $_.$a.$g("Water is rising!")
+                    $_.$a.$g("Water is rising" + "!".repeat(Math.floor(Math.random() * 2)))
                 }
                 $_.$ah = 0
             } else {
@@ -1839,7 +1839,7 @@ function $a3() {
         },
         $bH: {
             $v: function() {
-                $_.$a.$g("It's raining b" + "oxes today!");
+                $_.$a.$g("It's raining boxes today" + "!".repeat(Math.floor(Math.random() * 3)));
                 s.bx = $_.$Z($_.pf.x - $_.pf.w / 2 + $aC.w / 2, -100, $aC)
             },
             $c: function() {

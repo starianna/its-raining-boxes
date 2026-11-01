@@ -65,6 +65,7 @@ var $aM = {};
 
 var eq = -Math.floor(Math.random() * 350);
 var er = Math.floor(Math.random() * 350);
+var dying = true;
 
 function $aP(c) {
     if (c.$h) {
@@ -1073,7 +1074,7 @@ $aK.prototype = xt($T.prototype, {
 				this.$g("TOO COOOOOOOOLD!!!!!! I'M GONNA DIEEEE!!!!!");
 			}
             if (this.y > $_.$t + 50) {
-                this.die()
+                if(dying) this.die()
             }
         }
     },
@@ -1142,7 +1143,7 @@ $aK.prototype = xt($T.prototype, {
         }
     },
     $aU: function() {
-        this.die()
+        if(dying) this.die()
     },
     die: function() {
         $_.$bq(this);

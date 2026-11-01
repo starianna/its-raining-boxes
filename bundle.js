@@ -965,7 +965,7 @@ $T.prototype = {
                 return f * c + b
             };
         this.y = b.$f() - this.h / 2;
-        if (this.vY > 100 && this.$aR) {
+        if (this.vY > 1000 /* 100 */ && this.$aR) {
             $d.$e(this, "$ak", 0, -this.vY / 45, .4, 0, f)
         }
         this.vY = 0;
@@ -982,7 +982,7 @@ $T.prototype = {
             $d.$e(p, "s", p.s, 0, .3)
         }
         play(this === $_.$a ? "$a$a1" : "box$a1");
-		console.log("1");
+		console.log("box fallen");
         $d.$e(this, "sx", 1, 1.1, .2, 0, f);
         $d.$e(this, "sy", 1, .9, .2, 0, f)
     },

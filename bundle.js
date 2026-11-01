@@ -694,7 +694,7 @@ $bg.prototype = {
                         b.$ai = 0
                     }
                 });
-                $_.$b.splice(i, 1)
+                //$_.$b.splice(i, 1)
             }
         }
     },
@@ -748,7 +748,6 @@ $C.prototype = {
     },
     out: function(f) {
         $d.$e(this, "$i", this.$i, 0, .5, 0, $G, f)
-		console.log("out")
     }
 };
 

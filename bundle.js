@@ -657,7 +657,7 @@ $bg.prototype = {
                     $_.$Z(x)
                 }
             }(xs[i]), t * (Math.random() * 1001)) // 1000
-        },
+        }
         to(function() {
 			if(Math.random() < 0.5) {
            		$_.$a.$g("Storm is over");

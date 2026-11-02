@@ -423,17 +423,17 @@ $bg.prototype = {
     },
     $Z: function(x, y, d) {
         d = d || rp([{
-            w: Math.floor(Math.random() * 61), // 60
-            h: Math.floor(Math.random() * 61) // 60
+            w: (Math.random() * 201), // 60
+            h: (Math.random() * 201) // 60
         }, {
-            w: Math.floor(Math.random() * 91), // 90
-            h: Math.floor(Math.random() * 61) // 60
+            w: (Math.random() * 201), // 90
+            h: (Math.random() * 201) // 60
         }, {
-            w: Math.floor(Math.random() * 91), // 90
-            h: Math.floor(Math.random() * 91) // 90
+            w: (Math.random() * 201), // 90
+            h: (Math.random() * 201) // 90
         }, {
-            w: Math.floor(Math.random() * 41), // 40
-            h: Math.floor(Math.random() * 91) // 90
+            w: (Math.random() * 201), // 40
+            h: (Math.random() * 201) // 90
         }]);
         var b = new $T(this, d.w, d.h);
         b.x = x || this.$b6(d.w);
@@ -646,7 +646,7 @@ $bg.prototype = {
         $_.$a.$g("BOX ST" + "O".repeat(1 + Math.floor(Math.random() * 5)) + "RM" + "!".repeat(Math.floor(Math.random() * 4)));
         var xs = [];
         for (var i = 0; i < 1 /* 1 */; i++) {
-            for (var x = 0; x < P.w; x += rd(10, 20)) { // rd(100, 200)
+            for (var x = 0; x < P.w; x += rd(0, 100)) { // rd(100, 200), frequency at which new boxes spawn during a box storm
                 xs.push(x)
             }
         }
@@ -656,7 +656,7 @@ $bg.prototype = {
                 return function() {
                     $_.$Z(x)
                 }
-            }(xs[i]), t * (Math.random() * 1001)) // 1000
+            }(xs[i]), t * 1e3) // 1000
         }
         to(function() {
 			if(Math.random() < 0.5) {
@@ -1141,7 +1141,7 @@ $aK.prototype = xt($T.prototype, {
         if (this.$l && this.$x) {
             this.$aG();
             this.$l = 0;
-            this.vY = -550; // player's jump height. default is -400
+            this.vY = -600; // player's jump height. default is -400
             play("$K")
         }
     },

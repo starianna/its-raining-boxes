@@ -612,7 +612,7 @@ $bg.prototype = {
         var $S = function() {
             $_.$b.forEach(function(b) {
                 if (b !== $_.pf && b !== $_.$a) {
-                    b.vX = rd(eq, er) // -speed at which the boxes move around during earthquake, default -100, 100
+                    b.vX = rd(-300, 300) // -speed at which the boxes move around during earthquake, default -100, 100
                 }
             })
         };

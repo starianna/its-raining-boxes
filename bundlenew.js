@@ -1357,12 +1357,12 @@ Hero.prototype = xt(Box.prototype, {
 			}
 		});
 		if(this.y > wld.waterY - 25){
-			if(Math.random() < 0.01) this.say('It feels chilly..');
+			if(Math.random() < 0.0025) this.say('It feels chilly..');
 		}
 		if(this.y > wld.waterY){
 			this.say('Cold cold cooooold!!!');
-			if(this.y > wld.waterY + 45){
-				this.say('IT\'S TOO COOOOOOOOOOOOLD!!!!!!!! HELP I AM GONNA DIE');
+			if(this.y > wld.waterY + 40){
+				this.say('WATER\'S TOO COOOOOOOOOOOOLD!!!!!!!! HELP!!!!! I AM GONNA DIE!!!!!!');
 			}
 			if(this.y > wld.waterY + 50){
 				this.die();
@@ -2096,7 +2096,7 @@ Button.prototype = {
 function PlayScenario(skip){
 	this.nextSpawn = 6;
 	this.nextScoreIncrease = this.waterDelay = 10;
-	this.nextEvent = 40;
+	this.nextEvent = 8;
 
 	this.flooding = false;
 

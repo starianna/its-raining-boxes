@@ -645,13 +645,13 @@ $bg.prototype = {
     $bK: function() {
         $_.$a.$g("BOX ST" + "O".repeat(1 + Math.floor(Math.random() * 5)) + "RM" + "!".repeat(Math.floor(Math.random() * 4)));
         var xs = [];
-        for (var i = 0; i < (1 + Math.floor(Math.random() * 9)) /* 1 */; i++) {
+        for (var i = 0; i < 1 /* 1 */; i++) {
             for (var x = 0; x < P.w; x += rd(100, 200)) {
                 xs.push(x)
             }
         }
         $a4(xs);
-        for (var i = 0, t = 3; i < xs.length; i++, t += 1.2) {
+        for (var i = 0, t = 3; i < xs.length; i += (1 * Math.random() * 9) /* i++ */, t += 1.2) {
             to(function(x) {
                 return function() {
                     $_.$Z(x)

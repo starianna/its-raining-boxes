@@ -651,7 +651,7 @@ $bg.prototype = {
             }
         }
         $a4(xs);
-        for (var i = 0, t = 3; i < xs.length; i++, t += 1.2) {
+        for (var i = 0, t = (3 + Math.floor(Math.random() * 27)) /* 3 */; i < xs.length; i++, t += 1.2) {
             to(function(x) {
                 return function() {
                     $_.$Z(x)

@@ -607,12 +607,12 @@ $bg.prototype = {
         $_.$a.$aS(wd)
     },
     $cb: function() {
-		eq = -Math.floor(Math.random() * 350);
-		er = Math.floor(Math.random() * 350);
+		eq = -Math.floor(Math.random() * 200);
+		er = Math.floor(Math.random() * 400);
         var $S = function() {
             $_.$b.forEach(function(b) {
                 if (b !== $_.pf && b !== $_.$a) {
-                    b.vX = rd(-300, 300) // -speed at which the boxes move around during earthquake, default -100, 100
+                    b.vX = rd(eq, er) // -speed at which the boxes move around during earthquake, default -100, 100
                 }
             })
         };
@@ -1177,7 +1177,7 @@ $aK.prototype = xt($T.prototype, {
         }, 500);
         navigator.vibrate(500)
     },
-	window.kill: function() {
+	window.kill = function() {
         $_.$bq(this);
         this.$V = 1;
         play("die");

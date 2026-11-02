@@ -423,17 +423,17 @@ $bg.prototype = {
     },
     $Z: function(x, y, d) {
         d = d || rp([{
-            w: Math.floor(Math.random() * 121), // 60
-            h: Math.floor(Math.random() * 121) // 60
+            w: Math.floor(Math.random() * 61), // 60
+            h: Math.floor(Math.random() * 61) // 60
         }, {
-            w: Math.floor(Math.random() * 181), // 90
-            h: Math.floor(Math.random() * 121) // 60
+            w: Math.floor(Math.random() * 91), // 90
+            h: Math.floor(Math.random() * 61) // 60
         }, {
-            w: Math.floor(Math.random() * 181), // 90
-            h: Math.floor(Math.random() * 181) // 90
+            w: Math.floor(Math.random() * 91), // 90
+            h: Math.floor(Math.random() * 91) // 90
         }, {
-            w: Math.floor(Math.random() * 121), // 40
-            h: Math.floor(Math.random() * 181) // 90
+            w: Math.floor(Math.random() * 41), // 40
+            h: Math.floor(Math.random() * 91) // 90
         }]);
         var b = new $T(this, d.w, d.h);
         b.x = x || this.$b6(d.w);

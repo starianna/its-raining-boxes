@@ -829,7 +829,7 @@ World.prototype = {
 		}, 8000);
 	},
 	boxStorm: function(){
-		wld.hero.say('BOX STOOORM' + '!'.repeat(Math.floor(Math.random() * 5)));
+		wld.hero.say('BOX ST' + 'O'.repeat(1 + Math.floor(Math.random() * 6)) + 'RM' + '!'.repeat(Math.floor(Math.random() * 5)));
 
 		var xs = [];
 		for(var i = 0 ; i < 1 ; i++){
@@ -884,7 +884,7 @@ World.prototype = {
 					}
 				});
 
-				wld.boxes.splice(i, 1);
+				//wld.boxes.splice(i, 1);
 			}
 		}
 	},
@@ -900,10 +900,10 @@ World.prototype = {
 		}
 	},
 	tilt: function(){
-		wld.hero.say('THE PLATFORM IS TILTING!!!');
+		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(Math.floor(Math.random() * 5)));
 
 		var b = wld.balance(),
-			a = M.PI / 64;
+			a = M.PI / (10 + Math.random() * 54);
 		if(b < 0) a *= -1;
 
 		Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){

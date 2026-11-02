@@ -646,7 +646,7 @@ $bg.prototype = {
         $_.$a.$g("BOX ST" + "O".repeat(1 + Math.floor(Math.random() * 5)) + "RM" + "!".repeat(Math.floor(Math.random() * 4)));
         var xs = [];
         for (var i = 0; i < 1 /* 1 */; i++) {
-            for (var x = 0; x < P.w; x += rd(100, 1000)) { // rd(100, 200)
+            for (var x = 0; x < P.w; x += rd(900, 1000)) { // rd(100, 200)
                 xs.push(x)
             }
         }
@@ -1075,6 +1075,9 @@ $aK.prototype = xt($T.prototype, {
 			}
             if (this.y > $_.$t + 50) {
                 if(dying) this.die()
+            }
+			if (this.y > $_.$t + 1000) {
+                this.die()
             }
         }
     },

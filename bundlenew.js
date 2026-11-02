@@ -2133,7 +2133,7 @@ function PlayScenario(skip){
 
 	var t = 0;
 	if(!skip){
-		this.schedule[0] = 'Hello' + (G.lastScore !== undefined ? ' again' : '') + '!';
+		this.schedule[0] = 'Hello' + (G.lastScore !== undefined ? ' again' : '') + '!'.repeat(Math.floor(Math.random() * 3));
 		if(G.highscore > 0 && G.lastScore === undefined){
 			this.schedule[0] = 'Hey, you came back' + '!'.repeat(Math.floor(Math.random() * 3));
 		}

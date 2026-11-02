@@ -2276,7 +2276,7 @@ function TutorialScenario(){
 		},
 		spawn: {
 			init: function(){
-				wld.hero.say('It\'s raining boxes today!');
+				wld.hero.say('It\'s raining boxes today' + '!'.repeat(Math.floor(Math.random() * 3)));
 				s.bx = wld.spawnBox(wld.pf.x - wld.pf.w / 2 + dims.w / 2, -100, dims);
 			},
 			cycle: function(){
@@ -2287,7 +2287,7 @@ function TutorialScenario(){
 		},
 		push: {
 			init: function(){
-				wld.hero.say('Try to push this one away!');
+				wld.hero.say('Try to push this one away' + '!'.repeat(Math.floor(Math.random() * 2)));
 				wld.hero.controllable = true;
 			},
 			cycle: function(){
@@ -2300,7 +2300,7 @@ function TutorialScenario(){
 		},
 		pushed: {
 			init: function(){
-				wld.hero.say('Nice!');
+				wld.hero.say('Nice' + '!'.repeat(Math.floor(Math.random() * 2)));
 				wld.hero.controllable = false;
 			},
 			cycle: function(){
@@ -2362,7 +2362,7 @@ function TutorialScenario(){
 		},
 		explain: {
 			init: function(){
-				wld.hero.say('Try not to fall in the water!');
+				wld.hero.say('Try not to fall in the water' + '!'.repeat(Math.floor(Math.random() * 3)));
 
 				for(var i = 0 ; i < s.boxes.length ; i++){
 					s.boxes[i].pushable = true;
@@ -2376,7 +2376,7 @@ function TutorialScenario(){
 		},
 		start: {
 			init: function(){
-				wld.hero.say('Let\'s play now!');
+				wld.hero.say('Let\'s play now' + '!'.repeat(Math.floor(Math.random() * 3)));
 				wld.hero.controllable = true;
 			},
 			cycle: function(){

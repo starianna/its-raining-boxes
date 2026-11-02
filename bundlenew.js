@@ -825,7 +825,7 @@ World.prototype = {
 		}, 2000);
 		to(function(){
 			wld.flooding = false;
-			Math.random() < 0.5 ? wld.hero.say('Flood\'s over') || wld.hero.say('Flood is over');
+			Math.random() < 0.5 ? wld.hero.say('Flood\'s over') : wld.hero.say('Flood is over');
 		}, 8000);
 	},
 	boxStorm: function(){
@@ -849,7 +849,7 @@ World.prototype = {
 		}
 
 		to(function(){
-			Math.random() < 0.5 ? wld.hero.say('Storm is over') || wld.hero.say('Storm\'s over');
+			Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
 		}, t * 1000 + 1000);
 	},
 	addParticle: function(p){

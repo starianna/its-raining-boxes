@@ -552,17 +552,17 @@ World.prototype = {
 	},
 	spawnBox: function(x, y, d){
 		d = d || rp([{
-			w: Math.random() * 61,
-			h: Math.random() * 61
+			w: Math.floor(Math.random() * 61),
+			h: Math.floor(Math.random() * 61)
 		}, {
-			w: Math.random() * 91,
-			h: Math.random() * 61
+			w: Math.floor(Math.random() * 91),
+			h: Math.floor(Math.random() * 61)
 		},{
-			w: Math.random() * 91,
-			h: Math.random() * 91
+			w: Math.floor(Math.random() * 91),
+			h: Math.floor(Math.random() * 91)
 		},{
-			w: Math.random() * 41,
-			h: Math.random() * 91
+			w: Math.floor(Math.random() * 41),
+			h: Math.floor(Math.random() * 91)
 		}]);
 
 		var b = new Box(this, d.w, d.h);
@@ -1037,7 +1037,7 @@ function Box(world, w, h){
 	this.vX = this.vY = 0;
 	this.fall = true;
 	this.bounces = true;
-	this.pushable = false;
+	this.pushable = true;
 	this.over = [];
 	this.exists = true;
 	this.yOffset = 0;

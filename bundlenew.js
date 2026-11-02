@@ -2249,7 +2249,7 @@ PlayScenario.prototype = {
 				if(this.t > 600){
 					wld.waterSpeed = 4;
 				}
-				f(this.t > 1200){
+				if(this.t > 1200){
 					wld.waterSpeed = 5;
 				}
 			}

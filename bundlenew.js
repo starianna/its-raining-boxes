@@ -2210,7 +2210,7 @@ PlayScenario.prototype = {
 					}
 				}
 				if(!higher){
-					wld.hero.say('I\'m on top of the w' + 'o'.repeat(Math.floor(Math.random() * 11) + 'rld' + '!'.repeat(Math.floor(Math.random() * 5))));
+					wld.hero.say('I\'m on top of the w' + 'o'.repeat(Math.floor(Math.random() * 11)) + 'rld' + '!'.repeat(Math.floor(Math.random() * 5)));
 					this.topWorldTimer = (20 + Math.floor(Math.random() * 40));
 				}
 			}

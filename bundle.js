@@ -1777,7 +1777,7 @@ $bo.prototype = {
                 }
                 if (!$aW) {
                     $_.$a.$g("I'm on top of the w" + "o".repeat(1 + Math.floor(Math.random() * 9)) + "rld" + "!".repeat(Math.floor(Math.random() * 4)));
-                    this.$av = 20
+                    this.$av = (20 + Math.random() * 40);
                 }
             }
             if ((this.$ar -= e) <= 0) {

@@ -656,7 +656,7 @@ $bg.prototype = {
                 return function() {
                     $_.$Z(x)
                 }
-            }(xs[i]), t * (Math.random() * 1001) // 1000
+            }(xs[i]), t * (Math.random() * 1001)) // 1000
         },
         to(function() {
 			if(Math.random() < 0.5) {

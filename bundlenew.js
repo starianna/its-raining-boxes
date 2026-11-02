@@ -552,17 +552,17 @@ World.prototype = {
 	},
 	spawnBox: function(x, y, d){
 		d = d || rp([{
-			w: 60,
-			h: 60
+			w: Math.random() * 61,
+			h: Math.random() * 61
 		}, {
-			w: 90,
-			h: 60
+			w: Math.random() * 91,
+			h: Math.random() * 61
 		},{
-			w: 90,
-			h: 90
+			w: Math.random() * 91,
+			h: Math.random() * 91
 		},{
-			w: 40,
-			h: 90
+			w: Math.random() * 41,
+			h: Math.random() * 91
 		}]);
 
 		var b = new Box(this, d.w, d.h);
@@ -800,12 +800,12 @@ World.prototype = {
 		var shake = function(){
 			wld.boxes.forEach(function(b){
 				if(b !== wld.pf && b !== wld.hero){
-					b.vX = rd(-100, 100);
+					b.vX = rd(-300, 300);
 				}
 			});
 		};
 
-		wld.hero.say('EARTHQUAKE!!!');
+		wld.hero.say('EARTHQUAKE' + '!'.repeat(Math.floor(Math.random() * 6)));
 
 		to(function(){
 			wld.shake = true;
@@ -815,25 +815,25 @@ World.prototype = {
 		}
 		to(function(){
 			wld.shake = false;
-			wld.hero.say('Phewww');
+			wld.hero.say('Phe' + 'w'.repeat(1 + Math.floor(Math.random() * 8)));
 		}, t * 1000);
 	},
 	flood: function(){
-		wld.hero.say('FLOOD!!!');
+		wld.hero.say('FLOOD' + '!'.repeat(Math.floor(Math.random() * 5)));
 		to(function(){
 			wld.flooding = true;
 		}, 2000);
 		to(function(){
 			wld.flooding = false;
-			wld.hero.say('Flood\'s over');
+			Math.random() < 0.5 ? wld.hero.say('Flood\'s over') || wld.hero.say('Flood is over');
 		}, 8000);
 	},
 	boxStorm: function(){
-		wld.hero.say('BOX STOOORM!!!');
+		wld.hero.say('BOX STOOORM' + '!'.repeat(Math.floor(Math.random() * 5)));
 
 		var xs = [];
 		for(var i = 0 ; i < 1 ; i++){
-			for(var x = 0 ; x < P.w ; x += rd(100, 200)){
+			for(var x = 0 ; x < P.w ; x += rd(10, 100)){
 				xs.push(x);
 			}
 		}
@@ -849,7 +849,7 @@ World.prototype = {
 		}
 
 		to(function(){
-			wld.hero.say('Storm is over');
+			Math.random() < 0.5 ? wld.hero.say('Storm is over') || wld.hero.say('Storm\'s over');
 		}, t * 1000 + 1000);
 	},
 	addParticle: function(p){
@@ -1356,9 +1356,14 @@ Hero.prototype = xt(Box.prototype, {
 				}
 			}
 		});
-
+		if(this.y > wld.waterY - 25){
+			if(Math.random() < 0.01) this.say('It feels chilly..');
+		}
 		if(this.y > wld.waterY){
 			this.say('Cold cold cooooold!!!');
+			if(this.y > wld.waterY + 45){
+				this.say('IT\'S TOO COOOOOOOOOOOOLD!!!!!!!! HELP I AM GONNA DIE');
+			}
 			if(this.y > wld.waterY + 50){
 				this.die();
 			}
@@ -1382,7 +1387,7 @@ Hero.prototype = xt(Box.prototype, {
 
 			c.textAlign = 'center';
 			c.textBaseline = 'middle';
-			c.font = '16pt Arial';
+			c.font = '16pt Roboto';
 
 			fs('#000');
 			ft(this.sayS, this.w / 2 + 1, this.sayY + 1);
@@ -2130,28 +2135,28 @@ function PlayScenario(skip){
 	if(!skip){
 		this.schedule[0] = 'Hello' + (G.lastScore !== undefined ? ' again' : '') + '!';
 		if(G.highscore > 0 && G.lastScore === undefined){
-			this.schedule[0] = 'Hey, you came back!';
+			this.schedule[0] = 'Hey, you came back' + '!'.repeat(Math.floor(Math.random() * 3));
 		}
 		t += 3;
 	}
 
 	var s = 0;
 	if(!skip){
-		if('lastScore' in G && G.highscore < 40){
+		if('lastScore' in G && G.highscore < 123){
 			this.schedule[3] = 'I see you didn\'t do too well last time';
 			this.schedule[6] = 'Here is my advice';
-			this.schedule[9] = 'Try to avoid fal'+'ling b'+'oxes';
-			this.schedule[12] = 'Then, build a wall with the b'+'oxes';
-			this.schedule[15] = 'And climb it to avoid the w'+'ater';
+			this.schedule[9] = 'Try to avoid falling boxes';
+			this.schedule[12] = 'Then, build a wall with the boxes';
+			this.schedule[15] = 'And climb it to avoid the water';
 			this.schedule[18] = 'Let\'s try it!';
-			this.schedule[21] = 'It\'s raining b'+'oxes!!!';
+			this.schedule[21] = 'It\'s raining boxes' + '!'.repeat(Math.floor(Math.random() * 5));
 
 			s = 30;
 
 			this.nextSpawn = 24;
 		}else{
-			this.schedule[t] = 'It\'s raining b'+'oxes today!';
-			this.schedule[t + 7] = 'Water is rising!';
+			this.schedule[t] = 'It\'s raining boxes today' + '!'.repeat(Math.floor(Math.random() * 3));
+			this.schedule[t + 7] = 'Water is rising' + '!'.repeat(Math.floor(Math.random() * 3));
 
 			this.nextSpawn = 6;
 
@@ -2166,8 +2171,8 @@ function PlayScenario(skip){
 		}
 	}
 
-	this.schedule[s + 10] = 'You\'re getting good at this!';
-	this.schedule[s + 13] = 'Like... really good!';
+	this.schedule[s + 40] = 'You\'re getting good at this' + '!'.repeat(Math.floor(Math.random() * 3));
+	this.schedule[s + 43] = 'Like... really good' + '!'.repeat(Math.floor(Math.random() * 3));
 
 	this.t = 0;
 };
@@ -2187,7 +2192,7 @@ PlayScenario.prototype = {
 			//this.nextSpawn -= e;
 			if((this.nextSpawn -= e) <= 0){
 				var b = wld.spawnBox();
-				this.nextSpawn = 3;
+				this.nextSpawn = Math.random() * 4;
 
 				if(abs(b.x - wld.hero.x) < (wld.hero.w + b.w) / 2){
 					wld.hero.say('WATCH OUT' + '!'.repeat(Math.floor(Math.random() * 4)), 2);
@@ -2216,7 +2221,7 @@ PlayScenario.prototype = {
 				this.nextScoreIncrease = 1;
 
 				if(wld.score === G.highscore + 1 && G.highscore){
-					wld.hero.say('New record!');
+					wld.hero.say('New record' + '!'.repeat(Math.floor(Math.random() * 3)));
 				}
 			}
 
@@ -2237,7 +2242,7 @@ PlayScenario.prototype = {
 			if(this.nextEvent <= 0){
 				var t = rp(['quake', 'flood', 'boxStorm', 'tilt']);
 				wld[t].call(wld);
-				this.nextEvent = 40;
+				this.nextEvent = (10 + Math.floor(Math.random() * 30));
 			}
 		}
 	}
@@ -2261,7 +2266,7 @@ function TutorialScenario(){
 		},
 		name: {
 			init: function(){
-				wld.hero.say('My name is Didi');
+				wld.hero.say('My name is Sabrina');
 			},
 			cycle: function(){
 				if(wld.hero.sayT < 0){
@@ -2271,7 +2276,7 @@ function TutorialScenario(){
 		},
 		spawn: {
 			init: function(){
-				wld.hero.say('It\'s raining b'+'oxes today!');
+				wld.hero.say('It\'s raining boxes today!');
 				s.bx = wld.spawnBox(wld.pf.x - wld.pf.w / 2 + dims.w / 2, -100, dims);
 			},
 			cycle: function(){
@@ -2306,7 +2311,7 @@ function TutorialScenario(){
 		},
 		stacking: {
 			init: function(){
-				wld.hero.say('B'+'oxes can s'+'tack up');
+				wld.hero.say('Boxes can stack up');
 
 				var b = wld.pf.x + wld.pf.w / 2 - 70;
 				if(wld.hero.x > P.w / 2){
@@ -2329,7 +2334,7 @@ function TutorialScenario(){
 		},
 		stack: {
 			init: function(){
-				wld.hero.say('Try to j'+'ump on them');
+				wld.hero.say('Try to jump on them');
 				wld.hero.controllable = true;
 
 				for(var i = 0 ; i < s.boxes.length ; i++){
@@ -2340,7 +2345,7 @@ function TutorialScenario(){
 				if(wld.hero.liesOn === s.boxes[s.boxes.length - 1]){
 					s.startState('jumped');
 				}else if(wld.hero.sayT < 0){
-					wld.hero.say(G.touch ? 'Use the round b'+'utton to j'+'ump' : 'Use the up arrow to j'+'ump');
+					wld.hero.say(G.touch ? 'Use the round button to jump' : 'Use the up arrow to jump');
 				}
 			}
 		},
@@ -2357,7 +2362,7 @@ function TutorialScenario(){
 		},
 		explain: {
 			init: function(){
-				wld.hero.say('Try not to f'+'all in the w'+'ater!');
+				wld.hero.say('Try not to fall in the water!');
 
 				for(var i = 0 ; i < s.boxes.length ; i++){
 					s.boxes[i].pushable = true;

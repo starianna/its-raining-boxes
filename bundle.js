@@ -423,17 +423,17 @@ $bg.prototype = {
     },
     $Z: function(x, y, d) {
         d = d || rp([{
-            w: (Math.random() * 201), // 60
-            h: (Math.random() * 201) // 60
+            w: (Math.random() * 121), // 60
+            h: (Math.random() * 121) // 60
         }, {
-            w: (Math.random() * 201), // 90
-            h: (Math.random() * 201) // 60
+            w: (Math.random() * 181), // 90
+            h: (Math.random() * 121) // 60
         }, {
-            w: (Math.random() * 201), // 90
-            h: (Math.random() * 201) // 90
+            w: (Math.random() * 181), // 90
+            h: (Math.random() * 181) // 90
         }, {
-            w: (Math.random() * 201), // 40
-            h: (Math.random() * 201) // 90
+            w: (Math.random() * 81), // 40
+            h: (Math.random() * 181) // 90
         }]);
         var b = new $T(this, d.w, d.h);
         b.x = x || this.$b6(d.w);
@@ -1076,7 +1076,7 @@ $aK.prototype = xt($T.prototype, {
             if (this.y > $_.$t + 50) {
                 if(dying) this.die()
             }
-			if (this.y > $_.$t + 1000) {
+			if (this.y > $_.$t + 200) {
                 this.die()
             }
         }

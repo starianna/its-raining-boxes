@@ -2190,7 +2190,7 @@ PlayScenario.prototype = {
 				this.nextSpawn = 3;
 
 				if(abs(b.x - wld.hero.x) < (wld.hero.w + b.w) / 2){
-					wld.hero.say('WATCH OUT!', 2);
+					wld.hero.say('WATCH OUT' + '!'.repeat(Math.floor(Math.random() * 4)), 2);
 				}
 			}
 
@@ -2205,8 +2205,8 @@ PlayScenario.prototype = {
 					}
 				}
 				if(!higher){
-					wld.hero.say('I\'m on top of the wooooooorld!');
-					this.topWorldTimer = 20;
+					wld.hero.say('I\'m on top of the w' + 'o'.repeat(Math.floor(Math.random() * 11) + 'rld' + '!'.repeat(Math.floor(Math.random() * 5))));
+					this.topWorldTimer = (20 + Math.floor(Math.random() * 40);
 				}
 			}
 
@@ -2223,7 +2223,7 @@ PlayScenario.prototype = {
 			if(this.waterDelay > 0){
 				this.waterDelay -= e;
 				if(this.waterDelay <= 0){
-					wld.hero.say('Water is rising!');
+					wld.hero.say('Water is rising' + '!'.repeat(Math.floor(Math.random() * 3)));
 				}
 				wld.waterSpeed = 0;
 			}else{

@@ -1141,7 +1141,7 @@ $aK.prototype = xt($T.prototype, {
         if (this.$l && this.$x) {
             this.$aG();
             this.$l = 0;
-            this.vY = -600; // player's jump height. default is -400
+            this.vY = -550; // player's jump height. default is -400
             play("$K")
         }
     },
@@ -1149,6 +1149,35 @@ $aK.prototype = xt($T.prototype, {
         if(dying) this.die()
     },
     die: function() {
+        $_.$bq(this);
+        this.$V = 1;
+        play("die");
+        G.$bT();
+        for (var i = 0; i < 20; i++) {
+            var p = new $1(rd(2, 8), "red");
+            p.x = rd(this.$s() - 10, this.$E() + 10);
+            p.y = rd(this.$f(), this.$o());
+            $_.add$1(p);
+            var b = $_.$b3(p.x, p.y),
+                y = b ? b.$f() : P.h + 200;
+            $d.$e(p, "y", p.y, y, rd(.9, 1.2), 0, easeOutBounce);
+            $d.$e(p, "s", p.s, 0, 1, 3, $G, p.$al.bind(p))
+        }
+        for (var i = 0; i < 20; i++) {
+            var p = new $1(rd(10, 20), "red");
+            p.x = rd(this.$s() - 10, this.$E() + 10);
+            p.y = rd(this.$f(), this.$o());
+            $_.add$1(p);
+            $d.$e(p, "y", p.y, p.y - rd(30, 80), .3, 0, $G, p.$al.bind(p));
+            $d.$e(p, "s", p.s, 0, .3)
+        }
+        $_.$S = 1;
+        to(function() {
+            $_.$S = 0
+        }, 500);
+        navigator.vibrate(500)
+    },
+	window.kill: function() {
         $_.$bq(this);
         this.$V = 1;
         play("die");

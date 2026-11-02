@@ -654,7 +654,7 @@ World.prototype = {
 		tr(0, -~~this.camY);
 
 		if(this.shake){
-			tr(~~rd(-8, 8), ~~rd(-8, 8));
+			tr(~~rd(-Math.floor(Math.random() * 48), Math.floor(Math.random() * 48)), ~~rd(-Math.floor(Math.random() * 48), Math.floor(Math.random() * 48)));
 		}
 
 		sv();
@@ -800,7 +800,17 @@ World.prototype = {
 		var shake = function(){
 			wld.boxes.forEach(function(b){
 				if(b !== wld.pf && b !== wld.hero){
-					b.vX = rd(-300, 300);
+					if(Math.random() < 0.2) {
+						b.vX = rd(-500, 500);
+					} else if(Math.random() < 0.4) {
+						b.vX = rd(-333, 333);
+					} else if(Math.random() < 0.6) {
+						b.vX = rd(-200, 200);
+					} else if(Math.random() < 0.8) {
+						b.vX = rd(-100, 100);
+					} else if(Math.random() < 1) {
+						b.vX = rd(-25, 25);
+					}
 				}
 			});
 		};

@@ -1037,7 +1037,7 @@ function Box(world, w, h){
 	this.vX = this.vY = 0;
 	this.fall = true;
 	this.bounces = true;
-	this.pushable = true;
+	this.pushable = false;
 	this.over = [];
 	this.exists = true;
 	this.yOffset = 0;

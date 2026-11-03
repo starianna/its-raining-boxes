@@ -2307,7 +2307,7 @@ function TutorialScenario(){
 				wld.hero.controllable = true;
 			},
 			cycle: function(){
-				if(wld.boxes.length === 2){
+				if(wld.boxes.length == 2){
 					s.startState('pushed');
 				}else if(wld.hero.sayT < 0){
 					wld.hero.say('Use the arrow ' + (G.touch ? 'b'+'uttons' : 'keys') + ' to move');

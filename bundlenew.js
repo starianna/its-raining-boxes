@@ -854,7 +854,7 @@ World.prototype = {
 
 		var xs = [];
 		for(var i = 0 ; i < 1 ; i++){
-			for(var x = 0 ; x < P.w ; x += rd(32, 64)){
+			for(var x = 0 ; x < P.w ; x += rd(48, 96)){
 				xs.push(x);
 			}
 		}
@@ -871,7 +871,7 @@ World.prototype = {
 
 		to(function(){
 			Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
-		}, t * 500 + 500);
+		}, t * 250 + 250);
 	},
 	addParticle: function(p){
 		wld.particles.push(p);

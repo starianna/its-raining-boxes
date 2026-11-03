@@ -866,12 +866,12 @@ World.prototype = {
 				return function(){
 					wld.spawnBox(x);
 				}
-			})(xs[i]), t * 250);
+			})(xs[i]), t * 100);
 		}
 
 		to(function(){
 			Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
-		}, t * 250 + 250);
+		}, t * 100 + 100);
 	},
 	addParticle: function(p){
 		wld.particles.push(p);

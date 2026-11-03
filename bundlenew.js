@@ -2271,7 +2271,7 @@ function TutorialScenario(){
 	this.states = {
 		hello: {
 			init: function(){
-				wld.hero.say('Hello!');
+				wld.hero.say('Hello' + '!'.repeat(Math.floor(Math.random() * 3)));
 				wld.hero.controllable = false;
 			},
 			cycle: function(){

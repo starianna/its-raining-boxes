@@ -2368,7 +2368,7 @@ function TutorialScenario(){
 		jumped: {
 			init: function(){
 				wld.hero.say('Nice!');
-				wld.hero.controllable = false;
+				wld.hero.controllable = true;
 			},
 			cycle: function(){
 				if(wld.hero.sayT < 0){
@@ -2416,7 +2416,7 @@ TutorialScenario.prototype = {
 			this.state.cycle(e);
 		}
 
-		wld.hero.x = limit(wld.hero.x, wld.pf.x - wld.pf.w / 2, wld.pf.x + wld.pf.w / 2);
+		//wld.hero.x = limit(wld.hero.x, wld.pf.x - wld.pf.w / 2, wld.pf.x + wld.pf.w / 2);
 	},
 	startState: function(s){
 		(this.state = this.states[s]).init();

@@ -554,17 +554,17 @@ World.prototype = {
 	},
 	spawnBox: function(x, y, d){
 		d = d || rp([{
-			w: Math.floor(Math.random() * 91),
-			h: Math.floor(Math.random() * 91)
+			w: 60,
+			h: 60
 		}, {
-			w: Math.floor(Math.random() * 91),
-			h: Math.floor(Math.random() * 91)
+			w: 90,
+			h: 60
 		},{
-			w: Math.floor(Math.random() * 91),
-			h: Math.floor(Math.random() * 91)
+			w: 90,
+			h: 90
 		},{
-			w: Math.floor(Math.random() * 91),
-			h: Math.floor(Math.random() * 91)
+			w: 40,
+			h: 90
 		}]);
 
 		var b = new Box(this, d.w, d.h);
@@ -2207,7 +2207,7 @@ PlayScenario.prototype = {
 			//this.nextSpawn -= e;
 			if((this.nextSpawn -= e) <= 0){
 				var b = wld.spawnBox();
-				this.nextSpawn = Math.random() * 3;
+				this.nextSpawn = Math.random() * 4;
 
 				if(abs(b.x - wld.hero.x) < (wld.hero.w + b.w) / 2){
 					wld.hero.say('WATCH OUT' + '!'.repeat(Math.floor(Math.random() * 4)), 2);
@@ -2263,7 +2263,7 @@ PlayScenario.prototype = {
 			if(this.nextEvent <= 0){
 				var t = rp(['quake', 'flood', 'boxStorm', 'tilt']);
 				wld[t].call(wld);
-				this.nextEvent = (10 + Math.floor(Math.random() * 30));
+				this.nextEvent = (10 + Math.floor(Math.random() * 31));
 			}
 		}
 	}

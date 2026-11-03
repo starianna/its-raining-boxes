@@ -854,7 +854,7 @@ World.prototype = {
 
 		var xs = [];
 		for(var i = 0 ; i < 1 ; i++){
-			for(var x = 0 ; x < P.w ; x += rd(40, 120)){
+			for(var x = 0 ; x < P.w ; x += rd(75, 150)){
 				xs.push(x);
 			}
 		}
@@ -866,12 +866,12 @@ World.prototype = {
 				return function(){
 					wld.spawnBox(x);
 				}
-			})(xs[i]), t * 333);
+			})(xs[i]), t * 1000);
 		}
 
 		to(function(){
 			Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
-		}, t * 333 + 333);
+		}, t * 1000 + 1000);
 	},
 	addParticle: function(p){
 		wld.particles.push(p);

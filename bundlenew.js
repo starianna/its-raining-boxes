@@ -656,7 +656,7 @@ World.prototype = {
 		tr(0, -~~this.camY);
 
 		if(this.shake){
-			tr(~~rd(-16, 16), ~~rd(-16, 16));
+			tr(~~rd(-Math.floor(Math.random() * 48), Math.floor(Math.random() * 48)), ~~rd(-Math.floor(Math.random() * 48), Math.floor(Math.random() * 48)));
 		}
 
 		sv();

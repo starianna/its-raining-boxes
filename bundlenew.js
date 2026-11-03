@@ -1,3 +1,5 @@
+var dying = true;
+
 var _ = window,
     raf = (function(){
         return  _.requestAnimationFrame       ||
@@ -1473,6 +1475,7 @@ Hero.prototype = xt(Box.prototype, {
 		this.die();
 	},
 	die: function(){
+		if(!dying) return;
 		wld.removeBox(this);
 		this.dead = true;
 

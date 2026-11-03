@@ -894,7 +894,7 @@ World.prototype = {
 					}
 				});
 
-				//wld.boxes.splice(i, 1);
+				wld.boxes.splice(i, 1);
 			}
 		}
 	},
@@ -2272,7 +2272,7 @@ function TutorialScenario(){
 		hello: {
 			init: function(){
 				wld.hero.say('Hello' + '!'.repeat(Math.floor(Math.random() * 3)));
-				wld.hero.controllable = false;
+				wld.hero.controllable = true;
 			},
 			cycle: function(){
 				if(wld.hero.sayT < 0){
@@ -2307,7 +2307,7 @@ function TutorialScenario(){
 				wld.hero.controllable = true;
 			},
 			cycle: function(){
-				if(wld.boxes.length >= 2){
+				if(wld.boxes.length === 2){
 					s.startState('pushed');
 				}else if(wld.hero.sayT < 0){
 					wld.hero.say('Use the arrow ' + (G.touch ? 'b'+'uttons' : 'keys') + ' to move');
@@ -2317,7 +2317,7 @@ function TutorialScenario(){
 		pushed: {
 			init: function(){
 				wld.hero.say('Nice' + '!'.repeat(Math.floor(Math.random() * 2)));
-				wld.hero.controllable = false;
+				wld.hero.controllable = true;
 			},
 			cycle: function(){
 				if(wld.hero.sayT < 0){
@@ -2354,7 +2354,7 @@ function TutorialScenario(){
 				wld.hero.controllable = true;
 
 				for(var i = 0 ; i < s.boxes.length ; i++){
-					s.boxes[i].pushable = false;
+					s.boxes[i].pushable = true;
 				}
 			},
 			cycle: function(){

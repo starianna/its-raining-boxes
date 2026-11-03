@@ -1,4 +1,5 @@
 var dying = true;
+var shakingIntensity = 8;
 
 var _ = window,
     raf = (function(){
@@ -806,14 +807,19 @@ World.prototype = {
 				if(b !== wld.pf && b !== wld.hero){
 					if(quakeType < 0.2) {
 						b.vX = rd(-200, 200);
+						shakingIntensity = 32;
 					} else if(quakeType > 0.2 && quakeType < 0.4) {
 						b.vX = rd(-100, 100);
+						shakingIntensity = 16;
 					} else if(quakeType > 0.4 && quakeType < 0.6) {
 						b.vX = rd(-50, 50);
+						shakingIntensity = 8;
 					} else if(quakeType > 0.6 && quakeType < 0.8) {
 						b.vX = rd(-25, 25);
+						shakingIntensity = 4;
 					} else if(quakeType > 0.8 && quakeType < 1) {
 						b.vX = rd(-10, 10);
+						shakingIntensity = 2;
 					}
 				}
 			});
@@ -829,6 +835,7 @@ World.prototype = {
 		}
 		to(function(){
 			wld.shake = false;
+			shakingIntensity = 8;
 			wld.hero.say('Phe' + 'w'.repeat(1 + Math.floor(Math.random() * 8)));
 		}, t * 1000);
 	},
@@ -2247,15 +2254,9 @@ PlayScenario.prototype = {
 				}
 				wld.waterSpeed = 0;
 			}else{
-				wld.waterSpeed = 2;
+				wld.waterSpeed = 2.5;
 				if(this.t > 60){
-					wld.waterSpeed = 3;
-				}
-				if(this.t > 600){
-					wld.waterSpeed = 4;
-				}
-				if(this.t > 1200){
-					wld.waterSpeed = 5;
+					wld.waterSpeed = 3.5;
 				}
 			}
 

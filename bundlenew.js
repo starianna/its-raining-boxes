@@ -2266,7 +2266,7 @@ PlayScenario.prototype = {
 
 function TutorialScenario(){
 	var s = this,
-		dims = { w: 60, h: 60 };
+		dims = { w: Math.floor(Math.random() * 91), h: Math.floor(Math.random() * 91) };
 	var names = ["Sabrina", "Sophia", "Saphina", "Saraphina"];
 
 	this.states = {
@@ -2340,6 +2340,7 @@ function TutorialScenario(){
 				var xs = [b, b - 70, b + 70, b - 35, b + 35, b];
 				xs.forEach(function(x, i){
 					to(function(){
+						dims = { w: Math.floor(Math.random() * 91), h: Math.floor(Math.random() * 91) };
 						s.boxes.push(wld.spawnBox(x, null, dims));
 					}, i * 400);
 				});

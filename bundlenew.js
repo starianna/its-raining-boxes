@@ -854,7 +854,7 @@ World.prototype = {
 
 		var xs = [];
 		for(var i = 0 ; i < 1 ; i++){
-			for(var x = 0 ; x < P.w ; x += rd(10, 100)){
+			for(var x = 0 ; x < P.w ; x += rd(10, 50)){
 				xs.push(x);
 			}
 		}
@@ -866,7 +866,7 @@ World.prototype = {
 				return function(){
 					wld.spawnBox(x);
 				}
-			})(xs[i]), t * 1000);
+			})(xs[i]), t * 500);
 		}
 
 		to(function(){

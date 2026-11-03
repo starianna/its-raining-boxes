@@ -2202,7 +2202,7 @@ PlayScenario.prototype = {
 			//this.nextSpawn -= e;
 			if((this.nextSpawn -= e) <= 0){
 				var b = wld.spawnBox();
-				this.nextSpawn = Math.random() * 4;
+				this.nextSpawn = Math.random() * 3;
 
 				if(abs(b.x - wld.hero.x) < (wld.hero.w + b.w) / 2){
 					wld.hero.say('WATCH OUT' + '!'.repeat(Math.floor(Math.random() * 4)), 2);

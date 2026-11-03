@@ -854,7 +854,7 @@ World.prototype = {
 
 		var xs = [];
 		for(var i = 0 ; i < 1 ; i++){
-			for(var x = 0 ; x < P.w ; x += rd(10, 50)){
+			for(var x = 0 ; x < P.w ; x += rd(40, 120)){
 				xs.push(x);
 			}
 		}

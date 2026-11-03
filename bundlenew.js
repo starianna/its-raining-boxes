@@ -805,15 +805,15 @@ World.prototype = {
 			wld.boxes.forEach(function(b){
 				if(b !== wld.pf && b !== wld.hero){
 					if(quakeType < 0.2) {
-						b.vX = rd(-500, 500);
-					} else if(quakeType > 0.2 && quakeType < 0.4) {
-						b.vX = rd(-333, 333);
-					} else if(quakeType > 0.4 && quakeType < 0.6) {
 						b.vX = rd(-200, 200);
-					} else if(quakeType > 0.6 && quakeType < 0.8) {
+					} else if(quakeType > 0.2 && quakeType < 0.4) {
 						b.vX = rd(-100, 100);
-					} else if(quakeType > 0.8 && quakeType < 1) {
+					} else if(quakeType > 0.4 && quakeType < 0.6) {
+						b.vX = rd(-50, 50);
+					} else if(quakeType > 0.6 && quakeType < 0.8) {
 						b.vX = rd(-25, 25);
+					} else if(quakeType > 0.8 && quakeType < 1) {
+						b.vX = rd(-10, 10);
 					}
 				}
 			});

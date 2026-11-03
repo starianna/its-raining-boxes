@@ -797,18 +797,20 @@ World.prototype = {
 		wld.hero.setWalkDir(wd);
 	},
 	quake: function(){
+		var quakeType = Math.random();
+		console.log("earthquake");
 		var shake = function(){
 			wld.boxes.forEach(function(b){
 				if(b !== wld.pf && b !== wld.hero){
-					if(Math.random() < 0.2) {
+					if(quakeType < 0.2) {
 						b.vX = rd(-500, 500);
-					} else if(Math.random() > 0.2 && Math.random() < 0.4) {
+					} else if(quakeType > 0.2 && quakeType < 0.4) {
 						b.vX = rd(-333, 333);
-					} else if(Math.random() > 0.4 && Math.random() < 0.6) {
+					} else if(quakeType > 0.4 && quakeType < 0.6) {
 						b.vX = rd(-200, 200);
-					} else if(Math.random() > 0.6 && Math.random() < 0.8) {
+					} else if(quakeType > 0.6 && quakeType < 0.8) {
 						b.vX = rd(-100, 100);
-					} else if(Math.random() > 0.8 && Math.random() < 1) {
+					} else if(quakeType > 0.8 && quakeType < 1) {
 						b.vX = rd(-25, 25);
 					}
 				}

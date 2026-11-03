@@ -552,16 +552,16 @@ World.prototype = {
 	},
 	spawnBox: function(x, y, d){
 		d = d || rp([{
-			w: Math.floor(Math.random() * 61),
-			h: Math.floor(Math.random() * 61)
+			w: Math.floor(Math.random() * 91),
+			h: Math.floor(Math.random() * 91)
 		}, {
 			w: Math.floor(Math.random() * 91),
-			h: Math.floor(Math.random() * 61)
+			h: Math.floor(Math.random() * 91)
 		},{
 			w: Math.floor(Math.random() * 91),
 			h: Math.floor(Math.random() * 91)
 		},{
-			w: Math.floor(Math.random() * 41),
+			w: Math.floor(Math.random() * 91),
 			h: Math.floor(Math.random() * 91)
 		}]);
 
@@ -802,13 +802,13 @@ World.prototype = {
 				if(b !== wld.pf && b !== wld.hero){
 					if(Math.random() < 0.2) {
 						b.vX = rd(-500, 500);
-					} else if(Math.random() < 0.4) {
+					} else if(Math.random() > 0.2 && Math.random() < 0.4) {
 						b.vX = rd(-333, 333);
-					} else if(Math.random() < 0.6) {
+					} else if(Math.random() > 0.4 && Math.random() < 0.6) {
 						b.vX = rd(-200, 200);
-					} else if(Math.random() < 0.8) {
+					} else if(Math.random() > 0.6 && Math.random() < 0.8) {
 						b.vX = rd(-100, 100);
-					} else if(Math.random() < 1) {
+					} else if(Math.random() > 0.8 && Math.random() < 1) {
 						b.vX = rd(-25, 25);
 					}
 				}

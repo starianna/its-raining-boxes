@@ -2267,6 +2267,7 @@ PlayScenario.prototype = {
 function TutorialScenario(){
 	var s = this,
 		dims = { w: 60, h: 60 };
+	var names = ["Sabrina", "Sophia", "Saphina", "Saraphina"];
 
 	this.states = {
 		hello: {
@@ -2282,7 +2283,7 @@ function TutorialScenario(){
 		},
 		name: {
 			init: function(){
-				wld.hero.say('My name is Sabrina');
+				wld.hero.say('My name is ' + names[Math.floor(Math.random() * names.length)]);
 			},
 			cycle: function(){
 				if(wld.hero.sayT < 0){

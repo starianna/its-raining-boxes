@@ -871,7 +871,7 @@ World.prototype = {
 
 		to(function(){
 			Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
-		}, t * 1000 + 1000);
+		}, t * 500 + 500);
 	},
 	addParticle: function(p){
 		wld.particles.push(p);

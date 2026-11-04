@@ -2178,7 +2178,7 @@ function PlayScenario(skip){
 			this.nextSpawn = 24;
 		}else{
 			this.schedule[t] = 'It\'s raining boxes today' + '!'.repeat(Math.floor(Math.random() * 3));
-			this.schedule[t + 7] = 'Water is rising' + '!'.repeat(Math.floor(Math.random() * 3));
+			//this.schedule[t + 7] = 'Water is rising' + '!'.repeat(Math.floor(Math.random() * 3));
 
 			this.nextSpawn = 6;
 

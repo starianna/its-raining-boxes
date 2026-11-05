@@ -1525,7 +1525,7 @@ Hero.prototype = xt(Box.prototype, {
 		navigator.vibrate(500);
 	},
 	say: function(s, d){
-		if(s != this.sayS)
+		//if(s != this.sayS)
 			Easing.tween(this, 'sayY', 0, -80, .5, 0, easeOutBack);
 		this.sayS = s;
 		this.sayT = d || 3;

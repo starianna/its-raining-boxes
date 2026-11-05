@@ -818,7 +818,7 @@ World.prototype = {
 						b.vX = rd(-25, 25);
 						shakingIntensity = 4;
 					} else if(quakeType > 0.8 && quakeType < 1) {
-						b.vX = rd(-Math.floor(Math.random() * 301, Math.floor(Math.random() * 301);
+						b.vX = rd(-Math.floor(Math.random() * 301, Math.floor(Math.random() * 301)));
 						shakingIntensity = (1 + Math.floor(Math.random() * 41));
 					}
 				}

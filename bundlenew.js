@@ -923,13 +923,13 @@ World.prototype = {
 	tilt: function(){
 		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(Math.floor(Math.random() * 5)));
 		try {
+			console.log(testerrorme)
 			var b = wld.balance(),
 				a = M.PI / (10 + Math.random() * 54);
 			if(b < 0) a *= -1;
 			Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
 				Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
 			});
-			console.log(testerrorme)
 		} catch (e) {
 			setTimeout(() => { wld.hero.say('Wait, why is the platform not tilting?') }, 2000);
 			setTimeout(() => { wld.hero.say('Hmm... Looks like something\'s wrong') }, 5000);

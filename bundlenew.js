@@ -922,14 +922,21 @@ World.prototype = {
 	},
 	tilt: function(){
 		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(Math.floor(Math.random() * 5)));
-
-		var b = wld.balance(),
-			a = M.PI / (10 + Math.random() * 54);
-		if(b < 0) a *= -1;
-
-		Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
-			Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
-		});
+		try {
+			var b = wld.balance(),
+				a = M.PI / (10 + Math.random() * 54);
+			if(b < 0) a *= -1;
+			Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
+				Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
+			});
+			console.log(testerrorme)
+		} catch (e) {
+			wld.hero.say('Wait, why is the platform not tilting?');
+			this.schedule[t + 3] = 'Hmm... Looks like something\'s wrong';
+			this.schedule[t + 6] = 'Oh well, at least your game didn\'t freeze, so..';
+			this.schedule[t + 9] = 'yeah, I guess you\'re lucky then';
+			console.warn(e)
+		}
 	}
 };
 

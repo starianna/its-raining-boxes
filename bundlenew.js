@@ -801,7 +801,7 @@ World.prototype = {
 	},
 	quake: function(){
 		var quakeType = Math.random();
-		console.log("earthquake");
+		//console.log("earthquake");
 		var shake = function(){
 			wld.boxes.forEach(function(b){
 				if(b !== wld.pf && b !== wld.hero){
@@ -818,8 +818,8 @@ World.prototype = {
 						b.vX = rd(-25, 25);
 						shakingIntensity = 4;
 					} else if(quakeType > 0.8 && quakeType < 1) {
-						b.vX = rd(-10, 10);
-						shakingIntensity = 2;
+						b.vX = rd(-Math.floor(Math.random() * 301, Math.floor(Math.random() * 301);
+						shakingIntensity = (1 + Math.floor(Math.random() * 41));
 					}
 				}
 			});
@@ -923,7 +923,6 @@ World.prototype = {
 	tilt: function(){
 		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(Math.floor(Math.random() * 5)));
 		try {
-			console.log(testerrorme)
 			var b = wld.balance(),
 				a = M.PI / (10 + Math.random() * 54);
 			if(b < 0) a *= -1;

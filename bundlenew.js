@@ -931,10 +931,10 @@ World.prototype = {
 			});
 			console.log(testerrorme)
 		} catch (e) {
-			wld.hero.say('Wait, why is the platform not tilting?');
-			this.schedule[t + 3] = 'Hmm... Looks like something\'s wrong';
-			this.schedule[t + 6] = 'Oh well, at least your game didn\'t freeze, so..';
-			this.schedule[t + 9] = 'yeah, I guess you\'re lucky then';
+			setTimeout(() => { wld.hero.say('Wait, why is the platform not tilting?') }, 2000);
+			setTimeout(() => { wld.hero.say('Hmm... Looks like something\'s wrong') }, 5000);
+			setTimeout(() => { wld.hero.say('Oh well, at least your game didn\'t freeze, so..') }, 8000);
+			setTimeout(() => { wld.hero.say('yeah, I guess you\'re lucky then') }, 11000);
 			console.warn(e)
 		}
 	}

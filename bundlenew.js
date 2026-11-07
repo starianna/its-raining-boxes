@@ -2195,7 +2195,7 @@ function PlayScenario(skip){
 			s = 15;
 		}
 	}
-	this.nextScoreIncrease = this.waterDelay = this.nextSpawn + 7;
+	this.nextScoreIncrease = this.waterDelay = this.nextSpawn;
 
 	for(var i = 0 ; i < this.gimmicks[i] ; i++, s += 15){
 		for(var j = 0 ; j < this.gimmicks[i][j] ; j++, s += 3){

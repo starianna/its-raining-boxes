@@ -1,3 +1,7 @@
+window.onbeforeunload = function(e) {
+	e.preventDefault();
+}
+
 var dying = true;
 var shakingIntensity = 8;
 

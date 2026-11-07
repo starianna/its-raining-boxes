@@ -2123,7 +2123,7 @@ Button.prototype = {
 
 function PlayScenario(skip){
 	this.nextSpawn = 6;
-	this.nextScoreIncrease = this.waterDelay = 10;
+	this.nextScoreIncrease = this.waterDelay = 0;
 	this.nextEvent = 8;
 
 	this.flooding = false;
@@ -2184,7 +2184,7 @@ function PlayScenario(skip){
 			this.nextSpawn = 24;
 		}else{
 			this.schedule[t] = 'It\'s raining boxes today' + '!'.repeat(Math.floor(Math.random() * 3));
-			//this.schedule[t + 7] = 'Water is rising' + '!'.repeat(Math.floor(Math.random() * 3));
+			this.schedule[t + 7] = 'Water is rising' + '!'.repeat(Math.floor(Math.random() * 3));
 
 			this.nextSpawn = 6;
 
@@ -2256,7 +2256,7 @@ PlayScenario.prototype = {
 			if(this.waterDelay > 0){
 				this.waterDelay -= e;
 				if(this.waterDelay <= 0){
-					wld.hero.say('Water is rising' + '!'.repeat(Math.floor(Math.random() * 3)));
+					//wld.hero.say('Water is rising' + '!'.repeat(Math.floor(Math.random() * 3)));
 				}
 				wld.waterSpeed = 0;
 			}else{
@@ -2270,7 +2270,7 @@ PlayScenario.prototype = {
 			if(this.nextEvent <= 0){
 				var t = rp(['quake', 'flood', 'boxStorm', 'tilt']);
 				wld[t].call(wld);
-				this.nextEvent = (10 + Math.floor(Math.random() * 31));
+				this.nextEvent = Math.floor(Math.random() * 41);
 			}
 		}
 	}

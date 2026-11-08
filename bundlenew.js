@@ -851,8 +851,8 @@ World.prototype = {
 			wld.flooding = true;
 		}, 2000);
 		to(function(){
-			wld.flooding = false;
 			floodingSpeed -= 5;
+			if(floodingSpeed < 1) wld.flooding = false;
 			Math.random() < 0.5 ? wld.hero.say('Flood\'s over') : wld.hero.say('Flood is over');
 		}, 8000);
 	},
@@ -2135,7 +2135,7 @@ function PlayScenario(skip){
 
 	this.flooding = false;
 
-	this.topWorldTimer = 40;
+	this.topWorldTimer = 0;
 
 	wld.hero.controllable = true;
 
@@ -2246,7 +2246,7 @@ PlayScenario.prototype = {
 				}
 				if(!higher){
 					wld.hero.say('I\'m on top of the w' + 'o'.repeat(1 + Math.floor(Math.random() * 10)) + 'rld' + '!'.repeat(Math.floor(Math.random() * 5)));
-					this.topWorldTimer = (20 + Math.floor(Math.random() * 40));
+					this.topWorldTimer = (10 + Math.floor(Math.random() * 50));
 				}
 			}
 

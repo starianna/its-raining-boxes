@@ -2135,7 +2135,7 @@ function PlayScenario(skip){
 
 	this.flooding = false;
 
-	this.topWorldTimer = 0;
+	this.topWorldTimer = 10;
 
 	wld.hero.controllable = true;
 

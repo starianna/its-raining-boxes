@@ -4,6 +4,7 @@ window.onbeforeunload = function(e) {
 
 var dying = true;
 var shakingIntensity = 8;
+var floodingSpeed = 0;
 
 var _ = window,
     raf = (function(){
@@ -603,7 +604,7 @@ World.prototype = {
 		this.t += e;
 
 		if(!this.hero.dead)
-			this.waterY -= e * this.waterSpeed * (this.flooding ? 5 : 1);
+			this.waterY -= e * this.waterSpeed * (this.flooding ? floodingSpeed : 1);
 
 		//this.nextSort -= e;
 		if((this.nextSort -= e) <= 0){
@@ -846,10 +847,12 @@ World.prototype = {
 	flood: function(){
 		wld.hero.say('FLOOD' + '!'.repeat(Math.floor(Math.random() * 5)));
 		to(function(){
+			floodingSpeed += 5;
 			wld.flooding = true;
 		}, 2000);
 		to(function(){
 			wld.flooding = false;
+			floodingSpeed -= 5;
 			Math.random() < 0.5 ? wld.hero.say('Flood\'s over') : wld.hero.say('Flood is over');
 		}, 8000);
 	},

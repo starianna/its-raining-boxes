@@ -5,6 +5,7 @@ window.onbeforeunload = function(e) {
 var dying = true;
 var shakingIntensity = 8;
 var floodingSpeed = 0;
+var rainSize = 0.5;
 
 var _ = window,
     raf = (function(){
@@ -713,7 +714,7 @@ World.prototype = {
 		tr(-P.w / 2, -P.h / 2);
 
 		fs('#fff');
-		alpha(this.flooding ? 1 : .5);
+		alpha(this.flooding ? rainSize : .5);
 		for(var i = 0 ; i < this.drops.length ; i++){
 			this.drops[i].y += e * (this.flooding ? 2000 : 1000);
 			if(this.drops[i].y > P.h){
@@ -848,12 +849,26 @@ World.prototype = {
 		wld.hero.say('FLOOD' + '!'.repeat(Math.floor(Math.random() * 5)));
 		to(function(){
 			floodingSpeed += 5;
+			if(rainSize < 0.5) {
+				rainSize += 0.5;
+			} else {
+				rainSize *= 2;
+			}
 			wld.flooding = true;
 		}, 2000);
 		to(function(){
 			floodingSpeed -= 5;
 			if(floodingSpeed < 1) wld.flooding = false;
-			Math.random() < 0.5 ? wld.hero.say('Flood\'s over') : wld.hero.say('Flood is over');
+			if(rainSize) {
+				rainSize *= 0.5;
+			} else {
+				rainSize = 0.5;
+			}
+			if(floodingSpeed < 1) {
+				Math.random() < 0.5 ? wld.hero.say('Flood\'s over') : wld.hero.say('Flood is over');
+			} else {
+				wld.hero.say('Let this flash flood stop already' + '!'.repeat(1 + Math.floor(Math.random() * 6)));
+			}
 		}, 8000);
 	},
 	boxStorm: function(){

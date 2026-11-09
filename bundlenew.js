@@ -1128,8 +1128,8 @@ Box.prototype = {
 		if(this.fall){
 
 			if(!this.liesOn){
-				this.y += e * this.vY;
-				this.vY += e * P.g;
+				this.y += e * (this.vY * 0.5);
+				this.vY += e * (P.g * 0.5);
 
 				if(this.vY > 0 && !this.decoration){
 					if(this.y > P.h){
@@ -1144,7 +1144,7 @@ Box.prototype = {
 			}else{
 				b = this.liesOn;
 				if(abs(b.x - this.x) > (this.w + b.w) / 2
-					|| abs(b.y - this.y) > (this.h + b.h) / 8 + 8 // 2 + 2
+					|| abs(b.y - this.y) > (this.h + b.h) / 2 + 2
 					|| !b.exists){
 					this.free();
 				}

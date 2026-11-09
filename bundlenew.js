@@ -1234,7 +1234,11 @@ Box.prototype = {
 			rs();
 		}
 
-		fs('#f00'); // #fff
+		if(boxFallingAboveHero && platformTilting) {
+			fs('#f00'); // #fff
+		} else {
+			fs('#fff');
+		}
 		fr(this.x - this.w / 2, this.y - this.h / 2 + this.yOffset, this.w, this.h);
 
 		// Announcement

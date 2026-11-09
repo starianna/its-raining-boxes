@@ -1905,13 +1905,17 @@ var drawText = function(r, t, c, x, y, s, b){
 	r.sc(s, s);
 
 	x = 0;
-	for(var i = 0 ; i < t.length ; i++){
-		var ch = t.charAt(i),
-			img = Font[c][ch];
-		if(img){
-			r.di(img, x, 0);
-			x += img.width;
+	try {
+		for(var i = 0 ; i < t.length ; i++){
+			var ch = t.charAt(i),
+				img = Font[c][ch];
+			if(img){
+				r.di(img, x, 0);
+				x += img.width;
+			}
 		}
+	} catch (e) {
+		alert("Failed to render font");
 	}
 	r.rs();
 };

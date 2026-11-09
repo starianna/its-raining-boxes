@@ -577,7 +577,7 @@ World.prototype = {
 
 		var b = new Box(this, d.w, d.h);
 		b.x = x || this.idealSpawnX(d.w);
-		b.y = y || this.camY - 20; // 100
+		b.y = y || this.camY - 100; // 100
 		this.boxes.push(b);
 
 		return b;
@@ -1144,7 +1144,7 @@ Box.prototype = {
 			}else{
 				b = this.liesOn;
 				if(abs(b.x - this.x) > (this.w + b.w) / 2
-					|| abs(b.y - this.y) > (this.h + b.h) / 2 + 2
+					|| abs(b.y - this.y) > (this.h + b.h) / 8 + 8 // 2 + 2
 					|| !b.exists){
 					this.free();
 				}

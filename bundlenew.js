@@ -6,6 +6,7 @@ var dying = true;
 var shakingIntensity = 8;
 var floodingSpeed = 0;
 var rainSize = 0.5;
+var concurrentBoxStorms = 0;
 
 var _ = window,
     raf = (function(){
@@ -714,7 +715,7 @@ World.prototype = {
 		tr(-P.w / 2, -P.h / 2);
 
 		fs('#fff');
-		alpha(this.flooding ? rainSize : .5);
+		alpha(this.flooding ? 1 : .5);
 		for(var i = 0 ; i < this.drops.length ; i++){
 			this.drops[i].y += e * (this.flooding ? 2000 : 1000);
 			if(this.drops[i].y > P.h){
@@ -873,7 +874,7 @@ World.prototype = {
 	},
 	boxStorm: function(){
 		wld.hero.say('BOX ST' + 'O'.repeat(1 + Math.floor(Math.random() * 6)) + 'RM' + '!'.repeat(Math.floor(Math.random() * 5)));
-
+		concurrentBoxStorms++;
 		var xs = [];
 		for(var i = 0 ; i < 1 ; i++){
 			for(var x = 0 ; x < P.w ; x += rd(40, 80)){
@@ -892,7 +893,12 @@ World.prototype = {
 		}
 
 		to(function(){
-			Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
+			concurrentBoxStorms--;
+			if(concurrentBoxStorms < 1) {
+				Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
+			} else {
+				wld.hero.say('This wave of constant falling boxes must end soon'.repeat(Math.floor(Math.random() * 2)));
+			}
 		}, t * 1000 + 1000);
 	},
 	addParticle: function(p){

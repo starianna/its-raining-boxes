@@ -842,8 +842,18 @@ World.prototype = {
 		}
 		to(function(){
 			wld.shake = false;
+			if(shakingIntensity == 32) {
+				wld.hero.say('Phe' + 'w'.repeat(5 + Math.floor(Math.random() * 3)));
+			} else if(shakingIntensity == 16) {
+				wld.hero.say('Phe' + 'w'.repeat(3 + Math.floor(Math.random() * 5)));
+			} else if(shakingIntensity == 8) {
+				wld.hero.say('Phe' + 'w'.repeat(2 + Math.floor(Math.random() * 4)));
+			} else if(shakingIntensity == 4) {
+				wld.hero.say('Phe' + 'w'.repeat(1 + Math.floor(Math.random() * 2)));
+			} else {
+				wld.hero.say('Whe' + 'w'.repeat(1 + Math.floor(Math.random() * 3)) + ', this shaking almost killed me');
+			}
 			shakingIntensity = 8;
-			wld.hero.say('Phe' + 'w'.repeat(1 + Math.floor(Math.random() * 8)));
 		}, t * 1000);
 	},
 	flood: function(){
@@ -897,7 +907,7 @@ World.prototype = {
 			if(concurrentBoxStorms < 1) {
 				Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
 			} else {
-				wld.hero.say('This wave of constant falling boxes must end soon'.repeat(Math.floor(Math.random() * 2)));
+				wld.hero.say('This wave of constantly falling boxes must end soon'.repeat(Math.floor(Math.random() * 2)));
 			}
 		}, t * 1000 + 1000);
 	},

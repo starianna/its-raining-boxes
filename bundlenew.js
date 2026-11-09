@@ -1234,7 +1234,7 @@ Box.prototype = {
 			rs();
 		}
 
-		fs('#ffffff');
+		fs('#f00'); // #fff
 		fr(this.x - this.w / 2, this.y - this.h / 2 + this.yOffset, this.w, this.h);
 
 		// Announcement
@@ -1459,21 +1459,6 @@ Hero.prototype = xt(Box.prototype, {
 
 			fs('#fff');
 			ft(this.sayS, this.w / 2, this.sayY);
-		}
-
-		if(boxFallingAboveHero && platformTilting){
-			fs('#fff');
-			fr(P.w / 2, -10, 4, -300);
-
-			c.textAlign = 'center';
-			c.textBaseline = 'middle';
-			c.font = '64pt Roboto';
-
-			fs('#000');
-			ft("WATCH OUT", P.w / 2 + 1, 200);
-
-			fs('#fff');
-			ft("WATCH OUT", P.w / 2, 200);
 		}
 
 		//if(this.dir === -1){

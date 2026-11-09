@@ -9,6 +9,7 @@ var rainSize = 2;
 var concurrentBoxStorms = 0;
 var boxFallingSpeed = 1;
 var platformTilting = false;
+var boxFallingAboveHero = false;
 
 var _ = window,
     raf = (function(){
@@ -660,7 +661,10 @@ World.prototype = {
 			var w = textWidth(s);
 			alpha(.2);
 			drawText(c, s, P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
-			drawText(c, 'watch out', P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
+			if(boxFallingAboveHero && platformTilting) {
+				alpha(.5);
+				drawText(c, 'watch out', P.inverted ? 'black' : 'white', (P.w - w) / 1.5, 300);
+			}
 			alpha(1);
 		}
 
@@ -964,6 +968,9 @@ World.prototype = {
 			Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
 				Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
 			});
+			setTimeout(() => {
+				platformTilting = false;
+			}, 4000);
 		} catch (e) {
 			setTimeout(() => { wld.hero.say('Wait, why is the platform not tilting?') }, 2000);
 			setTimeout(() => { wld.hero.say('Hmm... Looks like something\'s wrong') }, 5000);
@@ -2263,11 +2270,10 @@ PlayScenario.prototype = {
 
 				if(abs(b.x - wld.hero.x) < (wld.hero.w + b.w) / 2){
 					wld.hero.say('WATCH OUT' + '!'.repeat(Math.floor(Math.random() * 4)), 2);
-					if(platformTilting) {
-						alpha(.2);
-						drawText(c, "watch out", P.inverted ? 'black' : 'white', 200, 500);
-						alpha(1);
-					}
+					boxFallingAboveHero = true;
+					setTimeout(() => {
+						boxFallingAboveHero = false;
+					}, 3000);
 				}
 			}
 

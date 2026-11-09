@@ -577,7 +577,7 @@ World.prototype = {
 
 		var b = new Box(this, d.w, d.h);
 		b.x = x || this.idealSpawnX(d.w);
-		b.y = y || this.camY - 100;
+		b.y = y || this.camY - 20; // 100
 		this.boxes.push(b);
 
 		return b;

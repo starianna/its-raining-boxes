@@ -1463,17 +1463,17 @@ Hero.prototype = xt(Box.prototype, {
 
 		if(boxFallingAboveHero && platformTilting){
 			fs('#fff');
-			fr(this.w / 2, -10, 4, this.sayY + 30);
+			fr(P.w / 2, -10, 4, 300);
 
 			c.textAlign = 'center';
 			c.textBaseline = 'middle';
 			c.font = '64pt Roboto';
 
 			fs('#000');
-			ft("WATCH OUT", this.w / 2 + 1, this.sayY + 1);
+			ft("WATCH OUT", P.w / 2 + 1, this.sayY + 1);
 
 			fs('#fff');
-			ft("WATCH OUT", this.w / 2, this.sayY);
+			ft("WATCH OUT", P.w / 2, this.sayY);
 		}
 
 		//if(this.dir === -1){

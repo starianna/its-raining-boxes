@@ -970,7 +970,7 @@ World.prototype = {
 			});
 			setTimeout(() => {
 				platformTilting = false;
-			}, 4000);
+			}, 5000);
 		} catch (e) {
 			setTimeout(() => { wld.hero.say('Wait, why is the platform not tilting?') }, 2000);
 			setTimeout(() => { wld.hero.say('Hmm... Looks like something\'s wrong') }, 5000);

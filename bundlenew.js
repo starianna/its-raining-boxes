@@ -1559,7 +1559,11 @@ Hero.prototype = xt(Box.prototype, {
 	say: function(s, d){
 		if(s != this.sayS)
 			Easing.tween(this, 'sayY', 0, -80, .5, 0, easeOutBack);
-		this.sayS = s;
+		if(s) {
+			this.sayS = s;
+		} else {
+			this.sayS = "Um.. What was I supposed to say?";
+		}
 		this.sayT = d || 3;
 	},
 	setWalkDir: function(d){

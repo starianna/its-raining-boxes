@@ -978,7 +978,7 @@ World.prototype = {
 				});
 				setTimeout(() => {
 					platformTilting = false;
-				}, 25000);
+				}, 30000);
 			}
 		} catch (e) {
 			setTimeout(() => { wld.hero.say('Wait, why is the platform not tilting?') }, 2000);
@@ -1248,7 +1248,7 @@ Box.prototype = {
 		}
 
 		if(boxFallingAboveHero && platformTilting) {
-			fs('#f00'); // #fff
+			fs('#ff9191'); // #fff
 		} else {
 			fs('#fff');
 		}

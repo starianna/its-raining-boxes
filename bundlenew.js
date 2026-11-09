@@ -661,10 +661,6 @@ World.prototype = {
 			var w = textWidth(s);
 			alpha(.2);
 			drawText(c, s, P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
-			if(boxFallingAboveHero && platformTilting) {
-				alpha(.5);
-				drawText(c, 'watch out', P.inverted ? 'firebrick' : 'red', (P.w - w) / 3, 200);
-			}
 			alpha(1);
 		}
 
@@ -1463,6 +1459,21 @@ Hero.prototype = xt(Box.prototype, {
 
 			fs('#fff');
 			ft(this.sayS, this.w / 2, this.sayY);
+		}
+
+		if(boxFallingAboveHero && platformTilting){
+			fs('#fff');
+			fr(this.w / 2, -10, 4, this.sayY + 30);
+
+			c.textAlign = 'center';
+			c.textBaseline = 'middle';
+			c.font = '64pt Roboto';
+
+			fs('#000');
+			ft("WATCH OUT", this.w / 2 + 1, this.sayY + 1);
+
+			fs('#fff');
+			ft("WATCH OUT", this.w / 2, this.sayY);
 		}
 
 		//if(this.dir === -1){

@@ -958,15 +958,27 @@ World.prototype = {
 		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(Math.floor(Math.random() * 5)));
 		try {
 			platformTilting = true;
-			var b = wld.balance(),
-				a = M.PI / (10 + Math.random() * 54);
-			if(b < 0) a *= -1;
-			Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
-				Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
-			});
-			setTimeout(() => {
-				platformTilting = false;
-			}, 5000);
+			if(Math.random() > 0.1) {
+				var b = wld.balance(),
+					a = M.PI / (10 + Math.random() * 54);
+				if(b < 0) a *= -1;
+				Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
+					Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
+				});
+				setTimeout(() => {
+					platformTilting = false;
+				}, 5000);
+			} else {
+				var b = wld.balance(),
+					a = M.PI / (64 + Math.random() * 65);
+				if(b < 0) a *= -0.2;
+				Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
+					Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
+				});
+				setTimeout(() => {
+					platformTilting = false;
+				}, 25000);
+			}
 		} catch (e) {
 			setTimeout(() => { wld.hero.say('Wait, why is the platform not tilting?') }, 2000);
 			setTimeout(() => { wld.hero.say('Hmm... Looks like something\'s wrong') }, 5000);
@@ -1572,7 +1584,13 @@ Hero.prototype = xt(Box.prototype, {
 		if(s) {
 			this.sayS = s;
 		} else {
-			this.sayS = "Um.. What was I supposed to say?";
+			this.sayS = "Uh.. What was I supposed to say?";
+			setTimeout(() => {
+				this.sayS = "I guess I forgot, haha";
+			}, 3000);
+			setTimeout(() => {
+				this.sayS = "There's so much going on maybe that's why";
+			}, 3000);
 		}
 		this.sayT = d || 3;
 	},

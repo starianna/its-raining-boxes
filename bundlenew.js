@@ -7,6 +7,7 @@ var shakingIntensity = 8;
 var floodingSpeed = 0;
 var rainSize = 2;
 var concurrentBoxStorms = 0;
+var boxFallingSpeed = 1;
 
 var _ = window,
     raf = (function(){
@@ -579,6 +580,7 @@ World.prototype = {
 		b.x = x || this.idealSpawnX(d.w);
 		b.y = y || this.camY - 100; // 100
 		this.boxes.push(b);
+		boxFallingSpeed = 0.5 + Math.random() * 0.5;
 
 		return b;
 	},
@@ -1128,8 +1130,8 @@ Box.prototype = {
 		if(this.fall){
 
 			if(!this.liesOn){
-				this.y += e * this.vY;
-				this.vY += e * P.g;
+				this.y += e * (this.vY * boxFallingSpeed);
+				this.vY += e * (P.g * boxFallingSpeed);
 
 				if(this.vY > 0 && !this.decoration){
 					if(this.y > P.h){
@@ -1393,7 +1395,7 @@ Hero.prototype = xt(Box.prototype, {
 		}
 
 		this.dir = this.walkDir || this.dir;
-		this.x += this.dir * 500 * this.vXFactor * e;
+		this.x += this.dir * 300 * this.vXFactor * e;
 		this.walkT += abs(this.vXFactor) * e;
 		if(!this.liesOn) this.walkT += e;
 		this.walking = this.walkDir !== 0;
@@ -1510,7 +1512,7 @@ Hero.prototype = xt(Box.prototype, {
 		if(this.liesOn && this.controllable){
 			this.free();
 			this.liesOn = false;
-			this.vY = -400;
+			this.vY = -400 * boxFallingSpeed;
 			play('jump');
 		}
 	},

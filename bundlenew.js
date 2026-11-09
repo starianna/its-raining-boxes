@@ -843,7 +843,7 @@ World.prototype = {
 		to(function(){
 			wld.shake = false;
 			if(shakingIntensity == 32) {
-				wld.hero.say('Phe' + 'w'.repeat(5 + Math.floor(Math.random() * 3)));
+				wld.hero.say('Phe' + 'w'.repeat(5 + Math.floor(Math.random() * 7)));
 			} else if(shakingIntensity == 16) {
 				wld.hero.say('Phe' + 'w'.repeat(3 + Math.floor(Math.random() * 5)));
 			} else if(shakingIntensity == 8) {

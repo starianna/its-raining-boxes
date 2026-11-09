@@ -663,7 +663,7 @@ World.prototype = {
 			drawText(c, s, P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
 			if(boxFallingAboveHero && platformTilting) {
 				alpha(.5);
-				drawText(c, 'watch out', P.inverted ? '#990000' : '#ff0000', (P.w - w) / 3, 200);
+				drawText(c, 'watch out', P.inverted ? 'firebrick' : 'red', (P.w - w) / 3, 200);
 			}
 			alpha(1);
 		}

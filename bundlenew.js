@@ -2263,7 +2263,9 @@ PlayScenario.prototype = {
 				if(abs(b.x - wld.hero.x) < (wld.hero.w + b.w) / 2){
 					wld.hero.say('WATCH OUT' + '!'.repeat(Math.floor(Math.random() * 4)), 2);
 					if(platformTilting) {
-						drawText(c, "watch out", P.inverted ? 'black' : 'white', 2, 500);
+						alpha(.2);
+						drawText(c, "watch out", P.inverted ? 'black' : 'white', 200, 500);
+						alpha(1);
 					}
 				}
 			}

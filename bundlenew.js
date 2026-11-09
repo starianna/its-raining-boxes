@@ -1128,7 +1128,7 @@ Box.prototype = {
 		if(this.fall){
 
 			if(!this.liesOn){
-				this.y += e * (this.vY * 0.5);
+				this.y += e * this.vY;
 				this.vY += e * P.g;
 
 				if(this.vY > 0 && !this.decoration){
@@ -1393,7 +1393,7 @@ Hero.prototype = xt(Box.prototype, {
 		}
 
 		this.dir = this.walkDir || this.dir;
-		this.x += this.dir * 300 * this.vXFactor * e;
+		this.x += this.dir * 500 * this.vXFactor * e;
 		this.walkT += abs(this.vXFactor) * e;
 		if(!this.liesOn) this.walkT += e;
 		this.walking = this.walkDir !== 0;

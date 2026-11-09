@@ -847,7 +847,7 @@ World.prototype = {
 			} else if(shakingIntensity == 16) {
 				wld.hero.say('Phe' + 'w'.repeat(3 + Math.floor(Math.random() * 5)));
 			} else if(shakingIntensity == 8) {
-				wld.hero.say('Phe' + 'w'.repeat(2 + Math.floor(Math.random() * 4)));
+				wld.hero.say('Phe' + 'w'.repeat(2 + Math.floor(Math.random() * 3)));
 			} else if(shakingIntensity == 4) {
 				wld.hero.say('Phe' + 'w'.repeat(1 + Math.floor(Math.random() * 2)));
 			} else {

@@ -1129,7 +1129,7 @@ Box.prototype = {
 
 			if(!this.liesOn){
 				this.y += e * (this.vY * 0.5);
-				this.vY += e * (P.g * 0.5);
+				this.vY += e * P.g;
 
 				if(this.vY > 0 && !this.decoration){
 					if(this.y > P.h){

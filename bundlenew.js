@@ -722,7 +722,7 @@ World.prototype = {
 				this.drops[i].x = rd(P.w);
 				this.drops[i].y = rd(-600, -100);
 			}
-			fr(this.drops[i].x, this.drops[i].y, 2, 40);
+			fr(this.drops[i].x, this.drops[i].y, 20 /* 2 */, 40);
 		}
 
 		rs();

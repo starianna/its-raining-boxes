@@ -971,9 +971,9 @@ World.prototype = {
 			} else {
 				var b = wld.balance(),
 					a = M.PI / (64 + Math.random() * 65);
-				if(b < 0) a *= -0.2;
+				if(b < 0) a *= -1;
 				Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
-					Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
+					Easing.tween(wld, 'angle', wld.angle, 0, 1, 10);
 				});
 				setTimeout(() => {
 					platformTilting = false;

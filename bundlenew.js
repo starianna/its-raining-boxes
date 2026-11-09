@@ -8,6 +8,7 @@ var floodingSpeed = 0;
 var rainSize = 2;
 var concurrentBoxStorms = 0;
 var boxFallingSpeed = 1;
+var platformTilting = false;
 
 var _ = window,
     raf = (function(){
@@ -955,6 +956,7 @@ World.prototype = {
 	tilt: function(){
 		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(Math.floor(Math.random() * 5)));
 		try {
+			platformTilting = true;
 			var b = wld.balance(),
 				a = M.PI / (10 + Math.random() * 54);
 			if(b < 0) a *= -1;
@@ -2260,6 +2262,9 @@ PlayScenario.prototype = {
 
 				if(abs(b.x - wld.hero.x) < (wld.hero.w + b.w) / 2){
 					wld.hero.say('WATCH OUT' + '!'.repeat(Math.floor(Math.random() * 4)), 2);
+					if(platformTilting) {
+						drawText(c, "watch out", P.inverted ? 'black' : 'white', (P.w - w) / 2, 500);
+					}
 				}
 			}
 

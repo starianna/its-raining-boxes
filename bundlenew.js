@@ -660,6 +660,7 @@ World.prototype = {
 			var w = textWidth(s);
 			alpha(.2);
 			drawText(c, s, P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
+			drawText(c, 'watch out', P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
 			alpha(1);
 		}
 

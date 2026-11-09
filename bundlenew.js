@@ -1512,7 +1512,7 @@ Hero.prototype = xt(Box.prototype, {
 		if(this.liesOn && this.controllable){
 			this.free();
 			this.liesOn = false;
-			this.vY = Math.max(-400 / boxFallingSpeed, -400;
+			this.vY = Math.max(-400 / boxFallingSpeed, -400);
 			play('jump');
 		}
 	},

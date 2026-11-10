@@ -578,7 +578,7 @@ World.prototype = {
 			h: 90
 		},{
 			w: 60,
-			h: 33
+			h: 32
 		}]);
 
 		var b = new Box(this, d.w, d.h);

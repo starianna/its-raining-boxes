@@ -576,13 +576,16 @@ World.prototype = {
 		},{
 			w: 40,
 			h: 90
+		},{
+			w: 60,
+			h: 20
 		}]);
 
 		var b = new Box(this, d.w, d.h);
 		b.x = x || this.idealSpawnX(d.w);
 		b.y = y || this.camY - 100; // 100
 		this.boxes.push(b);
-		boxFallingSpeed = 0.5 + Math.random() * 0.5;
+		boxFallingSpeed = 0.75 + Math.random() * 0.25;
 
 		return b;
 	},

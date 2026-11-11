@@ -816,6 +816,7 @@ World.prototype = {
 	},
 	quake: function(){
 		var quakeType = Math.random();
+		var quakeType2 = Math.random();
 		//console.log("earthquake");
 		var shake = function(){
 			wld.boxes.forEach(function(b){
@@ -833,7 +834,15 @@ World.prototype = {
 						b.vX = rd(-25, 25);
 						shakingIntensity = 4;
 					} else if(quakeType > 0.8 && quakeType < 1) {
-						b.vX = rd(-Math.floor(Math.random() * 301, Math.floor(Math.random() * 301)));
+						if(quakeType2 < 0.25) {
+							b.vX = rd(-Math.floor(Math.random() * 301, Math.floor(Math.random() * 301)));
+						} else if(quakeType2 > 0.25 && quakeType2 < 0.5) {
+							b.vX = rd(Math.floor(Math.random() * 301, -Math.floor(Math.random() * 301)));
+						} else if(quakeType2 > 0.5 && quakeType2 < 0.75) {
+							b.vX = rd(-Math.floor(Math.random() * 301, -Math.floor(Math.random() * 301)));
+						} else if(quakeType2 > 0.75) {
+							b.vX = rd(Math.floor(Math.random() * 301, Math.floor(Math.random() * 301)));
+						}
 						shakingIntensity = (1 + Math.floor(Math.random() * 41));
 					}
 				}
@@ -1449,7 +1458,7 @@ Hero.prototype = xt(Box.prototype, {
 			heroIsCold = true;
 			if(Math.random() < 0.05) this.say('Cold cold cooooold!!!');
 			if(this.y > wld.waterY + 40){
-				this.say('WATER\'S TOO COOOOOOOOOOOOLD!!!!!!!! HELP!!!!! I AM GONNA DIE!!!!!!');
+				this.say('TOO COOOOOOOOOOOOLD!!!!!!!! I\'M GONNA DIE!!!!!!');
 			}
 			if(this.y > wld.waterY + 50){
 				this.die();
@@ -1479,14 +1488,22 @@ Hero.prototype = xt(Box.prototype, {
 			c.font = '16pt Roboto';
 
 			if(!heroIsCold) {
-				fs('#000');
+				if(!boxFallingAboveHero) {
+					fs('#000');
+				} else {
+					fs('#8b0000');
+				}
 			} else {
 				fs('#191970');
 			}
 			ft(this.sayS, this.w / 2 + 1, this.sayY + 1);
 
 			if(!heroIsCold) {
-				fs('#fff');
+				if(!boxFallingAboveHero) {
+					fs('#fff');
+				} else {
+					fs('#f08080');
+				}
 			} else {
 				fs('#afeeee');
 			}

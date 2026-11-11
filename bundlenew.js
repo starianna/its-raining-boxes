@@ -10,6 +10,7 @@ var concurrentBoxStorms = 0;
 var boxFallingSpeed = 1;
 var platformTilting = false;
 var boxFallingAboveHero = false;
+var heroIsCold = false;
 
 var _ = window,
     raf = (function(){
@@ -1442,16 +1443,19 @@ Hero.prototype = xt(Box.prototype, {
 			}
 		});
 		if(this.y > wld.waterY - 25){
-			if(Math.random() < 0.0025) this.say('It feels chilly..');
+			if(Math.random() < 0.0075) this.say('Oh no, water is catching up to me');
 		}
 		if(this.y > wld.waterY){
-			this.say('Cold cold cooooold!!!');
+			heroIsCold = true;
+			if(Math.random() < 0.05) this.say('Cold cold cooooold!!!');
 			if(this.y > wld.waterY + 40){
 				this.say('WATER\'S TOO COOOOOOOOOOOOLD!!!!!!!! HELP!!!!! I AM GONNA DIE!!!!!!');
 			}
 			if(this.y > wld.waterY + 50){
 				this.die();
 			}
+		} else {
+			heroIsCold = false;
 		}
 	},
 	landingCondition: function(b){
@@ -1474,10 +1478,18 @@ Hero.prototype = xt(Box.prototype, {
 			c.textBaseline = 'middle';
 			c.font = '16pt Roboto';
 
-			fs('#000');
+			if(!heroIsCold) {
+				fs('#000');
+			} else {
+				fs('#191970');
+			}
 			ft(this.sayS, this.w / 2 + 1, this.sayY + 1);
 
-			fs('#fff');
+			if(!heroIsCold) {
+				fs('#fff');
+			} else {
+				fs('#afeeee');
+			}
 			ft(this.sayS, this.w / 2, this.sayY);
 		}
 

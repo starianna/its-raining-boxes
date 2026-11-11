@@ -1452,7 +1452,7 @@ Hero.prototype = xt(Box.prototype, {
 			}
 		});
 		if(this.y > wld.waterY - 25){
-			if(Math.random() < 0.0075) this.say('Oh no, water is catching up to me');
+			if(Math.random() < 0.0075 && !heroIsCold) this.say('Oh no, water is catching up to me');
 		}
 		if(this.y > wld.waterY){
 			heroIsCold = true;

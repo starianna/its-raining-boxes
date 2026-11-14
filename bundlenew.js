@@ -908,7 +908,7 @@ World.prototype = {
 				return function(){
 					wld.spawnBox(x);
 				}
-			})(xs[i]), t * 1000);
+			})(xs[i]), t * 1050);
 		}
 
 		to(function(){
@@ -916,7 +916,7 @@ World.prototype = {
 			if(concurrentBoxStorms < 1) {
 				Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
 			} else {
-				wld.hero.say('This wave of constantly falling boxes must end soon'.repeat(Math.floor(Math.random() * 2)));
+				wld.hero.say('This wave of constantly falling boxes must end soon' + '!'.repeat(Math.floor(Math.random() * 2)));
 			}
 		}, t * 1000 + 1000);
 	},

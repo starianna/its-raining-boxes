@@ -625,7 +625,7 @@ World.prototype = {
 		//this.nextThunder -= e;
 		if((this.nextThunder -= e) <= 0){
 			this.thunder();
-			this.nextThunder = 15;
+			this.nextThunder = Math.floor(Math.random() * 61);
 		}
 
 		if(this.angle !== 0){

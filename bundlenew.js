@@ -11,6 +11,11 @@ var boxFallingSpeed = 1;
 var platformTilting = false;
 var boxFallingAboveHero = false;
 var heroIsCold = false;
+var quakeExclams = 0;
+var floodExclams = 0;
+var stormExclams = 0;
+var OsInStorm = 0;
+var tiltExclams = 0;
 
 var _ = window,
     raf = (function(){
@@ -848,8 +853,8 @@ World.prototype = {
 				}
 			});
 		};
-
-		wld.hero.say('EARTHQUAKE' + '!'.repeat(Math.floor(Math.random() * 6)));
+		quakeExclams += Math.floor(Math.random() * 6);
+		wld.hero.say('EARTHQUAKE' + '!'.repeat(quakeExclams));
 
 		to(function(){
 			wld.shake = true;
@@ -870,11 +875,13 @@ World.prototype = {
 			} else {
 				wld.hero.say('Whe' + 'w'.repeat(1 + Math.floor(Math.random() * 3)) + ', this shaking almost killed me');
 			}
+			quakeExclams = 0;
 			shakingIntensity = 8;
 		}, t * 1000);
 	},
 	flood: function(){
-		wld.hero.say('FLOOD' + '!'.repeat(Math.floor(Math.random() * 5)));
+		floodExclams += Math.floor(Math.random() * 5);
+		wld.hero.say('FLOOD' + '!'.repeat(floodExclams));
 		to(function(){
 			floodingSpeed += 5;
 			rainSize *= 2;
@@ -886,13 +893,16 @@ World.prototype = {
 			rainSize *= 0.5;
 			if(floodingSpeed < 1) {
 				Math.random() < 0.5 ? wld.hero.say('Flood\'s over') : wld.hero.say('Flood is over');
+				floodExclams = 0;
 			} else {
 				wld.hero.say('Let this flash flood stop already' + '!'.repeat(1 + Math.floor(Math.random() * 6)));
 			}
 		}, 8000);
 	},
 	boxStorm: function(){
-		wld.hero.say('BOX ST' + 'O'.repeat(1 + Math.floor(Math.random() * 6)) + 'RM' + '!'.repeat(Math.floor(Math.random() * 5)));
+		stormExclams += Math.floor(Math.random() * 5);
+		OsInStorm += Math.floor(Math.random() * 6);
+		wld.hero.say('BOX ST' + 'O'.repeat(1 + OsInStorm) + 'RM' + '!'.repeat(stormExclams));
 		concurrentBoxStorms++;
 		var xs = [];
 		for(var i = 0 ; i < 1 ; i++){
@@ -915,6 +925,8 @@ World.prototype = {
 			concurrentBoxStorms--;
 			if(concurrentBoxStorms < 1) {
 				Math.random() < 0.5 ? wld.hero.say('Storm is over') : wld.hero.say('Storm\'s over');
+				OsInStorm = 0;
+				stormExclams = 0;
 			} else {
 				wld.hero.say('This wave of constantly falling boxes must end soon' + '!'.repeat(Math.floor(Math.random() * 2)));
 			}
@@ -977,7 +989,8 @@ World.prototype = {
 		}, 1000);
 	},
 	tilt: function(){
-		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(Math.floor(Math.random() * 5)));
+		tiltExclams += Math.floor(Math.random() * 5);
+		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(tiltExclams));
 		try {
 			platformTilting = true;
 			if(Math.random() > 0.1) {
@@ -988,6 +1001,7 @@ World.prototype = {
 					Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
 				});
 				setTimeout(() => {
+					tiltExclams = 0;
 					platformTilting = false;
 				}, 5000);
 			} else {
@@ -999,6 +1013,7 @@ World.prototype = {
 					Easing.tween(wld, 'angle', wld.angle, 0, 1, 25);
 				});
 				setTimeout(() => {
+					tiltExclams = 0;
 					platformTilting = false;
 				}, 30000);
 			}

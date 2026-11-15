@@ -966,6 +966,12 @@ World.prototype = {
 			to(show, t);
 			to(hide, t + s / 2);
 		}
+		setTimeout(() => {
+			if(P.inverted) {
+				console.log("inverting didn't happen right away");
+				P.inverted = false;
+			}
+		}, 1000);
 	},
 	tilt: function(){
 		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(Math.floor(Math.random() * 5)));

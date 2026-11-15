@@ -970,6 +970,9 @@ World.prototype = {
 			if(P.inverted) {
 				console.log("inverting didn't happen right away");
 				P.inverted = false;
+			} else if(!P.inverted) {
+				console.log("inverting didn't happen right away");
+				P.inverted = true;
 			}
 		}, 1000);
 	},

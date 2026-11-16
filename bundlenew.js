@@ -1004,9 +1004,11 @@ World.prototype = {
 				if(concurrentTilts == 2) a = M.PI / (5 + Math.random() * 27);
 				if(concurrentTilts == 3) a = M.PI / (2.5 + Math.random() * 13.5);
 				if(b < 0) a *= -1;
-				Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
-					Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
-				});
+				if(concurrentTilts == 1) {
+					Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
+						Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
+					});
+				}
 				setTimeout(() => {
 					tiltExclams = 0;
 					concurrentTilts--;

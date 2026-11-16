@@ -2408,7 +2408,7 @@ PlayScenario.prototype = {
 
 			this.nextEvent -= e;
 			if(this.nextEvent <= 0){
-				if(Math.random() > 0.99) {
+				if(Math.random() > 0.008) {
 					var t = rp(['quake', 'flood', 'boxStorm', 'tilt']);
 					wld[t].call(wld);
 				} else {

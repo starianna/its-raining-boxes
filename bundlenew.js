@@ -999,10 +999,10 @@ World.prototype = {
 		try {
 			platformTilting = true;
 			if(Math.random() > 0.1) {
-				var b = wld.balance();
-				concurrentTilts == 1 && a = M.PI / (10 + Math.random() * 54);
-				concurrentTilts == 2 && a = M.PI / (5 + Math.random() * 27);
-				concurrentTilts == 3 && a = M.PI / (2.5 + Math.random() * 13.5);
+				var b = wld.balance(),
+				if(concurrentTilts == 1) a = M.PI / (10 + Math.random() * 54);
+				if(concurrentTilts == 2) a = M.PI / (5 + Math.random() * 27);
+				if(concurrentTilts == 3) a = M.PI / (2.5 + Math.random() * 13.5);
 				if(b < 0) a *= -1;
 				Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
 					Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);

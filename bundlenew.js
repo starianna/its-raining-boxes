@@ -16,6 +16,8 @@ var floodExclams = 0;
 var stormExclams = 0;
 var OsInStorm = 0;
 var tiltExclams = 0;
+var concurrentTilts = 0;
+var concurrentQuakes = 0;
 
 var _ = window,
     raf = (function(){
@@ -822,33 +824,34 @@ World.prototype = {
 	quake: function(){
 		var quakeType = Math.random();
 		var quakeType2 = Math.random();
+		concurrentQuakes++;
 		//console.log("earthquake");
 		var shake = function(){
 			wld.boxes.forEach(function(b){
 				if(b !== wld.pf && b !== wld.hero){
 					if(quakeType < 0.2) {
-						b.vX = rd(-200, 200);
-						shakingIntensity = 32;
+						b.vX = rd(-200 * concurrentQuakes, 200 * concurrentQuakes);
+						shakingIntensity = 32 * concurrentQuakes;
 					} else if(quakeType > 0.2 && quakeType < 0.4) {
-						b.vX = rd(-100, 100);
-						shakingIntensity = 16;
+						b.vX = rd(-100 * concurrentQuakes, 100 * concurrentQuakes);
+						shakingIntensity = 16 * concurrentQuakes;
 					} else if(quakeType > 0.4 && quakeType < 0.6) {
-						b.vX = rd(-50, 50);
-						shakingIntensity = 8;
+						b.vX = rd(-50 * concurrentQuakes, 50 * concurrentQuakes);
+						shakingIntensity = 8 * concurrentQuakes;
 					} else if(quakeType > 0.6 && quakeType < 0.8) {
-						b.vX = rd(-25, 25);
-						shakingIntensity = 4;
+						b.vX = rd(-25 * concurrentQuakes, 25 * concurrentQuakes);
+						shakingIntensity = 4 * concurrentQuakes;
 					} else if(quakeType > 0.8 && quakeType < 1) {
 						if(quakeType2 < 0.25) {
-							b.vX = rd(-Math.floor(Math.random() * 301, Math.floor(Math.random() * 301)));
+							b.vX = rd(-Math.floor(Math.random() * 301  * concurrentQuakes, Math.floor(Math.random() * 301 * concurrentQuakes)));
 						} else if(quakeType2 > 0.25 && quakeType2 < 0.5) {
-							b.vX = rd(Math.floor(Math.random() * 301, -Math.floor(Math.random() * 301)));
+							b.vX = rd(Math.floor(Math.random() * 301 * concurrentQuakes, -Math.floor(Math.random() * 301 * concurrentQuakes)));
 						} else if(quakeType2 > 0.5 && quakeType2 < 0.75) {
-							b.vX = rd(-Math.floor(Math.random() * 301, -Math.floor(Math.random() * 301)));
+							b.vX = rd(-Math.floor(Math.random() * 301 * concurrentQuakes, -Math.floor(Math.random() * 301 * concurrentQuakes)));
 						} else if(quakeType2 > 0.75) {
-							b.vX = rd(Math.floor(Math.random() * 301, Math.floor(Math.random() * 301)));
+							b.vX = rd(Math.floor(Math.random() * 301 * concurrentQuakes, Math.floor(Math.random() * 301 * concurrentQuakes)));
 						}
-						shakingIntensity = (1 + Math.floor(Math.random() * 41));
+						shakingIntensity = (1 + Math.floor(Math.random() * 41 * concurrentQuakes));
 					}
 				}
 			});
@@ -876,6 +879,7 @@ World.prototype = {
 				wld.hero.say('Whe' + 'w'.repeat(1 + Math.floor(Math.random() * 3)) + ', this shaking almost killed me');
 			}
 			quakeExclams = 0;
+			concurrentQuakes--;
 			shakingIntensity = 8;
 		}, t * 1000);
 	},
@@ -990,18 +994,22 @@ World.prototype = {
 	},
 	tilt: function(){
 		tiltExclams += Math.floor(Math.random() * 5);
+		concurrentTilts++;
 		wld.hero.say('THE PLATFORM IS TILTING' + '!'.repeat(tiltExclams));
 		try {
 			platformTilting = true;
 			if(Math.random() > 0.1) {
 				var b = wld.balance(),
-					a = M.PI / (10 + Math.random() * 54);
+				concurrentTilts == 1 && a = M.PI / (10 + Math.random() * 54);
+				concurrentTilts == 2 && a = M.PI / (5 + Math.random() * 27);
+				concurrentTilts == 3 && a = M.PI / (2.5 + Math.random() * 13.5);
 				if(b < 0) a *= -1;
 				Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
 					Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
 				});
 				setTimeout(() => {
 					tiltExclams = 0;
+					concurrentTilts--;
 					platformTilting = false;
 				}, 5000);
 			} else {
@@ -1014,6 +1022,7 @@ World.prototype = {
 				});
 				setTimeout(() => {
 					tiltExclams = 0;
+					concurrentTilts--;
 					platformTilting = false;
 				}, 30000);
 			}

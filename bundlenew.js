@@ -879,7 +879,9 @@ World.prototype = {
 				wld.hero.say('Whe' + 'w'.repeat(1 + Math.floor(Math.random() * 3 * concurrentQuakes)) + ', this shaking almost killed me');
 			}
 			quakeExclams = 0;
-			concurrentQuakes--;
+			setTimeout(() => {
+				concurrentQuakes--;
+			}, 3000);
 			shakingIntensity = 8;
 		}, t * 1000);
 	},

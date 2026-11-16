@@ -999,7 +999,7 @@ World.prototype = {
 		try {
 			platformTilting = true;
 			if(Math.random() > 0.1) {
-				var b = wld.balance(),
+				var b = wld.balance(), // why doesn't my website update sometimes
 				if(concurrentTilts == 1) a = M.PI / (10 + Math.random() * 54);
 				if(concurrentTilts == 2) a = M.PI / (5 + Math.random() * 27);
 				if(concurrentTilts == 3) a = M.PI / (2.5 + Math.random() * 13.5);

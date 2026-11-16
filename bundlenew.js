@@ -2408,12 +2408,15 @@ PlayScenario.prototype = {
 
 			this.nextEvent -= e;
 			if(this.nextEvent <= 0){
+				var t = rp(['quake', 'flood', 'boxStorm', 'tilt']);
 				if(Math.random() > 0.99) { // 0.008
-					var t = rp(['quake', 'flood', 'boxStorm', 'tilt']);
+					wld[t].call(wld);
 				} else {
-					var t = ['quake', 'flood', 'boxStorm', 'tilt'];
+					wld[t].call('quake');
+					wld[t].call('flood');
+					wld[t].call('boxStorm');
+					wld[t].call('tilt');
 				}
-				wld[t].call(wld);
 				this.nextEvent = Math.floor(Math.random() * 41);
 			}
 		}

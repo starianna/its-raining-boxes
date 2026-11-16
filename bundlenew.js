@@ -1007,7 +1007,6 @@ World.prototype = {
 				Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
 					Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
 				});
-				}
 				setTimeout(() => {
 					tiltExclams = 0;
 					concurrentTilts--;

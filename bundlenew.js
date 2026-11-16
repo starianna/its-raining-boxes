@@ -868,15 +868,15 @@ World.prototype = {
 		to(function(){
 			wld.shake = false;
 			if(shakingIntensity == 32) {
-				wld.hero.say('Phe' + 'w'.repeat(5 + Math.floor(Math.random() * 7)));
+				wld.hero.say('Phe' + 'w'.repeat(5 + Math.floor(Math.random() * 7 * concurrentQuakes)));
 			} else if(shakingIntensity == 16) {
-				wld.hero.say('Phe' + 'w'.repeat(3 + Math.floor(Math.random() * 5)));
+				wld.hero.say('Phe' + 'w'.repeat(3 + Math.floor(Math.random() * 5 * concurrentQuakes)));
 			} else if(shakingIntensity == 8) {
-				wld.hero.say('Phe' + 'w'.repeat(2 + Math.floor(Math.random() * 3)));
+				wld.hero.say('Phe' + 'w'.repeat(2 + Math.floor(Math.random() * 3 * concurrentQuakes)));
 			} else if(shakingIntensity == 4) {
-				wld.hero.say('Phe' + 'w'.repeat(1 + Math.floor(Math.random() * 2)));
+				wld.hero.say('Phe' + 'w'.repeat(1 + Math.floor(Math.random() * 2 * concurrentQuakes)));
 			} else {
-				wld.hero.say('Whe' + 'w'.repeat(1 + Math.floor(Math.random() * 3)) + ', this shaking almost killed me');
+				wld.hero.say('Whe' + 'w'.repeat(1 + Math.floor(Math.random() * 3 * concurrentQuakes)) + ', this shaking almost killed me');
 			}
 			quakeExclams = 0;
 			concurrentQuakes--;
@@ -1004,10 +1004,9 @@ World.prototype = {
 				if(concurrentTilts == 2) a = M.PI / (5 + Math.random() * 27);
 				if(concurrentTilts == 3) a = M.PI / (2.5 + Math.random() * 13.5);
 				if(b < 0) a *= -1;
-				if(concurrentTilts == 1) {
-					Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
-						Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
-					});
+				Easing.tween(wld, 'angle', 0, a, 1, 1, linear, function(){
+					Easing.tween(wld, 'angle', wld.angle, 0, 1, 2);
+				});
 				}
 				setTimeout(() => {
 					tiltExclams = 0;

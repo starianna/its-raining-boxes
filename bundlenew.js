@@ -18,6 +18,8 @@ var OsInStorm = 0;
 var tiltExclams = 0;
 var concurrentTilts = 0;
 var concurrentQuakes = 0;
+var singleEvent = false;
+var singleEventType = "";
 
 var _ = window,
     raf = (function(){
@@ -353,6 +355,13 @@ Game.prototype = {
 	},
 	newWorld: function(){
 		G.world = new World();
+		if(Math.random() < 0.04) {
+			singleEvent = true;
+			var eventTypes = ["quake", "flood", "boxStorm", "tilt"];
+			singleEventType = eventTypes[Math.floor(Math.random() * eventTypes.length)];
+		} else {
+			singleEvent = false;
+		}
 	},
 	resize : function(){
 		to(function(){
@@ -2410,8 +2419,23 @@ PlayScenario.prototype = {
 			this.nextEvent -= e;
 			if(this.nextEvent <= 0){
 				if(Math.random() > 0.008) {
-					var t = rp(['quake', 'flood', 'boxStorm', 'tilt']);
-					wld[t].call(wld);
+					if(!singleEvent) {
+						var t = rp(['quake', 'flood', 'boxStorm', 'tilt']);
+						wld[t].call(wld);
+					} else {
+						if(singleEventType == "quake") {
+							wld.quake();
+						}
+						if(singleEventType == "flood") {
+							wld.flood();
+						}
+						if(singleEventType == "boxStorm") {
+							wld.boxStorm();
+						}
+						if(singleEventType == "tilt") {
+							wld.tilt();
+						}
+					}
 				} else {
 					wld.quake();
 					wld.flood();

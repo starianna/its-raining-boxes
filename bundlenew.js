@@ -2330,7 +2330,7 @@ function PlayScenario(skip){
 			this.nextSpawn = 24;
 		}else{
 			this.schedule[t] = 'It\'s raining boxes today' + '!'.repeat(Math.floor(Math.random() * 3));
-			this.schedule[t + 7] = 'Water is rising' + '!'.repeat(Math.floor(Math.random() * 3));
+			this.schedule[t + (5 + Math.floor(Math.random() * 16))] = 'Water is rising' + '!'.repeat(Math.floor(Math.random() * 3));
 
 			this.nextSpawn = 6;
 
@@ -2345,8 +2345,8 @@ function PlayScenario(skip){
 		}
 	}
 
-	this.schedule[s + 40] = 'You\'re getting good at this' + '!'.repeat(Math.floor(Math.random() * 3));
-	this.schedule[s + 43] = 'Like... really good' + '!'.repeat(Math.floor(Math.random() * 3));
+	this.schedule[s + Math.floor(G.highscore / 10)] = 'You\'re getting good at this' + '!'.repeat(Math.floor(Math.random() * 3));
+	this.schedule[s + Math.floor(G.highscore / 10) + 3] = 'Like... really good' + '!'.repeat(Math.floor(Math.random() * 3));
 
 	this.t = 0;
 };

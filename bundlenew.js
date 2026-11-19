@@ -2345,8 +2345,8 @@ function PlayScenario(skip){
 		}
 	}
 
-	this.schedule[s + Math.floor(G.highscore / 10)] = 'You\'re getting good at this' + '!'.repeat(Math.floor(Math.random() * 3));
-	this.schedule[s + Math.floor(G.highscore / 10) + 3] = 'Like... really good' + '!'.repeat(Math.floor(Math.random() * 3));
+	this.schedule[Math.floor(G.highscore / 10)] = 'You\'re getting good at this' + '!'.repeat(Math.floor(Math.random() * 3));
+	this.schedule[Math.floor(G.highscore / 10) + 3] = 'Like... really good' + '!'.repeat(Math.floor(Math.random() * 3));
 
 	this.t = 0;
 };

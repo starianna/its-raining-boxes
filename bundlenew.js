@@ -739,9 +739,9 @@ World.prototype = {
 		tr(-P.w / 2, -P.h / 2);
 
 		if(boxFallingAboveHero && platformTilting) {
-			fs('#fff');
-		} else {
 			fs('#f00');
+		} else {
+			fs('#fff');
 		}
 		alpha(this.flooding ? 1 : .5);
 		for(var i = 0 ; i < this.drops.length ; i++){

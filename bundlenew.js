@@ -679,7 +679,6 @@ World.prototype = {
 		if(!G.menu && this.score > 0){
 			var s = this.score.toString();
 			var w = textWidth(s);
-			alpha(.2);
 			if(boxFallingAboveHero && platformTilting) {
 				alpha(.5);
 				drawText(c, s, P.inverted ? 'cyan' : 'red', (P.w - w) / 2, 300);

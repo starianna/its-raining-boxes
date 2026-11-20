@@ -1088,7 +1088,7 @@ function Home(g){
 		G.prepareWorld();
 		h.out(G.play.bind(G));
 	}));
-	this.buttons.push(lb = new Button(hsFixButton, (P.w - playButton.width) / 8, 500, function(){
+	this.buttons.push(lb = new Button(hsFixButton, (P.w - hsFixButton.width) / 8, -500, function(){
 		console.log("test button");
 	}));
 	if(localStorage.getItem('tut') == 1){

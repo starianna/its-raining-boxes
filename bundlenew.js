@@ -1430,6 +1430,7 @@ Box.prototype = {
 		} catch (e) {
 			alert("Sorry, but the game has crashed.\nYour current highscore has been saved.\n\n" + e);
 			G.highscore = M.max(s, G.highscore);
+			localStorage['hs'] = G.highscore;
 		}
 	},
 	findHighestBoxBelow: function(bottomYBefore){

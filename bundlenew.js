@@ -2075,7 +2075,7 @@ waterHalo = cache(100, 400, function(c, r){
 	g.addColorStop(0, 'rgba(' + v + ', 0)');
 	g.addColorStop(1, 'rgba(' + v + ', 1)');
 
-	r.globalAlpha = .3;
+	r.globalAlpha = .52; // .3
 	r.fs(g);
 	r.fr(0, 0, c.w, c.h);
 }, 'pattern', true),

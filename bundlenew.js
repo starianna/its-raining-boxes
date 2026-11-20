@@ -2414,7 +2414,7 @@ PlayScenario.prototype = {
 				}
 			}
 
-			if(this.waterDelay > 0){
+			//if(this.waterDelay > 0){
 				this.waterDelay -= e;
 				if(this.waterDelay <= 0){
 					//wld.hero.say('Water is rising' + '!'.repeat(Math.floor(Math.random() * 3)));
@@ -2425,7 +2425,7 @@ PlayScenario.prototype = {
 				if(this.t > 60){
 					wld.waterSpeed = 3.5;
 				}
-			}
+			//}
 
 			this.nextEvent -= e;
 			if(this.nextEvent <= 0){

@@ -317,8 +317,10 @@ Game.prototype = {
 
 		Easing.cycle(e);
 
-		/*fillStyle = '#fff';
-		font = '20pt Arial';
+		// fps and cursor position
+
+		fillStyle = '#fff';
+		font = '20pt Roboto';
 		textBaseline = 'top';
 		textAlign = 'left';
 		ft(~~(1 / e) + 'fps', 10, 10);
@@ -343,13 +345,15 @@ Game.prototype = {
 		}
 		c.stroke();*/
 
-		/*G.curPos.forEach(function(t){
+		G.curPos.forEach(function(t){
 			alpha(.5);
 			fs('red');
 			beginPath();
 			arc(t.x, t.y, 100, 0, Math.PI * 2);
 			fill();
-		});*/
+		});
+
+		// fps and cursor position
 
 		rs();
 	},
@@ -2077,7 +2081,7 @@ waterHalo = cache(100, 400, function(c, r){
 
 	r.globalAlpha = .52; // .3
 	r.fs(g);
-	r.fr(0, 0, c.w, c.h * 2);
+	r.fr(0, 0, c.w, c.h);
 }, 'pattern', true),
 
 title = cache(475, 115, function(c, r){

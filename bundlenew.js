@@ -698,7 +698,7 @@ World.prototype = {
 		sv();
 		tr(0, ~~max(this.waterY + P.waterOffset, this.camY + P.h) - waterHalo.height);
 		fs(waterHalo);
-		fr(0, 0, P.w, waterHalo.height * 2);
+		fr(0, 0, P.w, waterHalo.height);
 		rs();
 
 		this.water(this.t * 50, this.waterY - 20);
@@ -2074,7 +2074,7 @@ water = cache(100, 20, function(c, r){
 }, 'pattern', true),
 
 waterHalo = cache(100, 400, function(c, r){
-	var g = r.clg(0, 0, 0, c.h), // c.h
+	var g = r.clg(0, c.h, 0, c.h), // c.h
 		v = !P.inverted ? '255,255,255' : '0,0,0';
 	g.addColorStop(0, 'rgba(' + v + ', 0)');
 	g.addColorStop(1, 'rgba(' + v + ', 1)');

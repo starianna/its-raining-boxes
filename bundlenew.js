@@ -680,12 +680,12 @@ World.prototype = {
 			var s = this.score.toString();
 			var w = textWidth(s);
 			alpha(.2);
-			if(!boxFallingAboveHero && platformTilting) {
-				alpha(.2);
-				drawText(c, s, P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
-			} else {
+			if(boxFallingAboveHero && platformTilting) {
 				alpha(.5);
 				drawText(c, s, P.inverted ? 'cyan' : 'red', (P.w - w) / 2, 300);
+			} else {
+				alpha(.2);
+				drawText(c, s, P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
 			}
 			alpha(1);
 		}

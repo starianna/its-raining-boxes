@@ -343,7 +343,7 @@ Game.prototype = {
 			//c.fr(x, 100 - (fps / 60) * 100, 2, 2);
 			c.lineTo(x, 100 - (fps / 60) * 100);
 		}
-		c.stroke();*/
+		c.stroke();
 
 		G.curPos.forEach(function(t){
 			alpha(.5);

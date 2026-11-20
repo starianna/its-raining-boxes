@@ -2070,7 +2070,7 @@ water = cache(100, 20, function(c, r){
 }, 'pattern', true),
 
 waterHalo = cache(100, 400, function(c, r){
-	var g = r.clg(0, 0, 0, c.h),
+	var g = r.clg(0, 0, 0, c.h * 2), // c.h
 		v = !P.inverted ? '255,255,255' : '0,0,0';
 	g.addColorStop(0, 'rgba(' + v + ', 0)');
 	g.addColorStop(1, 'rgba(' + v + ', 1)');

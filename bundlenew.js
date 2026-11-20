@@ -2275,7 +2275,8 @@ Button.prototype = {
 
 function PlayScenario(skip){
 	this.nextSpawn = 6;
-	this.nextScoreIncrease = this.waterDelay = 0;
+	this.nextScoreIncrease = 6;
+	this.waterDelay = 0;
 	this.nextEvent = 8;
 
 	this.flooding = false;
@@ -2343,7 +2344,6 @@ function PlayScenario(skip){
 			s = 15;
 		}
 	}
-	this.nextScoreIncrease = this.waterDelay = this.nextSpawn;
 
 	for(var i = 0 ; i < this.gimmicks[i] ; i++, s += 15){
 		for(var j = 0 ; j < this.gimmicks[i][j] ; j++, s += 3){
@@ -2414,7 +2414,7 @@ PlayScenario.prototype = {
 				}
 			}
 
-			//if(this.waterDelay > 0){
+			if(this.waterDelay > 0){
 				this.waterDelay -= e;
 				if(this.waterDelay <= 0){
 					//wld.hero.say('Water is rising' + '!'.repeat(Math.floor(Math.random() * 3)));
@@ -2425,7 +2425,7 @@ PlayScenario.prototype = {
 				if(this.t > 60){
 					wld.waterSpeed = 3.5;
 				}
-			//}
+			}
 
 			this.nextEvent -= e;
 			if(this.nextEvent <= 0){

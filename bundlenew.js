@@ -671,7 +671,6 @@ World.prototype = {
 		}
 
 		// Background
-		if(boxFallingAboveHero && platformTilting) {
 		fs('#000');
 		fr(0, 0, P.w, P.h);
 		if(!P.inverted) di(stars, 0, 0);

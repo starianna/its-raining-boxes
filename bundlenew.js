@@ -1088,6 +1088,9 @@ function Home(g){
 		G.prepareWorld();
 		h.out(G.play.bind(G));
 	}));
+	this.buttons.push(lb = new Button(playButton, (P.w - playButton.width) / 8, -500, function(){
+		console.log("test button");
+	}));
 	if(localStorage.getItem('tut') == 1){
 		this.buttons.push(lb = new Button(tutorialButton, (P.w - tutorialButton.width) / 2, 0, function(){
 			localStorage['tut'] = null;
@@ -2093,6 +2096,7 @@ tutorialButton = button('tutorial'),
 retryButton = button('try again'),
 colorsButton = button('reverse'),
 menuButton = button('back'),
+hsFixButton - button("fix hs'),
 
 choice = function(fg, bg, t){
 	return cache(P.w, P.h / 2, function(c, r){

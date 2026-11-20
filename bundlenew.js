@@ -2070,14 +2070,14 @@ water = cache(100, 20, function(c, r){
 }, 'pattern', true),
 
 waterHalo = cache(100, 400, function(c, r){
-	var g = r.clg(0, P.h - 200, 0, c.h), // c.h
+	var g = r.clg(0, 0, 0, c.h), // c.h
 		v = !P.inverted ? '255,255,255' : '0,0,0';
 	g.addColorStop(0, 'rgba(' + v + ', 0)');
 	g.addColorStop(1, 'rgba(' + v + ', 1)');
 
 	r.globalAlpha = .52; // .3
 	r.fs(g);
-	r.fr(0, 0, c.w, c.h);
+	r.fr(0, 0, c.w, c.h * 2);
 }, 'pattern', true),
 
 title = cache(475, 115, function(c, r){

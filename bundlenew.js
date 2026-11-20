@@ -2351,8 +2351,13 @@ function PlayScenario(skip){
 		}
 	}
 
-	this.schedule[Math.floor(G.highscore / 10)] = 'You\'re getting good at this' + '!'.repeat(Math.floor(Math.random() * 3));
-	this.schedule[Math.floor(G.highscore / 10) + 3] = 'Like... really good' + '!'.repeat(Math.floor(Math.random() * 3));
+	if(G.highscore >= 125) {
+		this.schedule[Math.floor(G.highscore / 10)] = 'You\'re getting good at this' + '!'.repeat(Math.floor(Math.random() * 3));
+		this.schedule[Math.floor(G.highscore / 10) + 3] = 'Like... really good' + '!'.repeat(Math.floor(Math.random() * 3));
+	} else {
+		this.schedule[s + 10] = 'You\'re getting somewhere...';
+		this.schedule[s + 13] = 'Keep playing and playing!');
+	}
 
 	this.t = 0;
 };

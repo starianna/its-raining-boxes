@@ -224,7 +224,7 @@ function Game(){
 		raf(arguments.callee);
 	});
 
-	//G.elapsedList = [];
+	G.elapsedList = [];
 
 	var displayablePixels = _.innerWidth * _.innerHeight * _.devicePixelRatio,
 		gamePixels = P.w * P.h,

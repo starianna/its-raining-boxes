@@ -696,9 +696,9 @@ World.prototype = {
 		}
 
 		sv();
-		tr(0, ~~max(this.waterY + P.waterOffset, this.camY + P.h) - (waterHalo.height * 2));
+		tr(0, ~~max(this.waterY + P.waterOffset, this.camY + P.h) - waterHalo.height);
 		fs(waterHalo);
-		fr(0, 0, P.w, waterHalo.height);
+		fr(0, 0, P.w, waterHalo.height * 2);
 		rs();
 
 		this.water(this.t * 50, this.waterY - 20);

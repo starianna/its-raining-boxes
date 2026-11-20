@@ -317,9 +317,9 @@ Game.prototype = {
 
 		Easing.cycle(e);
 
-		// fps and cursor position
+		// performance and cursor position
 
-		fillStyle = '#fff';
+		/*fillStyle = '#fff';
 		font = '20pt Roboto';
 		textBaseline = 'top';
 		textAlign = 'left';
@@ -351,7 +351,7 @@ Game.prototype = {
 			beginPath();
 			arc(t.x, t.y, 100, 0, Math.PI * 2);
 			fill();
-		});
+		});*/
 
 		// fps and cursor position
 
@@ -696,7 +696,7 @@ World.prototype = {
 		}
 
 		sv();
-		tr(0, ~~max(this.waterY + P.waterOffset, this.camY + P.h) - waterHalo.height);
+		tr(0, ~~max(this.waterY + P.waterOffset, this.camY + P.h) - (waterHalo.height * 2));
 		fs(waterHalo);
 		fr(0, 0, P.w, waterHalo.height);
 		rs();

@@ -1411,12 +1411,17 @@ Box.prototype = {
 		vX && this.setVX(vX);
 	},
 	setVX: function(vX){
-		this.vX = vX;
+		try {
+			this.vX = vX;
 
 		// Pushing boxes that are lying on the current one
 		//for(var i = 0 ; i < this.over.length ; i++){
-		for(var i in this.over){
-			this.over[i].setVX(vX * .7);
+			for(var i in this.over){
+				this.over[i].setVX(vX * .7);
+			}
+		} catch (e) {
+			alert("Sorry, but the game has crashed.\nYour current highscore has been saved.\n\n" + e);
+			G.highscore = M.max(s, G.highscore);
 		}
 	},
 	findHighestBoxBelow: function(bottomYBefore){

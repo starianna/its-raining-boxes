@@ -2096,7 +2096,7 @@ tutorialButton = button('tutorial'),
 retryButton = button('try again'),
 colorsButton = button('reverse'),
 menuButton = button('back'),
-hsFixButton - button('fix hs'),
+hsFixButton = button('fix hs'),
 
 choice = function(fg, bg, t){
 	return cache(P.w, P.h / 2, function(c, r){

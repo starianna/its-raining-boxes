@@ -671,7 +671,11 @@ World.prototype = {
 		}
 
 		// Background
-		fs('#000');
+		if(boxFallingAboveHero && platformTilting) {
+			fs('#200');
+		} else {
+			fs('#000');
+		}
 		fr(0, 0, P.w, P.h);
 		if(!P.inverted) di(stars, 0, 0);
 
@@ -679,13 +683,8 @@ World.prototype = {
 		if(!G.menu && this.score > 0){
 			var s = this.score.toString();
 			var w = textWidth(s);
-			if(boxFallingAboveHero && platformTilting) {
-				alpha(.5);
-				drawText(c, s, P.inverted ? 'cyan' : 'red', (P.w - w) / 2, 300);
-			} else {
-				alpha(.2);
-				drawText(c, s, P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
-			}
+			alpha(.2);
+			drawText(c, s, P.inverted ? 'black' : 'white', (P.w - w) / 2, 300);
 			alpha(1);
 		}
 

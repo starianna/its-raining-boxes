@@ -2323,7 +2323,7 @@ function PlayScenario(skip){
 
 	var s = 0;
 	if(!skip){
-		if('lastScore' in G && G.highscore < 123){
+		if('lastScore' in G && G.highscore < 151){
 			this.schedule[3] = 'I see you didn\'t do too well last time';
 			this.schedule[6] = 'Here is my advice';
 			this.schedule[9] = 'Try to avoid falling boxes';
@@ -2335,11 +2335,13 @@ function PlayScenario(skip){
 			s = 30;
 
 			this.nextSpawn = 24;
+			this.nextScoreIncrease = 24;
 		}else{
 			this.schedule[t] = 'It\'s raining boxes today' + '!'.repeat(Math.floor(Math.random() * 3));
 			this.schedule[t + (5 + Math.floor(Math.random() * 16))] = 'Water is rising' + '!'.repeat(Math.floor(Math.random() * 3));
 
 			this.nextSpawn = 6;
+			this.nextScoreIncrease = 6;
 
 			s = 15;
 		}

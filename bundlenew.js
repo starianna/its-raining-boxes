@@ -672,10 +672,7 @@ World.prototype = {
 
 		// Background
 		if(boxFallingAboveHero && platformTilting) {
-			fs('#200');
-		} else {
-			fs('#000');
-		}
+		fs('#000');
 		fr(0, 0, P.w, P.h);
 		if(!P.inverted) di(stars, 0, 0);
 
@@ -742,7 +739,11 @@ World.prototype = {
 		rt(-M.PI / 64);
 		tr(-P.w / 2, -P.h / 2);
 
-		fs('#fff');
+		if(!boxFallingAboveHero && !platformTilting) {
+			fs('#fff');
+		} else {
+			fs('#f00');
+		}
 		alpha(this.flooding ? 1 : .5);
 		for(var i = 0 ; i < this.drops.length ; i++){
 			this.drops[i].y += e * (this.flooding ? 2000 : 1000);

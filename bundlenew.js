@@ -1088,9 +1088,6 @@ function Home(g){
 		G.prepareWorld();
 		h.out(G.play.bind(G));
 	}));
-	this.buttons.push(lb = new Button(hsFixButton, (P.w - hsFixButton.width) / 8, -500, function(){
-		console.log("test button");
-	}));
 	if(localStorage.getItem('tut') == 1){
 		this.buttons.push(lb = new Button(tutorialButton, (P.w - tutorialButton.width) / 2, 0, function(){
 			localStorage['tut'] = null;
@@ -1719,13 +1716,13 @@ var defs = {
 		[1, , ],
 		[1,1,1]
 	],
-	/*f: [
+	f: [
 		[1,1,1],
 		[1, , ],
 		[1,1, ],
 		[1, , ],
 		[1, , ]
-	],*/
+	],
 	g: [
 		[1,1,1],
 		[1, , ],

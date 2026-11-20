@@ -738,7 +738,7 @@ World.prototype = {
 		rt(-M.PI / 64);
 		tr(-P.w / 2, -P.h / 2);
 
-		if(!boxFallingAboveHero && !platformTilting) {
+		if(boxFallingAboveHero && platformTilting) {
 			fs('#fff');
 		} else {
 			fs('#f00');
